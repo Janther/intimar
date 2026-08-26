@@ -22,6 +22,18 @@ const TantraPreset = definePreset(Aura, {
       900: '#4a2717',
       950: '#2e180e',
     },
+    // Aura's default light-mode placeholder color ({surface.500}, slate-500)
+    // only clears 4.43:1 against our warm brand-50 page background —
+    // just under the 4.5:1 AA minimum (surfaced by the MultiSelect filter's
+    // "Filtrar por enfoque" placeholder). Darkening it one step gives real
+    // headroom instead of resting on a fractional pass/fail margin.
+    colorScheme: {
+      light: {
+        formField: {
+          placeholderColor: '{surface.600}',
+        },
+      },
+    },
   },
 });
 

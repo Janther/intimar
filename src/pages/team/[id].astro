@@ -52,19 +52,27 @@ const hostedEvents = (await getEventsHostedBy(member.id)).map(toEventSummary);
           {specialties.map((specialty) => <Tag>{specialty}</Tag>)}
         </div>
         <div
-          class="mt-3 flex justify-center gap-4 text-sm text-brand-600 sm:justify-start"
+          class="mt-3 flex justify-center gap-3 text-brand-600 sm:justify-start"
         >
           {
             social.instagram && (
-              <a href={social.instagram} class="hover:text-brand-900">
-                Instagram
+              <a
+                href={social.instagram}
+                class="transition hover:text-brand-900"
+                aria-label="Instagram"
+              >
+                <span class="pi pi-instagram text-xl" aria-hidden="true" />
               </a>
             )
           }
           {
             social.website && (
-              <a href={social.website} class="hover:text-brand-900">
-                Sitio web
+              <a
+                href={social.website}
+                class="transition hover:text-brand-900"
+                aria-label="Sitio web"
+              >
+                <span class="pi pi-globe text-xl" aria-hidden="true" />
               </a>
             )
           }

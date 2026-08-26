@@ -1,5 +1,6 @@
-import { defineCollection, z } from 'astro:content';
+import { defineCollection } from 'astro:content';
 import { file } from 'astro/loaders';
+import { z } from 'astro/zod';
 
 // Data lives in flat JSON for now. To move to a database later, replace
 // `file('src/data/events.json')` with a custom loader that implements the
@@ -43,8 +44,8 @@ const team = defineCollection({
       specialties: z.array(z.string()).default([]),
       social: z
         .object({
-          instagram: z.string().url().optional(),
-          website: z.string().url().optional(),
+          instagram: z.url().optional(),
+          website: z.url().optional(),
         })
         .default({}),
     }),

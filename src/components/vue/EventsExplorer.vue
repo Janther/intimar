@@ -129,7 +129,7 @@ function formatPrice(price: number, currency: string) {
           </div>
           <p
             v-if="event.earlyBirdActive"
-            class="text-xs font-medium text-accent-gold"
+            class="text-xs font-medium text-accent-gold-text"
           >
             Early bird hasta el {{ event.earlyBirdDeadlineLabel }}
           </p>

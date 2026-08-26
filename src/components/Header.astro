@@ -33,6 +33,7 @@ const navLinks = [
         id="theme-toggle"
         type="button"
         aria-label="Cambiar tema"
+        aria-pressed="false"
         class="rounded-md p-2 text-brand-700 transition hover:text-brand-900"
       >
         <span
@@ -77,6 +78,7 @@ const navLinks = [
         <button
           id="theme-toggle-mobile"
           type="button"
+          aria-pressed="false"
           class="flex items-center gap-2 rounded px-3 py-2 text-left text-sm text-brand-700 hover:bg-brand-100"
         >
           <span
@@ -111,6 +113,7 @@ const navLinks = [
           if (sun) sun.classList.toggle('hidden', isDark);
           if (moon) moon.classList.toggle('hidden', !isDark);
           if (label) label.textContent = isDark ? 'Modo claro' : 'Modo oscuro';
+          toggle.setAttribute('aria-pressed', String(isDark));
         });
       }
 

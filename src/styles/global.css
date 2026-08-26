@@ -17,7 +17,7 @@
   --color-brand-200: oklch(0.86 0.05 60);
   --color-brand-300: oklch(0.76 0.08 50);
   --color-brand-400: oklch(0.66 0.11 45);
-  --color-brand-500: oklch(0.58 0.12 42);
+  --color-brand-500: oklch(0.52 0.12 42);
   --color-brand-600: oklch(0.48 0.11 38);
   --color-brand-700: oklch(0.4 0.13 35);
   --color-brand-800: oklch(0.3 0.09 28);
@@ -32,6 +32,12 @@
   --color-ink-900: oklch(0.16 0.03 30);
   --color-accent-gold: oklch(0.78 0.12 85);
   --color-hero-fg: oklch(0.97 0.015 75);
+
+  /* A darker sibling of accent-gold for small text set directly on
+     card/page surfaces (the "early bird" tag) — the decorative gold is
+     too light to hit 4.5:1 against a white/light surface, so text uses
+     this instead while hero/decorative uses keep the brighter gold. */
+  --color-accent-gold-text: oklch(0.5 0.14 75);
 
   /* Card/panel backgrounds that need to sit visibly above the page
      background — a plain `white` doesn't have a dark-mode equivalent,
@@ -59,7 +65,7 @@
     --color-brand-100: oklch(0.3 0.09 28);
     --color-brand-200: oklch(0.4 0.13 35);
     --color-brand-300: oklch(0.48 0.11 38);
-    --color-brand-400: oklch(0.58 0.12 42);
+    --color-brand-400: oklch(0.52 0.12 42);
     --color-brand-500: oklch(0.66 0.11 45);
     --color-brand-600: oklch(0.76 0.08 50);
     --color-brand-700: oklch(0.86 0.05 60);
@@ -67,6 +73,7 @@
     --color-brand-900: oklch(0.97 0.015 75);
 
     --color-surface: oklch(0.26 0.04 26);
+    --color-accent-gold-text: oklch(0.78 0.12 85);
   }
 }
 

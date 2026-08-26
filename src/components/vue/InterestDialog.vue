@@ -12,7 +12,7 @@ const visible = ref(false);
   <Button
     label="Quiero Inscribirme"
     icon="pi pi-envelope"
-    class="!border-brand-700 !bg-brand-700 hover:!bg-brand-800"
+    class="!border-brand-700 !bg-brand-700 !text-brand-50 hover:!bg-brand-800"
     @click="visible = true"
   />
   <Dialog

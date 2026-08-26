@@ -119,7 +119,7 @@ function formatPrice(price: number, currency: string) {
               <span class="font-medium text-brand-900">{{
                 formatPrice(event.earlyBirdPrice, event.currency)
               }}</span>
-              <span class="text-xs text-brand-400 line-through">{{
+              <span class="text-xs text-brand-600 line-through">{{
                 formatPrice(event.price, event.currency)
               }}</span>
             </span>

@@ -13,7 +13,12 @@
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
     "format": "prettier --write .",
-    "format:check": "prettier --check ."
+    "format:check": "prettier --check .",
+    "typecheck": "astro check",
+    "test:unit": "vitest run --config vitest.unit.config.ts",
+    "test:storybook": "vitest run",
+    "test": "npm run test:unit && npm run test:storybook",
+    "test:e2e": "playwright test"
   },
   "dependencies": {
     "@astrojs/sitemap": "^3.7.3",
@@ -31,7 +36,10 @@
     "esbuild": true
   },
   "devDependencies": {
+    "@astrojs/check": "^0.9.10",
+    "@axe-core/playwright": "^4.13.0",
     "@chromatic-com/storybook": "latest",
+    "@playwright/test": "^1.62.1",
     "@storybook/addon-a11y": "^10.5.10",
     "@storybook/addon-docs": "^10.5.10",
     "@storybook/addon-onboarding": "^10.5.10",
@@ -45,6 +53,7 @@
     "prettier-plugin-astro": "^0.14.1",
     "prettier-plugin-tailwindcss": "^0.8.1",
     "storybook": "^10.5.10",
+    "typescript": "^6.0.3",
     "vitest": "latest"
   }
 }

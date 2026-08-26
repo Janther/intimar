@@ -11,7 +11,7 @@
     "earlyBirdDeadline": "2026-09-08",
     "price": 1380000,
     "currency": "CLP",
-    "image": "https://images.unsplash.com/photo-1506126613408-eca07ce68773?auto=format&fit=crop&w=1200&q=80",
+    "image": "./images/events/sierra-silent-retreat.jpg",
     "tags": ["viaje en solitario", "corporalidad", "respiración"],
     "hostIds": ["sana-farooqi", "elena-marsh"],
     "featured": true
@@ -28,7 +28,7 @@
     "earlyBirdDeadline": "2026-09-01",
     "price": 1790000,
     "currency": "CLP",
-    "image": "https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?auto=format&fit=crop&w=1200&q=80",
+    "image": "./images/events/coastal-vinyasa-week.jpg",
     "tags": ["práctica en pareja", "respiración", "mirada compartida"],
     "hostIds": ["elena-marsh", "theo-lindqvist"],
     "featured": true
@@ -45,7 +45,7 @@
     "earlyBirdDeadline": "2026-10-06",
     "price": 590000,
     "currency": "CLP",
-    "image": "https://images.unsplash.com/photo-1544161515-4ab6ce6db874?auto=format&fit=crop&w=1200&q=80",
+    "image": "./images/events/somatic-reset-weekend.jpg",
     "tags": ["somática", "contacto consciente", "sistema nervioso"],
     "hostIds": ["marcus-oduya"],
     "featured": false
@@ -62,7 +62,7 @@
     "earlyBirdDeadline": "2026-11-10",
     "price": 930000,
     "currency": "CLP",
-    "image": "https://images.unsplash.com/photo-1509316785289-025f5b846b35?auto=format&fit=crop&w=1200&q=80",
+    "image": "./images/events/desert-new-moon-gathering.jpg",
     "tags": ["sanación por sonido", "ritual", "ceremonia"],
     "hostIds": ["sana-farooqi"],
     "featured": false
@@ -79,7 +79,7 @@
     "earlyBirdDeadline": "2027-04-01",
     "price": 2040000,
     "currency": "CLP",
-    "image": "https://images.unsplash.com/photo-1495521821757-a1efb6729352?auto=format&fit=crop&w=1200&q=80",
+    "image": "./images/events/kitchen-and-craft-immersion.jpg",
     "tags": ["cocina", "ritual sensorial", "campo"],
     "hostIds": ["theo-lindqvist", "elena-marsh"],
     "featured": false
@@ -96,7 +96,7 @@
     "earlyBirdDeadline": "2027-01-12",
     "price": 1280000,
     "currency": "CLP",
-    "image": "https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?auto=format&fit=crop&w=1200&q=80",
+    "image": "./images/events/sacred-union.jpg",
     "tags": ["parejas", "ceremonia", "trabajo energético"],
     "hostIds": ["elena-marsh", "sana-farooqi"],
     "featured": true

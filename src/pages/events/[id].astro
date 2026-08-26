@@ -1,4 +1,5 @@
 ---
+import { Image } from 'astro:assets';
 import Layout from '../../layouts/Layout.astro';
 import InterestDialog from '../../components/vue/InterestDialog.vue';
 import {
@@ -37,7 +38,7 @@ const earlyBird = isEarlyBirdActive(earlyBirdDeadline);
 const savings = price - earlyBirdPrice;
 ---
 
-<Layout title={title} description={event.data.summary}>
+<Layout title={title} description={event.data.summary} image={image.src}>
   <article class="mx-auto max-w-4xl px-6 py-16">
     <a href="/events" class="text-sm text-brand-600 hover:text-brand-900"
       >← Todos los retiros</a
@@ -58,7 +59,7 @@ const savings = price - earlyBirdPrice;
       {location} · {formatDateRange(startDate, endDate)}
     </p>
 
-    <img
+    <Image
       src={image}
       alt={title}
       class="mt-8 aspect-[16/9] w-full rounded-2xl object-cover"
@@ -78,7 +79,7 @@ const savings = price - earlyBirdPrice;
                     href={`/team/${host.id}`}
                     class="flex items-center gap-3 rounded-xl border border-brand-200 bg-white p-3 pr-5 transition hover:shadow-sm"
                   >
-                    <img
+                    <Image
                       src={host.data.photo}
                       alt={host.data.name}
                       class="h-12 w-12 rounded-full object-cover"

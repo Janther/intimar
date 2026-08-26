@@ -21,7 +21,7 @@ const eventSummaries = events.map((event) => ({
   earlyBirdDeadlineLabel: formatShortDate(event.data.earlyBirdDeadline),
   price: event.data.price,
   currency: event.data.currency,
-  image: event.data.image,
+  image: event.data.image.src,
   tags: event.data.tags,
 }));
 ---

@@ -4,7 +4,7 @@
     "name": "Elena Marsh",
     "role": "Fundadora y Profesora de Tantra",
     "bio": "Elena lleva más de doce años enseñando tantra y prácticas basadas en la respiración, combinando un enfoque informado en trauma con el contacto consciente. Fundó Intimar para crear espacios pequeños y sin apuro donde las personas puedan volver a su cuerpo — solas o en pareja.",
-    "photo": "https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=800&q=80",
+    "photo": "./images/team/elena-marsh.jpg",
     "specialties": ["Tantra", "Respiración", "Diseño de Retiros"],
     "social": {
       "instagram": "https://instagram.com/",
@@ -16,7 +16,7 @@
     "name": "Marcus Oduya",
     "role": "Facilitador Somático y de Contacto",
     "bio": "Ex kinesiólogo, Marcus enseña ahora contacto consciente y regulación del sistema nervioso, ayudando a las personas a soltar tensiones que el cuerpo ha guardado por años. Sus sesiones son a la vez lúdicas y profundamente arraigadas.",
-    "photo": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=800&q=80",
+    "photo": "./images/team/marcus-oduya.jpg",
     "specialties": [
       "Contacto Consciente",
       "Sistema Nervioso",
@@ -31,7 +31,7 @@
     "name": "Sana Farooqi",
     "role": "Facilitadora de Energía y Sonido",
     "bio": "Sana se formó en sanación por sonido himalayo antes de llevar su práctica a los retiros de tantra. Conduce baños de sonido nocturnos y ceremonias de cierre, guiando el trabajo energético en cada encuentro de Intimar.",
-    "photo": "https://images.unsplash.com/photo-1531123897727-8f129e1688ce?auto=format&fit=crop&w=800&q=80",
+    "photo": "./images/team/sana-farooqi.jpg",
     "specialties": ["Trabajo Energético", "Sanación por Sonido", "Ceremonia"],
     "social": {
       "website": "https://example.com/"
@@ -42,7 +42,7 @@
     "name": "Theo Lindqvist",
     "role": "Chef y Encargado de Nutrición",
     "bio": "Theo diseña los menús de estación, con foco en lo vegetal, que sostienen cada día de retiro. Cree que una comida compartida y sin apuro es tan parte de la práctica como cualquier ejercicio en la colchoneta.",
-    "photo": "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&w=800&q=80",
+    "photo": "./images/team/theo-lindqvist.jpg",
     "specialties": [
       "Cocina a Base de Plantas",
       "Ritual Sensorial",

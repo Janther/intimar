@@ -1,4 +1,5 @@
 ---
+import { Image } from 'astro:assets';
 import Layout from '../../layouts/Layout.astro';
 import EventCard from '../../components/EventCard.astro';
 import { getAllTeamMembers, getEventsHostedBy } from '../../lib/data';
@@ -16,7 +17,7 @@ const { name, role, bio, photo, specialties, social } = member.data;
 const hostedEvents = await getEventsHostedBy(member.id);
 ---
 
-<Layout title={name} description={`${name}, ${role} en Intimar.`}>
+<Layout title={name} description={`${name}, ${role} en Intimar.`} image={photo.src}>
   <article class="mx-auto max-w-4xl px-6 py-16">
     <a href="/team" class="text-sm text-brand-600 hover:text-brand-900"
       >← Nuestros facilitadores</a
@@ -25,7 +26,7 @@ const hostedEvents = await getEventsHostedBy(member.id);
     <div
       class="mt-6 flex flex-col items-center gap-6 text-center sm:flex-row sm:items-start sm:text-left"
     >
-      <img
+      <Image
         src={photo}
         alt={name}
         class="h-32 w-32 shrink-0 rounded-full object-cover ring-4 ring-brand-100"

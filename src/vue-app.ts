@@ -25,6 +25,84 @@ const TantraPreset = definePreset(Aura, {
   },
 });
 
+// PrimeVue's own internal strings (filter/search messages, ARIA labels)
+// default to English and don't follow the page's own copy — the site is
+// es-CL only, so these need to be set explicitly.
+const localeEsCl = {
+  today: 'Hoy',
+  clear: 'Limpiar',
+  weekHeader: 'Sem',
+  firstDayOfWeek: 1,
+  dateFormat: 'dd/mm/yy',
+  weak: 'Débil',
+  medium: 'Media',
+  strong: 'Fuerte',
+  passwordPrompt: 'Ingresa una contraseña',
+  emptyFilterMessage: 'No se encontraron resultados',
+  searchMessage: '{0} resultados disponibles',
+  selectionMessage: '{0} elementos seleccionados',
+  emptySelectionMessage: 'Ningún elemento seleccionado',
+  emptySearchMessage: 'No se encontraron resultados',
+  emptyMessage: 'No hay opciones disponibles',
+  choose: 'Elegir',
+  upload: 'Subir',
+  cancel: 'Cancelar',
+  completed: 'Completado',
+  pending: 'Pendiente',
+  fileChosenMessage: '{0} archivos',
+  noFileChosenMessage: 'Ningún archivo seleccionado',
+  fileSizeTypes: ['B', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'],
+  dayNames: [
+    'domingo',
+    'lunes',
+    'martes',
+    'miércoles',
+    'jueves',
+    'viernes',
+    'sábado',
+  ],
+  dayNamesShort: ['dom', 'lun', 'mar', 'mié', 'jue', 'vie', 'sáb'],
+  dayNamesMin: ['D', 'L', 'M', 'X', 'J', 'V', 'S'],
+  monthNames: [
+    'enero',
+    'febrero',
+    'marzo',
+    'abril',
+    'mayo',
+    'junio',
+    'julio',
+    'agosto',
+    'septiembre',
+    'octubre',
+    'noviembre',
+    'diciembre',
+  ],
+  monthNamesShort: [
+    'ene',
+    'feb',
+    'mar',
+    'abr',
+    'may',
+    'jun',
+    'jul',
+    'ago',
+    'sep',
+    'oct',
+    'nov',
+    'dic',
+  ],
+  aria: {
+    close: 'Cerrar',
+    previous: 'Anterior',
+    next: 'Siguiente',
+    navigation: 'Navegación',
+    selectAll: 'Seleccionar todo',
+    unselectAll: 'Deseleccionar todo',
+    slide: 'Diapositiva',
+    slideNumber: '{slideNumber}',
+  },
+};
+
 // Runs once per Vue island Astro hydrates. Registers PrimeVue on
 // every component tree so imported components (Dialog, Carousel, etc.)
 // work without repeating this setup in each island.
@@ -36,5 +114,6 @@ export default (app: App) => {
         darkModeSelector: '.app-dark',
       },
     },
+    locale: localeEsCl,
   });
 };

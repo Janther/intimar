@@ -16,21 +16,21 @@ export const Default: Story = {
     testimonials: [
       {
         quote:
-          'For the first time in years, my partner and I really slowed down and looked at each other. That weekend changed how we touch, period.',
+          'Por primera vez en años, mi pareja y yo realmente bajamos el ritmo y nos miramos. Ese fin de semana cambió la forma en que nos tocamos, punto.',
         name: 'Priya N.',
-        event: 'The Art of Presence',
+        event: 'El Arte de la Presencia',
       },
       {
         quote:
-          "I came home to parts of my body I'd been avoiding for years. No pressure, just presence.",
+          'Volví a partes de mi cuerpo que había estado evitando por años. Sin presión, solo presencia.',
         name: 'Daniel W.',
-        event: 'Coming Home to the Body',
+        event: 'Volver al Cuerpo',
       },
       {
         quote:
-          "Theo's cooking sessions alone were worth the trip. I still make the sourdough at home.",
+          'Cada comida se sentía parte de la práctica, no una pausa de ella. Todavía cocino más despacio por esa semana.',
         name: 'Marisol A.',
-        event: 'Kitchen & Craft Immersion',
+        event: 'Inmersión de Cocina y Oficio',
       },
     ],
   },
@@ -40,9 +40,9 @@ export const SingleTestimonial: Story = {
   args: {
     testimonials: [
       {
-        quote: 'Exactly what I needed.',
+        quote: 'Justo lo que necesitaba.',
         name: 'Daniel W.',
-        event: 'Coming Home to the Body',
+        event: 'Volver al Cuerpo',
       },
     ],
   },

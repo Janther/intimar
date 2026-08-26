@@ -61,21 +61,21 @@ export function formatDateRange(start: Date, end: Date): string {
   const sameMonth = sameYear && start.getMonth() === end.getMonth();
 
   // Intl.DateTimeFormat refuses to format day+year without month (it falls
-  // back to a disambiguated "2026 (day: 21)" string), so the same-month case
-  // is built by hand instead of asking it for just the end day and year.
+  // back to a disambiguated string), so the same-month case is built by
+  // hand instead of asking it for just the end day and year.
   if (sameMonth) {
-    const month = new Intl.DateTimeFormat('en-US', { month: 'long' }).format(
+    const month = new Intl.DateTimeFormat('es-CL', { month: 'long' }).format(
       start,
     );
-    return `${month} ${start.getDate()}–${end.getDate()}, ${end.getFullYear()}`;
+    return `${start.getDate()}–${end.getDate()} de ${month} de ${end.getFullYear()}`;
   }
 
-  const startFmt = new Intl.DateTimeFormat('en-US', {
+  const startFmt = new Intl.DateTimeFormat('es-CL', {
     month: 'long',
     day: 'numeric',
     ...(sameYear ? {} : { year: 'numeric' }),
   }).format(start);
-  const endFmt = new Intl.DateTimeFormat('en-US', {
+  const endFmt = new Intl.DateTimeFormat('es-CL', {
     month: 'long',
     day: 'numeric',
     year: 'numeric',
@@ -84,7 +84,7 @@ export function formatDateRange(start: Date, end: Date): string {
 }
 
 export function formatPrice(price: number, currency: string): string {
-  return new Intl.NumberFormat('en-US', {
+  return new Intl.NumberFormat('es-CL', {
     style: 'currency',
     currency,
     maximumFractionDigits: 0,
@@ -92,7 +92,7 @@ export function formatPrice(price: number, currency: string): string {
 }
 
 export function formatShortDate(date: Date): string {
-  return new Intl.DateTimeFormat('en-US', {
+  return new Intl.DateTimeFormat('es-CL', {
     month: 'long',
     day: 'numeric',
   }).format(date);

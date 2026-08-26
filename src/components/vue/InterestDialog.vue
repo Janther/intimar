@@ -10,7 +10,7 @@ const visible = ref(false);
 
 <template>
   <Button
-    label="Request to Join"
+    label="Quiero Inscribirme"
     icon="pi pi-envelope"
     class="!border-brand-700 !bg-brand-700 hover:!bg-brand-800"
     @click="visible = true"
@@ -18,16 +18,16 @@ const visible = ref(false);
   <Dialog
     v-model:visible="visible"
     modal
-    :header="`Join ${eventTitle}`"
+    :header="`Únete a ${eventTitle}`"
     class="w-[90vw] max-w-md"
   >
     <p class="mb-4 text-sm text-brand-700">
-      Tell us a bit about yourself and we'll follow up with availability and
-      next steps.
+      Cuéntanos un poco sobre ti y te responderemos con la disponibilidad y los
+      próximos pasos.
     </p>
     <ContactForm
-      :subject="`Interest: ${eventTitle}`"
-      :initial-message="`I'd like to join ${eventTitle}.`"
+      :subject="`Interés: ${eventTitle}`"
+      :initial-message="`Me gustaría unirme a ${eventTitle}.`"
     />
   </Dialog>
 </template>

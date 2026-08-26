@@ -48,7 +48,7 @@ const filteredEvents = computed(() => {
 });
 
 function formatPrice(price: number, currency: string) {
-  return new Intl.NumberFormat('en-US', {
+  return new Intl.NumberFormat('es-CL', {
     style: 'currency',
     currency,
     maximumFractionDigits: 0,
@@ -62,14 +62,14 @@ function formatPrice(price: number, currency: string) {
       <span class="p-input-icon-left w-full sm:max-w-xs">
         <InputText
           v-model="query"
-          placeholder="Search retreats or locations"
+          placeholder="Buscar retiros o ubicaciones"
           class="w-full"
         />
       </span>
       <MultiSelect
         v-model="selectedTags"
         :options="allTags"
-        placeholder="Filter by focus"
+        placeholder="Filtrar por enfoque"
         class="w-full sm:w-64"
         display="chip"
       />
@@ -79,7 +79,7 @@ function formatPrice(price: number, currency: string) {
       v-if="filteredEvents.length === 0"
       class="rounded-xl border border-brand-200 bg-white p-8 text-center text-brand-600"
     >
-      No retreats match your search just yet.
+      Aún no hay retiros que coincidan con tu búsqueda.
     </p>
 
     <div v-else class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
@@ -131,7 +131,7 @@ function formatPrice(price: number, currency: string) {
             v-if="event.earlyBirdActive"
             class="text-xs font-medium text-accent-gold"
           >
-            Early bird ends {{ event.earlyBirdDeadlineLabel }}
+            Early bird hasta el {{ event.earlyBirdDeadlineLabel }}
           </p>
           <p class="text-xs text-brand-500">{{ event.startDateLabel }}</p>
         </div>

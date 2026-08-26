@@ -18,7 +18,7 @@ const events = defineCollection({
     earlyBirdPrice: z.number(),
     earlyBirdDeadline: z.coerce.date(),
     price: z.number(),
-    currency: z.string().default('USD'),
+    currency: z.string().default('CLP'),
     image: z.string(),
     tags: z.array(z.string()).default([]),
     hostIds: z.array(z.string()).default([]),

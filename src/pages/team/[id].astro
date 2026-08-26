@@ -16,10 +16,10 @@ const { name, role, bio, photo, specialties, social } = member.data;
 const hostedEvents = await getEventsHostedBy(member.id);
 ---
 
-<Layout title={name} description={`${name}, ${role} at Intimar.`}>
+<Layout title={name} description={`${name}, ${role} en Intimar.`}>
   <article class="mx-auto max-w-4xl px-6 py-16">
     <a href="/team" class="text-sm text-brand-600 hover:text-brand-900"
-      >← Our guides</a
+      >← Nuestros facilitadores</a
     >
 
     <div
@@ -57,7 +57,7 @@ const hostedEvents = await getEventsHostedBy(member.id);
           {
             social.website && (
               <a href={social.website} class="hover:text-brand-900">
-                Website
+                Sitio web
               </a>
             )
           }
@@ -70,7 +70,7 @@ const hostedEvents = await getEventsHostedBy(member.id);
     {
       hostedEvents.length > 0 && (
         <div class="mt-12">
-          <h2 class="font-serif text-xl text-brand-900">Hosting</h2>
+          <h2 class="font-serif text-xl text-brand-900">Retiros que guía</h2>
           <div class="mt-4 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {hostedEvents.map((event) => (
               <EventCard event={event} />

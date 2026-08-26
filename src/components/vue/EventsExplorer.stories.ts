@@ -5,51 +5,51 @@ import EventsExplorer from './EventsExplorer.vue';
 const events = [
   {
     id: 'coastal-vinyasa-week',
-    title: 'The Art of Presence',
+    title: 'El Arte de la Presencia',
     summary:
-      'A weekend for couples and partners to slow down, drop into breath, and rediscover each other through conscious touch and presence practices.',
+      'Un fin de semana para que parejas bajen el ritmo, se adentren en la respiración y se redescubran a través del contacto consciente y las prácticas de presencia.',
     location: 'Ericeira, Portugal',
-    startDateLabel: 'September 14–21, 2026',
-    earlyBirdPrice: 1590,
+    startDateLabel: '14–21 de septiembre de 2026',
+    earlyBirdPrice: 1510000,
     earlyBirdActive: true,
-    earlyBirdDeadlineLabel: 'September 1',
-    price: 1890,
-    currency: 'USD',
+    earlyBirdDeadlineLabel: '1 de septiembre',
+    price: 1790000,
+    currency: 'CLP',
     image:
       'https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?auto=format&fit=crop&w=1200&q=80',
-    tags: ['partner practice', 'breathwork', 'eye gazing'],
+    tags: ['práctica en pareja', 'respiración', 'mirada compartida'],
   },
   {
     id: 'sierra-silent-retreat',
-    title: 'Coming Home to the Body',
+    title: 'Volver al Cuerpo',
     summary:
-      'A four-day solo retreat in the mountains for reconnecting with your own body through breath, movement, and unhurried stillness.',
+      'Un retiro individual de cuatro días en la montaña para reconectar con tu propio cuerpo a través de la respiración, el movimiento y la quietud sin apuro.',
     location: 'Sierra Nevada, California',
-    startDateLabel: 'October 8–12, 2026',
-    earlyBirdPrice: 1190,
+    startDateLabel: '8–12 de octubre de 2026',
+    earlyBirdPrice: 1130000,
     earlyBirdActive: true,
-    earlyBirdDeadlineLabel: 'September 8',
-    price: 1450,
-    currency: 'USD',
+    earlyBirdDeadlineLabel: '8 de septiembre',
+    price: 1380000,
+    currency: 'CLP',
     image:
       'https://images.unsplash.com/photo-1506126613408-eca07ce68773?auto=format&fit=crop&w=1200&q=80',
-    tags: ['solo journey', 'embodiment', 'breathwork'],
+    tags: ['viaje en solitario', 'corporalidad', 'respiración'],
   },
   {
     id: 'somatic-reset-weekend',
-    title: 'Somatic Reset Weekend',
+    title: 'Fin de Semana de Reset Somático',
     summary:
-      'A two-day intensive in conscious touch, cold exposure, and nervous-system regulation.',
-    location: 'Catskills, New York',
-    startDateLabel: 'November 6–8, 2026',
-    earlyBirdPrice: 520,
+      'Una intensiva de dos días en contacto consciente, exposición al frío y regulación del sistema nervioso.',
+    location: 'Catskills, Nueva York',
+    startDateLabel: '6–8 de noviembre de 2026',
+    earlyBirdPrice: 490000,
     earlyBirdActive: false,
-    earlyBirdDeadlineLabel: 'October 6',
-    price: 620,
-    currency: 'USD',
+    earlyBirdDeadlineLabel: '6 de octubre',
+    price: 590000,
+    currency: 'CLP',
     image:
       'https://images.unsplash.com/photo-1544161515-4ab6ce6db874?auto=format&fit=crop&w=1200&q=80',
-    tags: ['somatics', 'conscious touch', 'nervous system'],
+    tags: ['somática', 'contacto consciente', 'sistema nervioso'],
   },
 ];
 
@@ -73,13 +73,11 @@ export const Empty: Story = {
 export const FilteredBySearch: Story = {
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
-    const search = canvas.getByPlaceholderText('Search retreats or locations');
+    const search = canvas.getByPlaceholderText('Buscar retiros o ubicaciones');
     await userEvent.type(search, 'sierra');
+    await expect(canvas.getByText('Volver al Cuerpo')).toBeInTheDocument();
     await expect(
-      canvas.getByText('Coming Home to the Body'),
-    ).toBeInTheDocument();
-    await expect(
-      canvas.queryByText('The Art of Presence'),
+      canvas.queryByText('El Arte de la Presencia'),
     ).not.toBeInTheDocument();
   },
 };

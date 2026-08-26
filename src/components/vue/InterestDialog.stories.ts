@@ -8,7 +8,7 @@ const meta: Meta<typeof InterestDialog> = {
   tags: ['autodocs'],
   parameters: { layout: 'padded' },
   args: {
-    eventTitle: 'Coming Home to the Body',
+    eventTitle: 'Volver al Cuerpo',
   },
 };
 export default meta;
@@ -21,7 +21,7 @@ export const Open: Story = {
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
     await userEvent.click(
-      canvas.getByRole('button', { name: /request to join/i }),
+      canvas.getByRole('button', { name: /quiero inscribirme/i }),
     );
   },
 };

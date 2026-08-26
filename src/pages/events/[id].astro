@@ -40,7 +40,7 @@ const savings = price - earlyBirdPrice;
 <Layout title={title} description={event.data.summary}>
   <article class="mx-auto max-w-4xl px-6 py-16">
     <a href="/events" class="text-sm text-brand-600 hover:text-brand-900"
-      >← All retreats</a
+      >← Todos los retiros</a
     >
 
     <div class="mt-4 flex flex-wrap gap-1.5">
@@ -71,7 +71,7 @@ const savings = price - earlyBirdPrice;
         {
           hosts.length > 0 && (
             <div class="mt-8">
-              <h2 class="font-serif text-xl text-brand-900">Hosted by</h2>
+              <h2 class="font-serif text-xl text-brand-900">Guiado por</h2>
               <div class="mt-4 flex flex-wrap gap-4">
                 {hosts.map((host) => (
                   <a
@@ -109,9 +109,9 @@ const savings = price - earlyBirdPrice;
                   {formatPrice(price, currency)}
                 </p>
               </div>
-              <p class="text-sm text-brand-600">per person, early bird</p>
+              <p class="text-sm text-brand-600">por persona, early bird</p>
               <div class="mt-3 rounded-lg bg-brand-100 px-3 py-2 text-xs font-medium text-brand-700">
-                Save {formatPrice(savings, currency)} — register by{' '}
+                Ahorra {formatPrice(savings, currency)} — inscríbete antes del{' '}
                 {formatShortDate(earlyBirdDeadline)}
               </div>
             </>
@@ -120,17 +120,17 @@ const savings = price - earlyBirdPrice;
               <p class="text-2xl font-medium text-brand-900">
                 {formatPrice(price, currency)}
               </p>
-              <p class="text-sm text-brand-600">per person</p>
+              <p class="text-sm text-brand-600">por persona</p>
             </>
           )
         }
         <dl class="mt-4 space-y-2 text-sm text-brand-700">
           <div class="flex justify-between">
-            <dt>Dates</dt>
+            <dt>Fechas</dt>
             <dd>{formatDateRange(startDate, endDate)}</dd>
           </div>
           <div class="flex justify-between">
-            <dt>Location</dt>
+            <dt>Ubicación</dt>
             <dd>{location}</dd>
           </div>
         </dl>

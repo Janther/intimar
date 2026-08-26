@@ -20,7 +20,9 @@ export async function getStaticPaths() {
 
 const { member } = Astro.props;
 const { name, role, bio, photo, specialties, social } = member.data;
-const hostedEvents = (await getEventsHostedBy(member.id)).map(toEventSummary);
+const hostedEvents = await Promise.all(
+  (await getEventsHostedBy(member.id)).map(toEventSummary),
+);
 ---
 
 <Layout
@@ -58,6 +60,8 @@ const hostedEvents = (await getEventsHostedBy(member.id)).map(toEventSummary);
             social.instagram && (
               <a
                 href={social.instagram}
+                target="_blank"
+                rel="noopener noreferrer"
                 class="transition hover:text-brand-900"
                 aria-label="Instagram"
               >
@@ -69,6 +73,8 @@ const hostedEvents = (await getEventsHostedBy(member.id)).map(toEventSummary);
             social.website && (
               <a
                 href={social.website}
+                target="_blank"
+                rel="noopener noreferrer"
                 class="transition hover:text-brand-900"
                 aria-label="Sitio web"
               >

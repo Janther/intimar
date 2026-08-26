@@ -1,4 +1,5 @@
 import { getCollection, getEntry, type CollectionEntry } from 'astro:content';
+import { getImage } from 'astro:assets';
 
 export type EventEntry = CollectionEntry<'events'>;
 export type TeamEntry = CollectionEntry<'team'>;
@@ -122,10 +123,21 @@ export interface EventSummary {
   price: number;
   currency: string;
   image: string;
+  imageWidth: number;
+  imageHeight: number;
   tags: string[];
 }
 
-export function toEventSummary(event: EventEntry): EventSummary {
+export async function toEventSummary(event: EventEntry): Promise<EventSummary> {
+  // EventCard.vue can't use Astro's <Image> component (it's Vue, not
+  // Astro), so this calls the same underlying optimization by hand —
+  // getImage() is the programmatic API <Image> itself is built on. Without
+  // it, the card would fall back to the original unoptimized upload
+  // (2-3x the bytes) with no width/height, risking layout shift.
+  const optimizedImage = await getImage({
+    src: event.data.image,
+    format: 'webp',
+  });
   return {
     id: event.id,
     title: event.data.title,
@@ -137,7 +149,9 @@ export function toEventSummary(event: EventEntry): EventSummary {
     earlyBirdDeadlineLabel: formatShortDate(event.data.earlyBirdDeadline),
     price: event.data.price,
     currency: event.data.currency,
-    image: event.data.image.src,
+    image: optimizedImage.src,
+    imageWidth: optimizedImage.attributes.width,
+    imageHeight: optimizedImage.attributes.height,
     tags: event.data.tags,
   };
 }

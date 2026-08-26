@@ -26,8 +26,11 @@ function formatPrice(price: number, currency: string) {
     <div class="aspect-[4/3] overflow-hidden">
       <img
         :src="event.image"
+        :width="event.imageWidth"
+        :height="event.imageHeight"
         :alt="event.title"
         loading="lazy"
+        decoding="async"
         class="h-full w-full object-cover transition duration-500 group-hover:scale-105"
       />
     </div>

@@ -11,9 +11,9 @@ import {
 } from '../lib/data';
 import { withBase } from '../lib/site';
 
-const featuredEvents = (await getFeaturedEvents())
-  .slice(0, 3)
-  .map(toEventSummary);
+const featuredEvents = await Promise.all(
+  (await getFeaturedEvents()).slice(0, 3).map(toEventSummary),
+);
 const team = (await getAllTeamMembers()).slice(0, 4);
 const testimonials = (await getAllTestimonials()).map(
   (testimonial) => testimonial.data,

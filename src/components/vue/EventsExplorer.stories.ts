@@ -17,6 +17,8 @@ const events = [
     currency: 'CLP',
     image:
       'https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?auto=format&fit=crop&w=1200&q=80',
+    imageWidth: 1200,
+    imageHeight: 800,
     tags: ['práctica en pareja', 'respiración', 'mirada compartida'],
   },
   {
@@ -33,6 +35,8 @@ const events = [
     currency: 'CLP',
     image:
       'https://images.unsplash.com/photo-1506126613408-eca07ce68773?auto=format&fit=crop&w=1200&q=80',
+    imageWidth: 1200,
+    imageHeight: 800,
     tags: ['viaje en solitario', 'corporalidad', 'respiración'],
   },
   {
@@ -49,6 +53,8 @@ const events = [
     currency: 'CLP',
     image:
       'https://images.unsplash.com/photo-1544161515-4ab6ce6db874?auto=format&fit=crop&w=1200&q=80',
+    imageWidth: 1200,
+    imageHeight: 800,
     tags: ['somática', 'contacto consciente', 'sistema nervioso'],
   },
 ];

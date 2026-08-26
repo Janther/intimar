@@ -3,7 +3,9 @@ import Layout from '../../layouts/Layout.astro';
 import EventsExplorer from '../../components/vue/EventsExplorer.vue';
 import { getAllEvents, toEventSummary } from '../../lib/data';
 
-const eventSummaries = (await getAllEvents()).map(toEventSummary);
+const eventSummaries = await Promise.all(
+  (await getAllEvents()).map(toEventSummary),
+);
 ---
 
 <Layout

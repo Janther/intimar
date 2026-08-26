@@ -22,6 +22,8 @@ const meta: Meta<typeof EventCard> = {
       currency: 'CLP',
       image:
         'https://images.unsplash.com/photo-1506126613408-eca07ce68773?auto=format&fit=crop&w=1200&q=80',
+      imageWidth: 1200,
+      imageHeight: 800,
       tags: ['viaje en solitario', 'corporalidad', 'respiración'],
     },
   },

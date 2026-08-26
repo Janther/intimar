@@ -77,7 +77,7 @@ function formatPrice(price: number, currency: string) {
 
     <p
       v-if="filteredEvents.length === 0"
-      class="rounded-xl border border-brand-200 bg-white p-8 text-center text-brand-600"
+      class="rounded-xl border border-brand-200 bg-surface p-8 text-center text-brand-600"
     >
       Aún no hay retiros que coincidan con tu búsqueda.
     </p>
@@ -87,7 +87,7 @@ function formatPrice(price: number, currency: string) {
         v-for="event in filteredEvents"
         :key="event.id"
         :href="`/events/${event.id}`"
-        class="group flex flex-col overflow-hidden rounded-2xl border border-brand-200 bg-white shadow-sm transition hover:-translate-y-1 hover:shadow-md"
+        class="group flex flex-col overflow-hidden rounded-2xl border border-brand-200 bg-surface shadow-sm transition hover:-translate-y-1 hover:shadow-md"
       >
         <div class="aspect-[4/3] overflow-hidden">
           <img

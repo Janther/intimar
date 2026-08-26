@@ -36,9 +36,47 @@ const {
 const hosts = await getEventHosts(event);
 const earlyBird = isEarlyBirdActive(earlyBirdDeadline);
 const savings = price - earlyBirdPrice;
+
+const canonicalURL = new URL(Astro.url.pathname, Astro.site).toString();
+const eventSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Event',
+  name: title,
+  description: event.data.summary,
+  startDate: startDate.toISOString(),
+  endDate: endDate.toISOString(),
+  eventAttendanceMode: 'https://schema.org/OfflineEventAttendanceMode',
+  eventStatus: 'https://schema.org/EventScheduled',
+  location: {
+    '@type': 'Place',
+    name: location,
+  },
+  image: [new URL(image.src, Astro.site).toString()],
+  offers: {
+    '@type': 'Offer',
+    url: canonicalURL,
+    price,
+    priceCurrency: currency,
+    availability: 'https://schema.org/InStock',
+  },
+  organizer: {
+    '@type': 'Organization',
+    name: 'Intimar',
+    url: Astro.site?.toString(),
+  },
+  performer: hosts.map((host) => ({
+    '@type': 'Person',
+    name: host.data.name,
+  })),
+};
 ---
 
-<Layout title={title} description={event.data.summary} image={image.src}>
+<Layout
+  title={title}
+  description={event.data.summary}
+  image={image.src}
+  structuredData={eventSchema}
+>
   <article class="mx-auto max-w-4xl px-6 py-16">
     <a href="/events" class="text-sm text-brand-600 hover:text-brand-900"
       >← Todos los retiros</a
@@ -77,7 +115,7 @@ const savings = price - earlyBirdPrice;
                 {hosts.map((host) => (
                   <a
                     href={`/team/${host.id}`}
-                    class="flex items-center gap-3 rounded-xl border border-brand-200 bg-white p-3 pr-5 transition hover:shadow-sm"
+                    class="flex items-center gap-3 rounded-xl border border-brand-200 bg-surface p-3 pr-5 transition hover:shadow-sm"
                   >
                     <Image
                       src={host.data.photo}
@@ -98,7 +136,7 @@ const savings = price - earlyBirdPrice;
         }
       </div>
 
-      <aside class="h-fit rounded-2xl border border-brand-200 bg-white p-6">
+      <aside class="h-fit rounded-2xl border border-brand-200 bg-surface p-6">
         {
           earlyBird ? (
             <>

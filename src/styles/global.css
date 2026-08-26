@@ -23,14 +23,50 @@
   --color-brand-800: oklch(0.3 0.09 28);
   --color-brand-900: oklch(0.2 0.06 22);
 
-  /* Used only by the candlelit hero band. */
+  /* Used only by the candlelit hero band — fixed in both themes, since
+     the band itself stays dark regardless of site theme. --color-hero-fg
+     is deliberately not overridden under .app-dark: it is what
+     --color-brand-50 always meant before dark mode existed (readable
+     light text on this specific always-dark background), so it must
+     stay put even while brand-50 itself starts flipping for dark mode. */
   --color-ink-900: oklch(0.16 0.03 30);
   --color-accent-gold: oklch(0.78 0.12 85);
+  --color-hero-fg: oklch(0.97 0.015 75);
+
+  /* Card/panel backgrounds that need to sit visibly above the page
+     background — a plain `white` doesn't have a dark-mode equivalent,
+     so it's a token like the rest of the ramp. */
+  --color-surface: white;
 }
 
 @layer base {
   body {
     @apply bg-brand-50 font-sans text-brand-900 antialiased;
+  }
+
+  /* Dark mode is a manual/system toggle (.app-dark on the html element,
+     applied by the inline script in Layout.astro), not Tailwind's default
+     media-query variant, matching the darkModeSelector used by PrimeVue
+     in vue-app.ts. Every brand-N slot is swapped with its counterpart
+     from the other end of the light ramp (50 with 900, 100 with 800, and
+     so on), so existing bg-brand-x / text-brand-x usage repaints for
+     dark mode without needing dark: variants everywhere. Custom-property
+     overrides like this only survive the Tailwind / Lightning CSS build
+     when placed inside a declared layer; a bare top-level rule is
+     silently dropped from the compiled output. */
+  .app-dark {
+    --color-brand-50: oklch(0.2 0.06 22);
+    --color-brand-100: oklch(0.3 0.09 28);
+    --color-brand-200: oklch(0.4 0.13 35);
+    --color-brand-300: oklch(0.48 0.11 38);
+    --color-brand-400: oklch(0.58 0.12 42);
+    --color-brand-500: oklch(0.66 0.11 45);
+    --color-brand-600: oklch(0.76 0.08 50);
+    --color-brand-700: oklch(0.86 0.05 60);
+    --color-brand-800: oklch(0.93 0.03 70);
+    --color-brand-900: oklch(0.97 0.015 75);
+
+    --color-surface: oklch(0.26 0.04 26);
   }
 }
 

@@ -7,6 +7,7 @@ interface Props {
   title: string;
   description?: string;
   image?: string;
+  structuredData?: Record<string, unknown> | Record<string, unknown>[];
 }
 
 const DEFAULT_OG_IMAGE =
@@ -16,7 +17,14 @@ const {
   title,
   description = 'Intimar — retiros de tantra pequeños y presenciales, guiados por nuestro propio equipo.',
   image = DEFAULT_OG_IMAGE,
+  structuredData,
 } = Astro.props;
+
+const structuredDataEntries = structuredData
+  ? Array.isArray(structuredData)
+    ? structuredData
+    : [structuredData]
+  : [];
 
 const pageTitle = `${title} · Intimar`;
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
@@ -27,6 +35,15 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script is:inline>
+      (function () {
+        var stored = localStorage.getItem('theme');
+        var isDark = stored
+          ? stored === 'dark'
+          : window.matchMedia('(prefers-color-scheme: dark)').matches;
+        document.documentElement.classList.toggle('app-dark', isDark);
+      })();
+    </script>
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="description" content={description} />
     <title>{pageTitle}</title>
@@ -51,6 +68,12 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
       rel="stylesheet"
       href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,400;1,500&family=Jost:wght@300;400;500&display=swap"
     />
+
+    {
+      structuredDataEntries.map((data) => (
+        <script type="application/ld+json" set:html={JSON.stringify(data)} />
+      ))
+    }
   </head>
   <body class="flex min-h-screen flex-col">
     <Header />

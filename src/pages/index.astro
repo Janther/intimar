@@ -14,9 +14,18 @@ const team = (await getAllTeamMembers()).slice(0, 4);
 const testimonials = (await getAllTestimonials()).map(
   (testimonial) => testimonial.data,
 );
+
+const organizationSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Organization',
+  name: 'Intimar',
+  url: Astro.site?.toString(),
+  description:
+    'Intimar guía retiros de tantra pequeños y presenciales, con raíces en la respiración, la presencia y el contacto consciente.',
+};
 ---
 
-<Layout title="Inicio">
+<Layout title="Inicio" structuredData={organizationSchema}>
   <section class="hero-candlelit">
     <div
       class="mx-auto flex max-w-2xl flex-col items-center px-6 py-28 text-center sm:py-36"
@@ -27,11 +36,11 @@ const testimonials = (await getAllTestimonials()).map(
         Retiros de Tantra y Encuentros Íntimos
       </p>
       <h1
-        class="mt-7 font-serif text-5xl leading-tight text-brand-50 sm:text-6xl"
+        class="mt-7 font-serif text-5xl leading-tight text-hero-fg sm:text-6xl"
       >
         Vuelve a tu cuerpo, <em class="text-accent-gold italic">juntos</em>.
       </h1>
-      <p class="mx-auto mt-7 max-w-lg text-lg font-light text-brand-50/80">
+      <p class="mx-auto mt-7 max-w-lg text-lg font-light text-hero-fg/80">
         Intimar guía retiros de tantra pequeños y presenciales, con raíces en la
         respiración, la presencia y el contacto consciente — nunca más de un par
         de decenas de personas.
@@ -45,7 +54,7 @@ const testimonials = (await getAllTestimonials()).map(
         </a>
         <a
           href="/team"
-          class="rounded-full border border-brand-50/35 px-7 py-3.5 text-sm font-medium text-brand-50 transition hover:bg-brand-50/10"
+          class="rounded-full border border-hero-fg/35 px-7 py-3.5 text-sm font-medium text-hero-fg transition hover:bg-hero-fg/10"
         >
           Conoce a tus Facilitadores
         </a>

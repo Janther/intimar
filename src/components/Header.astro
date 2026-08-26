@@ -28,12 +28,31 @@ const navLinks = [
       }
     </nav>
 
-    <a
-      href="/events"
-      class="hidden rounded-full bg-brand-700 px-5 py-2 text-sm font-medium text-brand-50 transition hover:bg-brand-800 md:inline-block"
-    >
-      Ver Retiros
-    </a>
+    <div class="hidden items-center gap-3 md:flex">
+      <button
+        id="theme-toggle"
+        type="button"
+        aria-label="Cambiar tema"
+        class="rounded-md p-2 text-brand-700 transition hover:text-brand-900"
+      >
+        <span
+          class="pi pi-moon text-lg"
+          data-theme-icon="dark"
+          aria-hidden="true"
+        ></span>
+        <span
+          class="pi pi-sun hidden text-lg"
+          data-theme-icon="light"
+          aria-hidden="true"
+        ></span>
+      </button>
+      <a
+        href="/events"
+        class="rounded-full bg-brand-700 px-5 py-2 text-sm font-medium text-brand-50 transition hover:bg-brand-800"
+      >
+        Ver Retiros
+      </a>
+    </div>
 
     <details class="relative md:hidden">
       <summary
@@ -55,7 +74,56 @@ const navLinks = [
             </a>
           ))
         }
+        <button
+          id="theme-toggle-mobile"
+          type="button"
+          class="flex items-center gap-2 rounded px-3 py-2 text-left text-sm text-brand-700 hover:bg-brand-100"
+        >
+          <span
+            class="pi pi-moon text-sm"
+            data-theme-icon="dark"
+            aria-hidden="true"
+          ></span>
+          <span
+            class="pi pi-sun hidden text-sm"
+            data-theme-icon="light"
+            aria-hidden="true"
+          ></span>
+          <span data-theme-label>Modo oscuro</span>
+        </button>
       </nav>
     </details>
   </div>
+
+  <script is:inline>
+    (function () {
+      var toggles = [
+        document.getElementById('theme-toggle'),
+        document.getElementById('theme-toggle-mobile'),
+      ].filter(Boolean);
+
+      function sync() {
+        var isDark = document.documentElement.classList.contains('app-dark');
+        toggles.forEach(function (toggle) {
+          var sun = toggle.querySelector('[data-theme-icon="light"]');
+          var moon = toggle.querySelector('[data-theme-icon="dark"]');
+          var label = toggle.querySelector('[data-theme-label]');
+          if (sun) sun.classList.toggle('hidden', isDark);
+          if (moon) moon.classList.toggle('hidden', !isDark);
+          if (label) label.textContent = isDark ? 'Modo claro' : 'Modo oscuro';
+        });
+      }
+
+      function toggleTheme() {
+        var isDark = document.documentElement.classList.toggle('app-dark');
+        localStorage.setItem('theme', isDark ? 'dark' : 'light');
+        sync();
+      }
+
+      toggles.forEach(function (toggle) {
+        toggle.addEventListener('click', toggleTheme);
+      });
+      sync();
+    })();
+  </script>
 </header>

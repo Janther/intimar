@@ -1,0 +1,29 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import TeamCard from '../../components/TeamCard.astro';
+import { getAllTeamMembers } from '../../lib/data';
+
+const team = await getAllTeamMembers();
+---
+
+<Layout
+  title="Our Guides"
+  description="Meet the tantra teachers, facilitators, and guides behind Intimar's retreats."
+>
+  <section class="mx-auto max-w-6xl px-6 py-16">
+    <p class="text-sm font-medium tracking-widest text-brand-500 uppercase">
+      Our Guides
+    </p>
+    <h1 class="mt-2 font-serif text-3xl text-brand-900 sm:text-4xl">
+      The people leading each retreat
+    </h1>
+    <p class="mt-4 max-w-2xl text-brand-700">
+      Every Intimar retreat is held in person by one or more of our guides —
+      never outsourced to facilitators we haven't practiced alongside ourselves.
+    </p>
+
+    <div class="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+      {team.map((member) => <TeamCard member={member} />)}
+    </div>
+  </section>
+</Layout>

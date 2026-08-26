@@ -1,0 +1,23 @@
+---
+import Layout from '../layouts/Layout.astro';
+import ContactForm from '../components/vue/ContactForm.vue';
+---
+
+<Layout title="Contact" description="Get in touch with the Intimar guides.">
+  <section class="mx-auto max-w-xl px-6 py-16">
+    <p class="text-sm font-medium tracking-widest text-brand-500 uppercase">
+      Contact
+    </p>
+    <h1 class="mt-2 font-serif text-3xl text-brand-900 sm:text-4xl">
+      Get in touch
+    </h1>
+    <p class="mt-4 text-brand-700">
+      Questions about an upcoming retreat, or interested in something custom for
+      your group or couple? Send us a note.
+    </p>
+
+    <div class="mt-8 rounded-2xl border border-brand-200 bg-white p-6">
+      <ContactForm client:load />
+    </div>
+  </section>
+</Layout>

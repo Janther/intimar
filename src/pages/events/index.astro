@@ -1,0 +1,49 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import EventsExplorer from '../../components/vue/EventsExplorer.vue';
+import {
+  getAllEvents,
+  formatDateRange,
+  formatShortDate,
+  isEarlyBirdActive,
+} from '../../lib/data';
+
+const events = await getAllEvents();
+
+const eventSummaries = events.map((event) => ({
+  id: event.id,
+  title: event.data.title,
+  summary: event.data.summary,
+  location: event.data.location,
+  startDateLabel: formatDateRange(event.data.startDate, event.data.endDate),
+  earlyBirdPrice: event.data.earlyBirdPrice,
+  earlyBirdActive: isEarlyBirdActive(event.data.earlyBirdDeadline),
+  earlyBirdDeadlineLabel: formatShortDate(event.data.earlyBirdDeadline),
+  price: event.data.price,
+  currency: event.data.currency,
+  image: event.data.image,
+  tags: event.data.tags,
+}));
+---
+
+<Layout
+  title="Retreats"
+  description="Upcoming tantra retreats hosted by Intimar."
+>
+  <section class="mx-auto max-w-6xl px-6 py-16">
+    <p class="text-sm font-medium tracking-widest text-brand-500 uppercase">
+      Retreats
+    </p>
+    <h1 class="mt-2 font-serif text-3xl text-brand-900 sm:text-4xl">
+      Upcoming retreats
+    </h1>
+    <p class="mt-4 max-w-2xl text-brand-700">
+      Every retreat below is led in person by our own guides. Search by keyword
+      or filter by focus to find the right fit.
+    </p>
+
+    <div class="mt-10">
+      <EventsExplorer events={eventSummaries} client:load />
+    </div>
+  </section>
+</Layout>

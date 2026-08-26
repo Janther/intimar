@@ -1,0 +1,47 @@
+[
+  {
+    "id": "elena-marsh",
+    "name": "Elena Marsh",
+    "role": "Founder & Tantra Teacher",
+    "bio": "Elena has taught tantra and breath-based practices for over twelve years, blending trauma-informed presence work with conscious touch. She founded Intimar to create small, unhurried spaces for people to come home to their bodies — alone or with a partner.",
+    "photo": "https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=800&q=80",
+    "specialties": ["Tantra", "Breathwork", "Retreat Design"],
+    "social": {
+      "instagram": "https://instagram.com/",
+      "website": "https://example.com/"
+    }
+  },
+  {
+    "id": "marcus-oduya",
+    "name": "Marcus Oduya",
+    "role": "Somatic & Touch Facilitator",
+    "bio": "A former physiotherapist, Marcus now teaches conscious touch and nervous-system regulation, helping guests release tension the body has been holding for years. His sessions are equal parts playful and grounding.",
+    "photo": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=800&q=80",
+    "specialties": ["Conscious Touch", "Nervous System Work", "Cold Exposure"],
+    "social": {
+      "instagram": "https://instagram.com/"
+    }
+  },
+  {
+    "id": "sana-farooqi",
+    "name": "Sana Farooqi",
+    "role": "Energy & Sound Guide",
+    "bio": "Sana trained in Himalayan sound healing before bringing her practice to tantra retreats. She holds evening sound baths and closing ceremonies, guiding energy work across every Intimar gathering.",
+    "photo": "https://images.unsplash.com/photo-1531123897727-8f129e1688ce?auto=format&fit=crop&w=800&q=80",
+    "specialties": ["Energy Work", "Sound Healing", "Ceremony"],
+    "social": {
+      "website": "https://example.com/"
+    }
+  },
+  {
+    "id": "theo-lindqvist",
+    "name": "Theo Lindqvist",
+    "role": "Chef & Nourishment Lead",
+    "bio": "Theo designs the seasonal, plant-forward menus that anchor every retreat day. He believes a shared, unhurried meal is as much a sensory practice as anything on the mat.",
+    "photo": "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&w=800&q=80",
+    "specialties": ["Plant-Based Cooking", "Sensory Ritual", "Fermentation"],
+    "social": {
+      "instagram": "https://instagram.com/"
+    }
+  }
+]

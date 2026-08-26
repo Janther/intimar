@@ -1,0 +1,79 @@
+@import 'tailwindcss';
+@import 'tailwindcss-primeui';
+@import 'primeicons/primeicons.css';
+
+/* PrimeVue injects its "primevue" layer at runtime; declaring the order
+   here keeps it after Tailwind's base/theme and before utilities so
+   Tailwind utility classes can still override component styles. */
+@layer base, theme, primevue, components, utilities;
+
+@theme {
+  --font-sans: 'Jost', ui-sans-serif, system-ui, sans-serif;
+  --font-serif: 'Cormorant Garamond', Georgia, serif;
+
+  /* Warm terracotta-to-burgundy ramp — the site's parchment/ink scale. */
+  --color-brand-50: oklch(0.97 0.015 75);
+  --color-brand-100: oklch(0.93 0.03 70);
+  --color-brand-200: oklch(0.86 0.05 60);
+  --color-brand-300: oklch(0.76 0.08 50);
+  --color-brand-400: oklch(0.66 0.11 45);
+  --color-brand-500: oklch(0.58 0.12 42);
+  --color-brand-600: oklch(0.48 0.11 38);
+  --color-brand-700: oklch(0.4 0.13 35);
+  --color-brand-800: oklch(0.3 0.09 28);
+  --color-brand-900: oklch(0.2 0.06 22);
+
+  /* Used only by the candlelit hero band. */
+  --color-ink-900: oklch(0.16 0.03 30);
+  --color-accent-gold: oklch(0.78 0.12 85);
+}
+
+@layer base {
+  body {
+    @apply bg-brand-50 font-sans text-brand-900 antialiased;
+  }
+}
+
+@layer components {
+  .hero-candlelit {
+    position: relative;
+    overflow: hidden;
+    background: var(--color-ink-900);
+  }
+
+  .hero-candlelit::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(
+        circle at 22% 15%,
+        oklch(0.58 0.12 42 / 0.35),
+        transparent 55%
+      ),
+      radial-gradient(
+        circle at 78% 85%,
+        oklch(0.3 0.09 28 / 0.6),
+        transparent 60%
+      ),
+      radial-gradient(
+        circle at 50% 105%,
+        oklch(0.78 0.12 85 / 0.16),
+        transparent 50%
+      );
+  }
+
+  .hero-candlelit::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    opacity: 0.5;
+    mix-blend-mode: overlay;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='matrix' values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 0.035 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+
+  .hero-candlelit > * {
+    position: relative;
+    z-index: 1;
+  }
+}

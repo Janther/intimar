@@ -104,3 +104,40 @@ export function formatShortDate(date: Date): string {
 export function isEarlyBirdActive(deadline: Date): boolean {
   return deadline.getTime() >= Date.now();
 }
+
+// The plain, pre-formatted shape EventCard.vue actually renders. Vue
+// components can't take the raw EventEntry (its image is Astro-specific
+// ImageMetadata, and re-formatting dates/currency per render isn't worth
+// duplicating in every framework) — pages map to this shape once, here,
+// rather than each repeating the same six fields inline.
+export interface EventSummary {
+  id: string;
+  title: string;
+  summary: string;
+  location: string;
+  startDateLabel: string;
+  earlyBirdPrice: number;
+  earlyBirdActive: boolean;
+  earlyBirdDeadlineLabel: string;
+  price: number;
+  currency: string;
+  image: string;
+  tags: string[];
+}
+
+export function toEventSummary(event: EventEntry): EventSummary {
+  return {
+    id: event.id,
+    title: event.data.title,
+    summary: event.data.summary,
+    location: event.data.location,
+    startDateLabel: formatDateRange(event.data.startDate, event.data.endDate),
+    earlyBirdPrice: event.data.earlyBirdPrice,
+    earlyBirdActive: isEarlyBirdActive(event.data.earlyBirdDeadline),
+    earlyBirdDeadlineLabel: formatShortDate(event.data.earlyBirdDeadline),
+    price: event.data.price,
+    currency: event.data.currency,
+    image: event.data.image.src,
+    tags: event.data.tags,
+  };
+}

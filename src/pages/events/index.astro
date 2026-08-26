@@ -1,29 +1,9 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 import EventsExplorer from '../../components/vue/EventsExplorer.vue';
-import {
-  getAllEvents,
-  formatDateRange,
-  formatShortDate,
-  isEarlyBirdActive,
-} from '../../lib/data';
+import { getAllEvents, toEventSummary } from '../../lib/data';
 
-const events = await getAllEvents();
-
-const eventSummaries = events.map((event) => ({
-  id: event.id,
-  title: event.data.title,
-  summary: event.data.summary,
-  location: event.data.location,
-  startDateLabel: formatDateRange(event.data.startDate, event.data.endDate),
-  earlyBirdPrice: event.data.earlyBirdPrice,
-  earlyBirdActive: isEarlyBirdActive(event.data.earlyBirdDeadline),
-  earlyBirdDeadlineLabel: formatShortDate(event.data.earlyBirdDeadline),
-  price: event.data.price,
-  currency: event.data.currency,
-  image: event.data.image.src,
-  tags: event.data.tags,
-}));
+const eventSummaries = (await getAllEvents()).map(toEventSummary);
 ---
 
 <Layout

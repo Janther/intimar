@@ -1,8 +1,12 @@
 ---
 import { Image } from 'astro:assets';
 import Layout from '../../layouts/Layout.astro';
-import EventCard from '../../components/EventCard.astro';
-import { getAllTeamMembers, getEventsHostedBy } from '../../lib/data';
+import EventCard from '../../components/vue/EventCard.vue';
+import {
+  getAllTeamMembers,
+  getEventsHostedBy,
+  toEventSummary,
+} from '../../lib/data';
 import { withBase } from '../../lib/site';
 import Tag from '../../components/vue/Tag.vue';
 
@@ -16,7 +20,7 @@ export async function getStaticPaths() {
 
 const { member } = Astro.props;
 const { name, role, bio, photo, specialties, social } = member.data;
-const hostedEvents = await getEventsHostedBy(member.id);
+const hostedEvents = (await getEventsHostedBy(member.id)).map(toEventSummary);
 ---
 
 <Layout

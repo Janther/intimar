@@ -2,23 +2,8 @@
 import { computed, ref } from 'vue';
 import InputText from 'primevue/inputtext';
 import MultiSelect from 'primevue/multiselect';
-import Tag from './Tag.vue';
-import { withBase } from '../../lib/site';
-
-interface EventSummary {
-  id: string;
-  title: string;
-  summary: string;
-  location: string;
-  startDateLabel: string;
-  earlyBirdPrice: number;
-  earlyBirdActive: boolean;
-  earlyBirdDeadlineLabel: string;
-  price: number;
-  currency: string;
-  image: string;
-  tags: string[];
-}
+import EventCard from './EventCard.vue';
+import type { EventSummary } from '../../lib/data';
 
 const props = defineProps<{ events: EventSummary[] }>();
 
@@ -47,14 +32,6 @@ const filteredEvents = computed(() => {
     return matchesQuery && matchesTags;
   });
 });
-
-function formatPrice(price: number, currency: string) {
-  return new Intl.NumberFormat('es-CL', {
-    style: 'currency',
-    currency,
-    maximumFractionDigits: 0,
-  }).format(price);
-}
 </script>
 
 <template>
@@ -84,56 +61,11 @@ function formatPrice(price: number, currency: string) {
     </p>
 
     <div v-else class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-      <a
+      <EventCard
         v-for="event in filteredEvents"
         :key="event.id"
-        :href="withBase(`/events/${event.id}`)"
-        class="group flex flex-col overflow-hidden rounded-2xl border border-brand-200 bg-surface shadow-sm transition hover:-translate-y-1 hover:shadow-md"
-      >
-        <div class="aspect-[4/3] overflow-hidden">
-          <img
-            :src="event.image"
-            :alt="event.title"
-            loading="lazy"
-            class="h-full w-full object-cover transition duration-500 group-hover:scale-105"
-          />
-        </div>
-        <div class="flex flex-1 flex-col gap-2 p-5">
-          <div class="flex flex-wrap gap-1.5">
-            <Tag v-for="tag in event.tags.slice(0, 3)" :key="tag">{{
-              tag
-            }}</Tag>
-          </div>
-          <h3 class="font-serif text-lg text-brand-900">{{ event.title }}</h3>
-          <p class="line-clamp-2 text-sm text-brand-700">{{ event.summary }}</p>
-          <div
-            class="mt-auto flex items-center justify-between pt-3 text-sm text-brand-600"
-          >
-            <span>{{ event.location }}</span>
-            <span
-              v-if="event.earlyBirdActive"
-              class="flex items-baseline gap-1.5"
-            >
-              <span class="font-medium text-brand-900">{{
-                formatPrice(event.earlyBirdPrice, event.currency)
-              }}</span>
-              <span class="text-xs text-brand-600 line-through">{{
-                formatPrice(event.price, event.currency)
-              }}</span>
-            </span>
-            <span v-else class="font-medium text-brand-900">{{
-              formatPrice(event.price, event.currency)
-            }}</span>
-          </div>
-          <p
-            v-if="event.earlyBirdActive"
-            class="text-xs font-medium text-accent-gold-text"
-          >
-            Early bird hasta el {{ event.earlyBirdDeadlineLabel }}
-          </p>
-          <p class="text-xs text-brand-500">{{ event.startDateLabel }}</p>
-        </div>
-      </a>
+        :event="event"
+      />
     </div>
   </div>
 </template>

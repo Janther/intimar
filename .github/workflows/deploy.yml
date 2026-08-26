@@ -1,0 +1,54 @@
+name: Deploy to GitHub Pages (staging)
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+# Only one Pages deployment at a time; let an in-flight one finish rather
+# than cancel it mid-upload.
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: actions/setup-node@v7
+        with:
+          node-version: '22'
+          cache: npm
+
+      - run: npm ci
+
+      # DEPLOY_TARGET=gh-pages switches astro.config.mjs's site/base to
+      # janther.github.io/intimar for this build only — the intimar.life
+      # production config is untouched for local/other builds.
+      - name: Build (GitHub Pages staging config)
+        run: npm run build
+        env:
+          DEPLOY_TARGET: gh-pages
+
+      - uses: actions/configure-pages@v5
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: ./dist
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4

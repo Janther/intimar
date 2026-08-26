@@ -1,5 +1,6 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import { withBase } from '../lib/site';
 ---
 
 <Layout
@@ -21,13 +22,13 @@ import Layout from '../layouts/Layout.astro';
     </p>
     <div class="mt-9 flex flex-wrap justify-center gap-4">
       <a
-        href="/events"
+        href={withBase('/events')}
         class="rounded-full bg-brand-700 px-7 py-3.5 text-sm font-medium text-brand-50 transition hover:bg-brand-600"
       >
         Ver Próximos Retiros
       </a>
       <a
-        href="/team"
+        href={withBase('/team')}
         class="rounded-full border border-brand-200 px-7 py-3.5 text-sm font-medium text-brand-900 transition hover:bg-brand-100"
       >
         Conoce a tus Facilitadores

@@ -3,6 +3,7 @@ import { Image } from 'astro:assets';
 import Layout from '../../layouts/Layout.astro';
 import EventCard from '../../components/EventCard.astro';
 import { getAllTeamMembers, getEventsHostedBy } from '../../lib/data';
+import { withBase } from '../../lib/site';
 
 export async function getStaticPaths() {
   const team = await getAllTeamMembers();
@@ -23,7 +24,9 @@ const hostedEvents = await getEventsHostedBy(member.id);
   image={photo.src}
 >
   <article class="mx-auto max-w-4xl px-6 py-16">
-    <a href="/team" class="text-sm text-brand-600 hover:text-brand-900"
+    <a
+      href={withBase('/team')}
+      class="text-sm text-brand-600 hover:text-brand-900"
       >← Nuestros facilitadores</a
     >
 

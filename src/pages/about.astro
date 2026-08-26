@@ -1,5 +1,6 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import { withBase } from '../lib/site';
 ---
 
 <Layout
@@ -30,12 +31,12 @@ import Layout from '../layouts/Layout.astro';
       </p>
       <p>
         Si eso suena al tipo de encuentro que buscas, mira nuestros <a
-          href="/events"
+          href={withBase('/events')}
           class="text-brand-800 underline underline-offset-2"
           >próximos retiros</a
         >{' '}
         o conoce a los <a
-          href="/team"
+          href={withBase('/team')}
           class="text-brand-800 underline underline-offset-2"
           >facilitadores que los conducen</a
         >.

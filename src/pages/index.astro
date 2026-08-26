@@ -8,6 +8,7 @@ import {
   getAllTeamMembers,
   getAllTestimonials,
 } from '../lib/data';
+import { withBase } from '../lib/site';
 
 const featuredEvents = (await getFeaturedEvents()).slice(0, 3);
 const team = (await getAllTeamMembers()).slice(0, 4);
@@ -47,13 +48,13 @@ const organizationSchema = {
       </p>
       <div class="mt-9 flex flex-wrap justify-center gap-4">
         <a
-          href="/events"
+          href={withBase('/events')}
           class="rounded-full bg-brand-700 px-7 py-3.5 text-sm font-medium text-brand-50 transition hover:bg-brand-600"
         >
           Ver Próximos Retiros
         </a>
         <a
-          href="/team"
+          href={withBase('/team')}
           class="rounded-full border border-hero-fg/35 px-7 py-3.5 text-sm font-medium text-hero-fg transition hover:bg-hero-fg/10"
         >
           Conoce a tus Facilitadores
@@ -65,8 +66,9 @@ const organizationSchema = {
   <section class="mx-auto max-w-6xl px-6 py-20">
     <div class="mb-8 flex items-end justify-between">
       <h2 class="font-serif text-2xl text-brand-900">Próximos retiros</h2>
-      <a href="/events" class="text-sm text-brand-700 hover:text-brand-900"
-        >Ver todos →</a
+      <a
+        href={withBase('/events')}
+        class="text-sm text-brand-700 hover:text-brand-900">Ver todos →</a
       >
     </div>
     <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
@@ -81,7 +83,9 @@ const organizationSchema = {
   <section class="mx-auto max-w-6xl px-6 py-20">
     <div class="mb-8 flex items-end justify-between">
       <h2 class="font-serif text-2xl text-brand-900">Nuestros facilitadores</h2>
-      <a href="/team" class="text-sm text-brand-700 hover:text-brand-900"
+      <a
+        href={withBase('/team')}
+        class="text-sm text-brand-700 hover:text-brand-900"
         >Conócelos a todos →</a
       >
     </div>

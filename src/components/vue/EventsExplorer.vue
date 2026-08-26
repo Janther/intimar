@@ -3,6 +3,7 @@ import { computed, ref } from 'vue';
 import InputText from 'primevue/inputtext';
 import MultiSelect from 'primevue/multiselect';
 import Tag from 'primevue/tag';
+import { withBase } from '../../lib/site';
 
 interface EventSummary {
   id: string;
@@ -86,7 +87,7 @@ function formatPrice(price: number, currency: string) {
       <a
         v-for="event in filteredEvents"
         :key="event.id"
-        :href="`/events/${event.id}`"
+        :href="withBase(`/events/${event.id}`)"
         class="group flex flex-col overflow-hidden rounded-2xl border border-brand-200 bg-surface shadow-sm transition hover:-translate-y-1 hover:shadow-md"
       >
         <div class="aspect-[4/3] overflow-hidden">

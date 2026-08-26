@@ -10,6 +10,7 @@ import {
   formatShortDate,
   isEarlyBirdActive,
 } from '../../lib/data';
+import { withBase } from '../../lib/site';
 
 export async function getStaticPaths() {
   const events = await getAllEvents();
@@ -78,8 +79,9 @@ const eventSchema = {
   structuredData={eventSchema}
 >
   <article class="mx-auto max-w-4xl px-6 py-16">
-    <a href="/events" class="text-sm text-brand-600 hover:text-brand-900"
-      >← Todos los retiros</a
+    <a
+      href={withBase('/events')}
+      class="text-sm text-brand-600 hover:text-brand-900">← Todos los retiros</a
     >
 
     <div class="mt-4 flex flex-wrap gap-1.5">
@@ -114,7 +116,7 @@ const eventSchema = {
               <div class="mt-4 flex flex-wrap gap-4">
                 {hosts.map((host) => (
                   <a
-                    href={`/team/${host.id}`}
+                    href={withBase(`/team/${host.id}`)}
                     class="flex items-center gap-3 rounded-xl border border-brand-200 bg-surface p-3 pr-5 transition hover:shadow-sm"
                   >
                     <Image

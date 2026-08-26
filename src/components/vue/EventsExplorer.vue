@@ -2,7 +2,7 @@
 import { computed, ref } from 'vue';
 import InputText from 'primevue/inputtext';
 import MultiSelect from 'primevue/multiselect';
-import Tag from 'primevue/tag';
+import Tag from './Tag.vue';
 import { withBase } from '../../lib/site';
 
 interface EventSummary {
@@ -100,12 +100,9 @@ function formatPrice(price: number, currency: string) {
         </div>
         <div class="flex flex-1 flex-col gap-2 p-5">
           <div class="flex flex-wrap gap-1.5">
-            <Tag
-              v-for="tag in event.tags.slice(0, 3)"
-              :key="tag"
-              :value="tag"
-              severity="secondary"
-            />
+            <Tag v-for="tag in event.tags.slice(0, 3)" :key="tag">{{
+              tag
+            }}</Tag>
           </div>
           <h3 class="font-serif text-lg text-brand-900">{{ event.title }}</h3>
           <p class="line-clamp-2 text-sm text-brand-700">{{ event.summary }}</p>

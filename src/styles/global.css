@@ -9,7 +9,13 @@
 
 @theme {
   --font-sans: 'Jost', ui-sans-serif, system-ui, sans-serif;
-  --font-serif: 'Cormorant Garamond', Georgia, serif;
+  --font-serif: 'Fraunces', Georgia, serif;
+
+  /* A rawer, documented-testimony voice for quoted/confessional content
+     (testimonials) — plain, composed Fraunces reads as poised no matter
+     what it's saying; a typewriter face carries the sense of an account
+     being given, not a brand line being written. */
+  --font-confession: 'Special Elite', 'Courier New', monospace;
 
   /* Warm terracotta-to-burgundy ramp — the site's parchment/ink scale. */
   --color-brand-50: oklch(0.97 0.015 75);

@@ -4,9 +4,9 @@ import { definePreset } from '@primevue/themes';
 import Aura from '@primevue/themes/aura';
 
 // Aura's default "primary" is emerald green, which clashes with the site's
-// warm terracotta palette (visible on Carousel dots, focus rings, selected
-// MultiSelect chips). Swapping in a terracotta ramp keeps PrimeVue's own
-// interactive chrome consistent with the buttons we style by hand.
+// warm terracotta palette (visible on Carousel dots and focus rings).
+// Swapping in a terracotta ramp keeps PrimeVue's own interactive chrome
+// consistent with the buttons we style by hand.
 const TantraPreset = definePreset(Aura, {
   semantic: {
     primary: {
@@ -24,9 +24,10 @@ const TantraPreset = definePreset(Aura, {
     },
     // Aura's default light-mode placeholder color ({surface.500}, slate-500)
     // only clears 4.43:1 against our warm brand-50 page background —
-    // just under the 4.5:1 AA minimum (surfaced by the MultiSelect filter's
-    // "Filtrar por enfoque" placeholder). Darkening it one step gives real
-    // headroom instead of resting on a fractional pass/fail margin.
+    // just under the 4.5:1 AA minimum (surfaced by the events search
+    // input's "Buscar retiros o ubicaciones" placeholder). Darkening it
+    // one step gives real headroom instead of resting on a fractional
+    // pass/fail margin.
     colorScheme: {
       light: {
         formField: {

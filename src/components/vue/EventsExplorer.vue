@@ -1,57 +1,34 @@
 <script setup lang="ts">
 import { computed, ref } from 'vue';
 import InputText from 'primevue/inputtext';
-import MultiSelect from 'primevue/multiselect';
 import EventCard from './EventCard.vue';
 import type { EventSummary } from '../../lib/data';
 
 const props = defineProps<{ events: EventSummary[] }>();
 
 const query = ref('');
-const selectedTags = ref<string[]>([]);
-
-const allTags = computed(() => {
-  const tags = new Set<string>();
-  for (const event of props.events) {
-    for (const tag of event.tags) tags.add(tag);
-  }
-  return [...tags].sort();
-});
 
 const filteredEvents = computed(() => {
   const q = query.value.trim().toLowerCase();
-  return props.events.filter((event) => {
-    const matchesQuery =
-      q.length === 0 ||
+  if (q.length === 0) return props.events;
+  return props.events.filter(
+    (event) =>
       event.title.toLowerCase().includes(q) ||
       event.location.toLowerCase().includes(q) ||
-      event.summary.toLowerCase().includes(q);
-    const matchesTags =
-      selectedTags.value.length === 0 ||
-      selectedTags.value.every((tag) => event.tags.includes(tag));
-    return matchesQuery && matchesTags;
-  });
+      event.summary.toLowerCase().includes(q),
+  );
 });
 </script>
 
 <template>
   <div>
-    <div class="mb-8 flex flex-col gap-3 sm:flex-row sm:items-center">
-      <span class="p-input-icon-left w-full sm:max-w-xs">
-        <InputText
-          v-model="query"
-          placeholder="Buscar retiros o ubicaciones"
-          class="w-full"
-        />
-      </span>
-      <MultiSelect
-        v-model="selectedTags"
-        :options="allTags"
-        placeholder="Filtrar por enfoque"
-        class="w-full sm:w-64"
-        display="chip"
+    <span class="p-input-icon-left mb-8 block w-full sm:max-w-xs">
+      <InputText
+        v-model="query"
+        placeholder="Buscar retiros o ubicaciones"
+        class="w-full"
       />
-    </div>
+    </span>
 
     <p
       v-if="filteredEvents.length === 0"

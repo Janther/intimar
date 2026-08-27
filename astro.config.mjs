@@ -36,7 +36,6 @@ export default defineConfig({
         'primevue/button',
         'primevue/dialog',
         'primevue/inputtext',
-        'primevue/multiselect',
         'primevue/carousel',
         'primevue/textarea',
         'primevue/message',

@@ -71,6 +71,25 @@ const eventSchema = {
     name: host.data.name,
   })),
 };
+const breadcrumbSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    {
+      '@type': 'ListItem',
+      position: 1,
+      name: 'Inicio',
+      item: Astro.site?.toString(),
+    },
+    {
+      '@type': 'ListItem',
+      position: 2,
+      name: 'Retiros',
+      item: new URL(withBase('/events'), Astro.site).toString(),
+    },
+    { '@type': 'ListItem', position: 3, name: title, item: canonicalURL },
+  ],
+};
 ---
 
 <Layout
@@ -80,7 +99,7 @@ const eventSchema = {
   imageAlt={title}
   imageWidth={image.width}
   imageHeight={image.height}
-  structuredData={eventSchema}
+  structuredData={[eventSchema, breadcrumbSchema]}
 >
   <article class="mx-auto max-w-4xl px-6 py-16">
     <a

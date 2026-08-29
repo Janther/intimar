@@ -23,6 +23,42 @@ const { name, role, bio, photo, specialties, social } = member.data;
 const hostedEvents = await Promise.all(
   (await getEventsHostedBy(member.id)).map(toEventSummary),
 );
+
+const canonicalURL = new URL(Astro.url.pathname, Astro.site).toString();
+const personSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  name,
+  jobTitle: role,
+  description: bio,
+  image: new URL(photo.src, Astro.site).toString(),
+  url: canonicalURL,
+  worksFor: {
+    '@type': 'Organization',
+    name: 'Intimar',
+    url: Astro.site?.toString(),
+  },
+  sameAs: [social.instagram, social.website].filter(Boolean),
+};
+const breadcrumbSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    {
+      '@type': 'ListItem',
+      position: 1,
+      name: 'Inicio',
+      item: Astro.site?.toString(),
+    },
+    {
+      '@type': 'ListItem',
+      position: 2,
+      name: 'Facilitadores',
+      item: new URL(withBase('/team'), Astro.site).toString(),
+    },
+    { '@type': 'ListItem', position: 3, name, item: canonicalURL },
+  ],
+};
 ---
 
 <Layout
@@ -32,6 +68,7 @@ const hostedEvents = await Promise.all(
   imageAlt={name}
   imageWidth={photo.width}
   imageHeight={photo.height}
+  structuredData={[personSchema, breadcrumbSchema]}
 >
   <article class="mx-auto max-w-4xl px-6 py-16">
     <a

@@ -1,24 +1,39 @@
 ---
+import { getImage } from 'astro:assets';
 import '../styles/global.css';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import { withBase } from '../lib/site';
+import ogDefaultSource from '../data/images/site/og-default.jpg';
 
 interface Props {
   title: string;
   description?: string;
   image?: string;
+  imageAlt?: string;
+  imageWidth?: number;
+  imageHeight?: number;
   structuredData?: Record<string, unknown> | Record<string, unknown>[];
+  noindex?: boolean;
 }
 
-const DEFAULT_OG_IMAGE =
-  'https://images.unsplash.com/photo-1506126613408-eca07ce68773?auto=format&fit=crop&w=1200&q=80';
+const defaultOgImage = await getImage({
+  src: ogDefaultSource,
+  width: 1200,
+  height: 630,
+  fit: 'cover',
+  format: 'jpg',
+});
 
 const {
   title,
   description = 'Intimar — retiros de tantra pequeños y presenciales, guiados por nuestro propio equipo.',
-  image = DEFAULT_OG_IMAGE,
+  image = defaultOgImage.src,
+  imageAlt = 'Intimar — retiros de tantra pequeños y presenciales',
+  imageWidth = 1200,
+  imageHeight = 630,
   structuredData,
+  noindex = false,
 } = Astro.props;
 
 const structuredDataEntries = structuredData
@@ -29,6 +44,9 @@ const structuredDataEntries = structuredData
 
 const pageTitle = `${title} · Intimar`;
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+// og:image/twitter:image must be absolute — `image` may be a root-relative
+// build path (astro:assets output, or a page's own image.src override).
+const absoluteImageURL = new URL(image, Astro.site);
 ---
 
 <!doctype html>
@@ -47,6 +65,7 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
     </script>
     <link rel="icon" type="image/svg+xml" href={withBase('/favicon.svg')} />
     <meta name="description" content={description} />
+    {noindex && <meta name="robots" content="noindex" />}
     <title>{pageTitle}</title>
     <link rel="canonical" href={canonicalURL} />
 
@@ -55,13 +74,17 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
     <meta property="og:title" content={pageTitle} />
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonicalURL} />
-    <meta property="og:image" content={image} />
+    <meta property="og:image" content={absoluteImageURL} />
+    <meta property="og:image:width" content={String(imageWidth)} />
+    <meta property="og:image:height" content={String(imageHeight)} />
+    <meta property="og:image:alt" content={imageAlt} />
     <meta property="og:locale" content="es_CL" />
 
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={pageTitle} />
     <meta name="twitter:description" content={description} />
-    <meta name="twitter:image" content={image} />
+    <meta name="twitter:image" content={absoluteImageURL} />
+    <meta name="twitter:image:alt" content={imageAlt} />
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />

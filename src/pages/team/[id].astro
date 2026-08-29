@@ -29,6 +29,9 @@ const hostedEvents = await Promise.all(
   title={name}
   description={`${name}, ${role} en Intimar.`}
   image={photo.src}
+  imageAlt={name}
+  imageWidth={photo.width}
+  imageHeight={photo.height}
 >
   <article class="mx-auto max-w-4xl px-6 py-16">
     <a

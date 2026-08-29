@@ -15,21 +15,33 @@ const year = new Date().getFullYear();
       </p>
     </div>
 
-    <nav aria-label="Explorar" class="flex flex-col gap-2 text-sm text-brand-700">
+    <nav
+      aria-label="Explorar"
+      class="flex flex-col gap-2 text-sm text-brand-700"
+    >
       <p class="text-sm font-semibold text-brand-900">Explorar</p>
-      <a href={withBase('/events')} class="hover:text-brand-900">Próximos retiros</a>
-      <a href={withBase('/team')} class="hover:text-brand-900">Nuestros facilitadores</a>
-      <a href={withBase('/about')} class="hover:text-brand-900">Sobre Intimar</a>
+      <a href={withBase('/events')} class="hover:text-brand-900"
+        >Próximos retiros</a
+      >
+      <a href={withBase('/team')} class="hover:text-brand-900"
+        >Nuestros facilitadores</a
+      >
+      <a href={withBase('/about')} class="hover:text-brand-900">Sobre Intimar</a
+      >
     </nav>
 
-    <address class="flex flex-col gap-2 text-sm not-italic text-brand-700">
+    <address class="flex flex-col gap-2 text-sm text-brand-700 not-italic">
       <p class="text-sm font-semibold text-brand-900">Contáctanos</p>
       <a href={withBase('/contact')} class="hover:text-brand-900">Escríbenos</a>
-      <a href={`mailto:${CONTACT_EMAIL}`} class="hover:text-brand-900">{CONTACT_EMAIL}</a>
+      <a href={`mailto:${CONTACT_EMAIL}`} class="hover:text-brand-900"
+        >{CONTACT_EMAIL}</a
+      >
     </address>
   </div>
 
-  <p class="border-t border-brand-200/60 px-6 py-4 text-center text-xs text-brand-600">
+  <p
+    class="border-t border-brand-200/60 px-6 py-4 text-center text-xs text-brand-600"
+  >
     © {year} Intimar. Todos los derechos reservados.
   </p>
 </footer>

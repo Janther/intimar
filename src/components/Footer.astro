@@ -15,47 +15,21 @@ const year = new Date().getFullYear();
       </p>
     </div>
 
-    <div>
+    <nav aria-label="Explorar" class="flex flex-col gap-2 text-sm text-brand-700">
       <p class="text-sm font-semibold text-brand-900">Explorar</p>
-      <ul class="mt-3 space-y-2 text-sm text-brand-700">
-        <li>
-          <a href={withBase('/events')} class="hover:text-brand-900"
-            >Próximos retiros</a
-          >
-        </li>
-        <li>
-          <a href={withBase('/team')} class="hover:text-brand-900"
-            >Nuestros facilitadores</a
-          >
-        </li>
-        <li>
-          <a href={withBase('/about')} class="hover:text-brand-900"
-            >Sobre Intimar</a
-          >
-        </li>
-      </ul>
-    </div>
+      <a href={withBase('/events')} class="hover:text-brand-900">Próximos retiros</a>
+      <a href={withBase('/team')} class="hover:text-brand-900">Nuestros facilitadores</a>
+      <a href={withBase('/about')} class="hover:text-brand-900">Sobre Intimar</a>
+    </nav>
 
-    <div>
+    <address class="flex flex-col gap-2 text-sm not-italic text-brand-700">
       <p class="text-sm font-semibold text-brand-900">Contáctanos</p>
-      <ul class="mt-3 space-y-2 text-sm text-brand-700">
-        <li>
-          <a href={withBase('/contact')} class="hover:text-brand-900"
-            >Escríbenos</a
-          >
-        </li>
-        <li>
-          <a href={`mailto:${CONTACT_EMAIL}`} class="hover:text-brand-900"
-            >{CONTACT_EMAIL}</a
-          >
-        </li>
-      </ul>
-    </div>
+      <a href={withBase('/contact')} class="hover:text-brand-900">Escríbenos</a>
+      <a href={`mailto:${CONTACT_EMAIL}`} class="hover:text-brand-900">{CONTACT_EMAIL}</a>
+    </address>
   </div>
 
-  <div
-    class="border-t border-brand-200/60 px-6 py-4 text-center text-xs text-brand-600"
-  >
+  <p class="border-t border-brand-200/60 px-6 py-4 text-center text-xs text-brand-600">
     © {year} Intimar. Todos los derechos reservados.
-  </div>
+  </p>
 </footer>

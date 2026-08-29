@@ -7,6 +7,8 @@ import tailwindcss from '@tailwindcss/vite';
 
 import sitemap from '@astrojs/sitemap';
 
+import compress from '@playform/compress';
+
 // The GitHub Pages staging deploy (see .github/workflows/deploy.yml) builds
 // with DEPLOY_TARGET=gh-pages so it gets a site/base matching where GitHub
 // actually serves a repo not named <user>.github.io — janther.github.io/intimar.
@@ -23,6 +25,10 @@ export default defineConfig({
       appEntrypoint: '/src/vue-app.ts',
     }),
     sitemap(),
+    // Must stay last — it compresses the fully-rendered build output,
+    // including inline <script>/<style> content that Astro's own
+    // compressHTML leaves untouched.
+    compress(),
   ],
 
   vite: {

@@ -1,9 +1,9 @@
 import { getCollection, getEntry, type CollectionEntry } from 'astro:content';
 import { getImage } from 'astro:assets';
 
-export type EventEntry = CollectionEntry<'events'>;
+type EventEntry = CollectionEntry<'events'>;
 export type TeamEntry = CollectionEntry<'team'>;
-export type TestimonialEntry = CollectionEntry<'testimonials'>;
+type TestimonialEntry = CollectionEntry<'testimonials'>;
 
 export async function getAllEvents(): Promise<EventEntry[]> {
   const events = await getCollection('events');
@@ -12,7 +12,7 @@ export async function getAllEvents(): Promise<EventEntry[]> {
   );
 }
 
-export async function getUpcomingEvents(): Promise<EventEntry[]> {
+async function getUpcomingEvents(): Promise<EventEntry[]> {
   const now = new Date();
   const events = await getAllEvents();
   return events.filter(
@@ -25,17 +25,11 @@ export async function getFeaturedEvents(): Promise<EventEntry[]> {
   return events.filter((event) => event.data.featured);
 }
 
-export async function getEvent(id: string): Promise<EventEntry | undefined> {
-  return getEntry('events', id);
-}
-
 export async function getAllTeamMembers(): Promise<TeamEntry[]> {
   return getCollection('team');
 }
 
-export async function getTeamMember(
-  id: string,
-): Promise<TeamEntry | undefined> {
+async function getTeamMember(id: string): Promise<TeamEntry | undefined> {
   return getEntry('team', id);
 }
 

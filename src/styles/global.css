@@ -17,6 +17,11 @@
      being given, not a brand line being written. */
   --font-confession: 'Special Elite', 'Courier New', monospace;
 
+  /* Scoped accent for a single emphasized word/phrase (e.g. the hero's
+     "juntos") — a connecting script is a display/accent face, not a body
+     font, so it stays off --font-sans and gets applied deliberately. */
+  --font-allura: 'Allura', cursive;
+
   /* Warm terracotta-to-burgundy ramp — the site's parchment/ink scale. */
   --color-brand-50: oklch(0.97 0.015 75);
   --color-brand-100: oklch(0.93 0.03 70);

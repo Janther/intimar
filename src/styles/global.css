@@ -8,7 +8,7 @@
 @layer base, theme, primevue, components, utilities;
 
 @theme {
-  --font-sans: 'Jost', ui-sans-serif, system-ui, sans-serif;
+  --font-sans: 'Belleza', ui-sans-serif, system-ui, sans-serif;
   --font-serif: 'Fraunces', Georgia, serif;
 
   /* A rawer, documented-testimony voice for quoted/confessional content

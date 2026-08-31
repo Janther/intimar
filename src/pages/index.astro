@@ -54,7 +54,7 @@ const organizationSchema = {
       <div class="mt-9 flex flex-wrap justify-center gap-4">
         <a
           href={withBase('/events')}
-          class="rounded-full bg-brand-700 px-7 py-3.5 text-sm font-medium text-brand-50 transition hover:bg-brand-600"
+          class="rounded-full bg-terracotta-500 px-7 py-3.5 text-sm font-medium text-white transition hover:bg-terracotta-400"
         >
           Ver Próximos Retiros
         </a>
@@ -70,10 +70,10 @@ const organizationSchema = {
 
   <section class="mx-auto max-w-6xl px-6 py-20">
     <div class="mb-8 flex items-end justify-between">
-      <h2 class="font-serif text-2xl text-brand-900">Próximos retiros</h2>
+      <h2 class="font-serif text-2xl text-ink-900">Próximos retiros</h2>
       <a
         href={withBase('/events')}
-        class="text-sm text-brand-700 hover:text-brand-900">Ver todos →</a
+        class="text-sm text-ink-700 hover:text-ink-900">Ver todos →</a
       >
     </div>
     <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
@@ -81,17 +81,16 @@ const organizationSchema = {
     </div>
   </section>
 
-  <section class="border-y border-brand-200/60 bg-brand-100/40 py-4">
+  <section class="border-y border-ink-200/60 bg-ink-100/40 py-4">
     <Testimonials testimonials={testimonials} client:visible />
   </section>
 
   <section class="mx-auto max-w-6xl px-6 py-20">
     <div class="mb-8 flex items-end justify-between">
-      <h2 class="font-serif text-2xl text-brand-900">Nuestros facilitadores</h2>
+      <h2 class="font-serif text-2xl text-ink-900">Nuestros facilitadores</h2>
       <a
         href={withBase('/team')}
-        class="text-sm text-brand-700 hover:text-brand-900"
-        >Conócelos a todos →</a
+        class="text-sm text-ink-700 hover:text-ink-900">Conócelos a todos →</a
       >
     </div>
     <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">

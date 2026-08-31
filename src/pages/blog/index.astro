@@ -1,0 +1,32 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import BlogCard from '../../components/BlogCard.astro';
+import { getAllBlogPosts } from '../../lib/data';
+
+const posts = await getAllBlogPosts();
+---
+
+<Layout
+  title="Blog"
+  description="Reflexiones sobre tantra, respiración y contacto consciente desde el equipo de Intimar."
+>
+  <section class="mx-auto max-w-6xl px-6 py-16">
+    <p
+      class="text-sm font-medium tracking-widest text-terracotta-text uppercase"
+    >
+      Blog
+    </p>
+    <h1 class="mt-2 font-serif text-3xl text-ink-900 sm:text-4xl">
+      Reflexiones desde el equipo
+    </h1>
+    <p class="mt-4 max-w-2xl text-ink-700">
+      Notas sobre práctica, respiración y contacto consciente — escritas por
+      quienes guían nuestros retiros, y a veces por quienes los observan desde
+      afuera.
+    </p>
+
+    <div class="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+      {posts.map((post) => <BlogCard post={post} />)}
+    </div>
+  </section>
+</Layout>

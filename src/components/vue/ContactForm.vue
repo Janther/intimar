@@ -37,19 +37,17 @@ function handleSubmit() {
 <template>
   <form class="flex flex-col gap-4" @submit.prevent="handleSubmit">
     <div class="flex flex-col gap-1">
-      <label for="name" class="text-sm font-medium text-brand-800"
-        >Nombre</label
-      >
+      <label for="name" class="text-sm font-medium text-ink-800">Nombre</label>
       <InputText id="name" v-model="name" required />
     </div>
     <div class="flex flex-col gap-1">
-      <label for="email" class="text-sm font-medium text-brand-800"
+      <label for="email" class="text-sm font-medium text-ink-800"
         >Correo electrónico</label
       >
       <InputText id="email" v-model="email" type="email" required />
     </div>
     <div class="flex flex-col gap-1">
-      <label for="message" class="text-sm font-medium text-brand-800"
+      <label for="message" class="text-sm font-medium text-ink-800"
         >Mensaje</label
       >
       <Textarea id="message" v-model="message" rows="4" autoResize required />
@@ -57,7 +55,7 @@ function handleSubmit() {
     <Button
       type="submit"
       label="Enviar"
-      class="!border-brand-700 !bg-brand-700 !text-brand-50 hover:!bg-brand-800"
+      class="!border-terracotta-500 !bg-terracotta-500 !text-white hover:!bg-terracotta-700"
     />
     <Message v-if="submitted" severity="success" :closable="false">
       Tu aplicación de correo debería estar abierta con tu mensaje listo para

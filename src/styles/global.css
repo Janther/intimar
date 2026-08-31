@@ -1,6 +1,7 @@
 @import 'tailwindcss';
 @import 'tailwindcss-primeui';
 @import 'primeicons/primeicons.css';
+@plugin '@tailwindcss/typography';
 
 /* PrimeVue injects its "primevue" layer at runtime; declaring the order
    here keeps it after Tailwind's base/theme and before utilities so
@@ -22,33 +23,71 @@
      font, so it stays off --font-sans and gets applied deliberately. */
   --font-allura: 'Allura', cursive;
 
-  /* Warm terracotta-to-burgundy ramp — the site's parchment/ink scale. */
-  --color-brand-50: oklch(0.97 0.015 75);
-  --color-brand-100: oklch(0.93 0.03 70);
-  --color-brand-200: oklch(0.86 0.05 60);
-  --color-brand-300: oklch(0.76 0.08 50);
-  --color-brand-400: oklch(0.66 0.11 45);
-  --color-brand-500: oklch(0.52 0.12 42);
-  --color-brand-600: oklch(0.48 0.11 38);
-  --color-brand-700: oklch(0.4 0.13 35);
-  --color-brand-800: oklch(0.3 0.09 28);
-  --color-brand-900: oklch(0.2 0.06 22);
+  /* Structural neutral ramp — page/card backgrounds, body text, borders.
+     Shared with the sexology project's brand system (src/styles/global.css
+     there) so the two sites draw from one palette; this replaces the old
+     single-ramp "brand" scale of the same role. */
+  --color-ink-50: #f2e9e0;
+  --color-ink-100: #e8dcc9;
+  --color-ink-200: #d8c7ab;
+  --color-ink-300: #c2ac8c;
+  --color-ink-400: #a8926f;
+  --color-ink-500: #93826c;
+  --color-ink-600: #4a3d33;
+  --color-ink-700: #332922;
+  --color-ink-800: #241a15;
+  --color-ink-900: #1a1310;
 
-  /* Used only by the candlelit hero band — fixed in both themes, since
-     the band itself stays dark regardless of site theme. --color-hero-fg
-     is deliberately not overridden under .app-dark: it is what
-     --color-brand-50 always meant before dark mode existed (readable
-     light text on this specific always-dark background), so it must
-     stay put even while brand-50 itself starts flipping for dark mode. */
-  --color-ink-900: oklch(0.16 0.03 30);
-  --color-accent-gold: oklch(0.78 0.12 85);
-  --color-hero-fg: oklch(0.97 0.015 75);
+  /* Accent / call-to-action ramp — buttons, eyebrow labels, "read more"
+     style hovers. Not part of the structural ramp above: it stays the same
+     handful of shades in both themes rather than flipping, since a solid
+     button's own fill provides its contrast regardless of page theme. */
+  --color-terracotta-50: #fbede6;
+  --color-terracotta-100: #f6d9c9;
+  --color-terracotta-200: #edb691;
+  --color-terracotta-300: #e2925f;
+  --color-terracotta-400: #d17240;
+  --color-terracotta-500: #c2542f;
+  --color-terracotta-600: #a8451f;
+  --color-terracotta-700: #8a3819;
+  --color-terracotta-800: #6e2c14;
+  --color-terracotta-900: #4a1d0d;
 
-  /* A darker sibling of accent-gold for small text set directly on
-     card/page surfaces (the "early bird" tag) — the decorative gold is
-     too light to hit 4.5:1 against a white/light surface, so text uses
-     this instead while hero/decorative uses keep the brighter gold. */
-  --color-accent-gold-text: oklch(0.5 0.14 75);
+  /* Rare accent, reserved for compliance/callout boxes — not used for
+     everyday UI. */
+  --color-gold-50: #fbf3e2;
+  --color-gold-100: #f5e4c2;
+  --color-gold-200: #ecc98a;
+  --color-gold-300: #e0b468;
+  --color-gold-400: #d4a24c;
+  --color-gold-500: #b8842f;
+  --color-gold-600: #96691f;
+  --color-gold-700: #785115;
+  --color-gold-800: #6a441a;
+  --color-gold-900: #5c3d12;
+
+  /* Used only by the candlelit hero band — fixed in both themes, since the
+     band itself stays dark regardless of site theme. Deliberately literal
+     values, not var()-linked to the ink ramp: they are what ink-900/ink-50
+     mean in light mode specifically, and must stay put even once ink-*
+     itself starts flipping for dark mode below. */
+  --color-hero-bg: #1a1310;
+  --color-hero-fg: #f2e9e0;
+
+  /* Decorative gold accent (hero rays, "juntos", section flourishes) and a
+     darker sibling for small text set directly on a card/page surface — the
+     decorative shade is too light to hit 4.5:1 on a light surface, so text
+     uses the darker one instead. Same relationship @accent-gold-text has
+     always had; only the underlying gold ramp changed. */
+  --color-accent-gold: var(--color-gold-300);
+  --color-accent-gold-text: var(--color-gold-800);
+
+  /* terracotta-500 (the button/eyebrow shade) doesn't hit 4.5:1 as small
+     text against either end of the ink ramp on its own — this is the text
+     -safe sibling, one shade darker in light mode, and swaps to a lighter
+     shade under .app-dark below. Buttons stay on the fixed terracotta-500
+     scale directly; only inline text/links need this. */
+  --color-terracotta-text: var(--color-terracotta-600);
 
   /* Card/panel backgrounds that need to sit visibly above the page
      background — a plain `white` doesn't have a dark-mode equivalent,
@@ -58,33 +97,34 @@
 
 @layer base {
   body {
-    @apply bg-brand-50 font-sans text-brand-900 antialiased;
+    @apply bg-ink-50 font-sans text-ink-900 antialiased;
   }
 
   /* Dark mode is a manual/system toggle (.app-dark on the html element,
      applied by the inline script in Layout.astro), not Tailwind's default
      media-query variant, matching the darkModeSelector used by PrimeVue
-     in vue-app.ts. Every brand-N slot is swapped with its counterpart
-     from the other end of the light ramp (50 with 900, 100 with 800, and
-     so on), so existing bg-brand-x / text-brand-x usage repaints for
-     dark mode without needing dark: variants everywhere. Custom-property
-     overrides like this only survive the Tailwind / Lightning CSS build
-     when placed inside a declared layer; a bare top-level rule is
-     silently dropped from the compiled output. */
+     in vue-app.ts. Every ink-N slot is swapped with its counterpart from
+     the other end of the light ramp (50 with 900, 100 with 800, and so
+     on), so existing bg-ink-x / text-ink-x usage repaints for dark mode
+     without needing dark: variants everywhere. Custom-property overrides
+     like this only survive the Tailwind / Lightning CSS build when placed
+     inside a declared layer; a bare top-level rule is silently dropped
+     from the compiled output. */
   .app-dark {
-    --color-brand-50: oklch(0.2 0.06 22);
-    --color-brand-100: oklch(0.3 0.09 28);
-    --color-brand-200: oklch(0.4 0.13 35);
-    --color-brand-300: oklch(0.48 0.11 38);
-    --color-brand-400: oklch(0.52 0.12 42);
-    --color-brand-500: oklch(0.66 0.11 45);
-    --color-brand-600: oklch(0.76 0.08 50);
-    --color-brand-700: oklch(0.86 0.05 60);
-    --color-brand-800: oklch(0.93 0.03 70);
-    --color-brand-900: oklch(0.97 0.015 75);
+    --color-ink-50: #1a1310;
+    --color-ink-100: #241a15;
+    --color-ink-200: #332922;
+    --color-ink-300: #4a3d33;
+    --color-ink-400: #93826c;
+    --color-ink-500: #a8926f;
+    --color-ink-600: #c2ac8c;
+    --color-ink-700: #d8c7ab;
+    --color-ink-800: #e8dcc9;
+    --color-ink-900: #f2e9e0;
 
-    --color-surface: oklch(0.26 0.04 26);
-    --color-accent-gold-text: oklch(0.78 0.12 85);
+    --color-surface: #211712;
+    --color-accent-gold-text: var(--color-gold-300);
+    --color-terracotta-text: var(--color-terracotta-300);
   }
 }
 
@@ -92,7 +132,7 @@
   .hero-candlelit {
     position: relative;
     overflow: hidden;
-    background: var(--color-ink-900);
+    background: var(--color-hero-bg);
   }
 
   .hero-candlelit::before {
@@ -102,17 +142,17 @@
     background:
       radial-gradient(
         circle at 22% 15%,
-        oklch(0.58 0.12 42 / 0.35),
+        rgba(194, 84, 47, 0.35),
         transparent 55%
       ),
       radial-gradient(
         circle at 78% 85%,
-        oklch(0.3 0.09 28 / 0.6),
+        rgba(110, 44, 20, 0.6),
         transparent 60%
       ),
       radial-gradient(
         circle at 50% 105%,
-        oklch(0.78 0.12 85 / 0.16),
+        rgba(224, 180, 104, 0.16),
         transparent 50%
       );
   }
@@ -129,5 +169,30 @@
   .hero-candlelit > * {
     position: relative;
     z-index: 1;
+  }
+}
+
+/* Retunes @tailwindcss/typography's default prose palette (slate/gray) to
+   the site's own brand ramp and headline font, so blog post bodies match
+   the rest of the site instead of looking like a generic docs page.
+   Defined with @utility (not @layer components) because the typography
+   plugin's own `.prose` defaults for these same --tw-prose-* variables live
+   in Tailwind's `utilities` layer, which comes after `components` in the
+   @layer order declared above — a components-layer rule of equal
+   specificity silently lost every time, in both light and dark mode. */
+@utility blog-content {
+  --tw-prose-body: var(--color-ink-700);
+  --tw-prose-headings: var(--color-ink-900);
+  --tw-prose-links: var(--color-terracotta-text);
+  --tw-prose-bold: var(--color-ink-900);
+  --tw-prose-bullets: var(--color-ink-300);
+  --tw-prose-hr: var(--color-ink-200);
+  --tw-prose-quotes: var(--color-ink-800);
+  --tw-prose-quote-borders: var(--color-ink-300);
+  --tw-prose-captions: var(--color-ink-500);
+
+  & :is(h1, h2, h3, h4) {
+    font-family: var(--font-serif);
+    font-weight: 600;
   }
 }

@@ -104,15 +104,15 @@ const breadcrumbSchema = {
   <article class="mx-auto max-w-4xl px-6 py-16">
     <a
       href={withBase('/events')}
-      class="text-sm text-brand-600 hover:text-brand-900">← Todos los retiros</a
+      class="text-sm text-ink-600 hover:text-ink-900">← Todos los retiros</a
     >
 
     <div class="mt-4 flex flex-wrap gap-1.5">
       {tags.map((tag) => <Tag>{tag}</Tag>)}
     </div>
 
-    <h1 class="mt-3 font-serif text-3xl text-brand-900 sm:text-4xl">{title}</h1>
-    <p class="mt-2 text-brand-600">
+    <h1 class="mt-3 font-serif text-3xl text-ink-900 sm:text-4xl">{title}</h1>
+    <p class="mt-2 text-ink-600">
       {location} · {formatDateRange(startDate, endDate)}
     </p>
 
@@ -123,18 +123,18 @@ const breadcrumbSchema = {
     />
 
     <div class="mt-10 grid gap-10 sm:grid-cols-[2fr_1fr]">
-      <div class="prose prose-p:text-brand-700 max-w-none">
-        <p class="text-brand-700">{description}</p>
+      <div class="prose max-w-none prose-p:text-ink-700">
+        <p class="text-ink-700">{description}</p>
 
         {
           hosts.length > 0 && (
             <div class="mt-8">
-              <h2 class="font-serif text-xl text-brand-900">Guiado por</h2>
+              <h2 class="font-serif text-xl text-ink-900">Guiado por</h2>
               <div class="mt-4 flex flex-wrap gap-4">
                 {hosts.map((host) => (
                   <a
                     href={withBase(`/team/${host.id}`)}
-                    class="flex items-center gap-3 rounded-xl border border-brand-200 bg-surface p-3 pr-5 transition hover:shadow-sm"
+                    class="flex items-center gap-3 rounded-xl border border-ink-200 bg-surface p-3 pr-5 transition hover:shadow-sm"
                   >
                     <Image
                       src={host.data.photo}
@@ -142,10 +142,10 @@ const breadcrumbSchema = {
                       class="h-12 w-12 rounded-full object-cover"
                     />
                     <div>
-                      <p class="text-sm font-medium text-brand-900">
+                      <p class="text-sm font-medium text-ink-900">
                         {host.data.name}
                       </p>
-                      <p class="text-xs text-brand-600">{host.data.role}</p>
+                      <p class="text-xs text-ink-600">{host.data.role}</p>
                     </div>
                   </a>
                 ))}
@@ -155,34 +155,34 @@ const breadcrumbSchema = {
         }
       </div>
 
-      <aside class="h-fit rounded-2xl border border-brand-200 bg-surface p-6">
+      <aside class="h-fit rounded-2xl border border-ink-200 bg-surface p-6">
         {
           earlyBird ? (
             <>
               <div class="flex items-baseline gap-2">
-                <p class="text-2xl font-medium text-brand-900">
+                <p class="text-2xl font-medium text-ink-900">
                   {formatPrice(earlyBirdPrice, currency)}
                 </p>
-                <p class="text-sm text-brand-600 line-through">
+                <p class="text-sm text-ink-600 line-through">
                   {formatPrice(price, currency)}
                 </p>
               </div>
-              <p class="text-sm text-brand-600">por persona, early bird</p>
-              <div class="mt-3 rounded-lg bg-brand-100 px-3 py-2 text-xs font-medium text-brand-700">
+              <p class="text-sm text-ink-600">por persona, early bird</p>
+              <div class="mt-3 rounded-lg bg-ink-100 px-3 py-2 text-xs font-medium text-ink-700">
                 Ahorra {formatPrice(savings, currency)} — inscríbete antes del{' '}
                 {formatShortDate(earlyBirdDeadline)}
               </div>
             </>
           ) : (
             <>
-              <p class="text-2xl font-medium text-brand-900">
+              <p class="text-2xl font-medium text-ink-900">
                 {formatPrice(price, currency)}
               </p>
-              <p class="text-sm text-brand-600">por persona</p>
+              <p class="text-sm text-ink-600">por persona</p>
             </>
           )
         }
-        <dl class="mt-4 space-y-2 text-sm text-brand-700">
+        <dl class="mt-4 space-y-2 text-sm text-ink-700">
           <div class="flex justify-between">
             <dt>Fechas</dt>
             <dd>{formatDateRange(startDate, endDate)}</dd>

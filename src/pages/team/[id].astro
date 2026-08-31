@@ -71,9 +71,7 @@ const breadcrumbSchema = {
   structuredData={[personSchema, breadcrumbSchema]}
 >
   <article class="mx-auto max-w-4xl px-6 py-16">
-    <a
-      href={withBase('/team')}
-      class="text-sm text-brand-600 hover:text-brand-900"
+    <a href={withBase('/team')} class="text-sm text-ink-600 hover:text-ink-900"
       >← Nuestros facilitadores</a
     >
 
@@ -83,18 +81,18 @@ const breadcrumbSchema = {
       <Image
         src={photo}
         alt={name}
-        class="h-32 w-32 shrink-0 rounded-full object-cover ring-4 ring-brand-100"
+        class="h-32 w-32 shrink-0 rounded-full object-cover ring-4 ring-ink-100"
       />
       <div>
-        <h1 class="font-serif text-3xl text-brand-900">{name}</h1>
-        <p class="mt-1 text-brand-600">{role}</p>
+        <h1 class="font-serif text-3xl text-ink-900">{name}</h1>
+        <p class="mt-1 text-ink-600">{role}</p>
         <div
           class="mt-3 flex flex-wrap justify-center gap-1.5 sm:justify-start"
         >
           {specialties.map((specialty) => <Tag>{specialty}</Tag>)}
         </div>
         <div
-          class="mt-3 flex justify-center gap-3 text-brand-600 sm:justify-start"
+          class="mt-3 flex justify-center gap-3 text-ink-600 sm:justify-start"
         >
           {
             social.instagram && (
@@ -102,7 +100,7 @@ const breadcrumbSchema = {
                 href={social.instagram}
                 target="_blank"
                 rel="noopener noreferrer"
-                class="transition hover:text-brand-900"
+                class="transition hover:text-ink-900"
                 aria-label="Instagram"
               >
                 <span class="pi pi-instagram text-xl" aria-hidden="true" />
@@ -115,7 +113,7 @@ const breadcrumbSchema = {
                 href={social.website}
                 target="_blank"
                 rel="noopener noreferrer"
-                class="transition hover:text-brand-900"
+                class="transition hover:text-ink-900"
                 aria-label="Sitio web"
               >
                 <span class="pi pi-globe text-xl" aria-hidden="true" />
@@ -126,12 +124,12 @@ const breadcrumbSchema = {
       </div>
     </div>
 
-    <p class="mt-8 max-w-2xl text-brand-700">{bio}</p>
+    <p class="mt-8 max-w-2xl text-ink-700">{bio}</p>
 
     {
       hostedEvents.length > 0 && (
         <div class="mt-12">
-          <h2 class="font-serif text-xl text-brand-900">Retiros que guía</h2>
+          <h2 class="font-serif text-xl text-ink-900">Retiros que guía</h2>
           <div class="mt-4 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {hostedEvents.map((event) => (
               <EventCard event={event} />

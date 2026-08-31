@@ -4,43 +4,39 @@ import { CONTACT_EMAIL, withBase } from '../lib/site';
 const year = new Date().getFullYear();
 ---
 
-<footer class="border-t border-brand-200/60 bg-brand-100/40">
+<footer class="border-t border-ink-200/60 bg-ink-100/40">
   <div class="mx-auto grid max-w-6xl gap-8 px-6 py-12 md:grid-cols-3">
     <div>
-      <p class="font-serif text-lg text-brand-900">Intimar</p>
-      <p class="mt-2 max-w-xs text-sm text-brand-700">
+      <p class="font-serif text-lg text-ink-900">Intimar</p>
+      <p class="mt-2 max-w-xs text-sm text-ink-700">
         Retiros de tantra pequeños y presenciales, guiados por un equipo
         selecto, con raíces en la respiración, la presencia y el contacto
         consciente.
       </p>
     </div>
 
-    <nav
-      aria-label="Explorar"
-      class="flex flex-col gap-2 text-sm text-brand-700"
-    >
-      <p class="text-sm font-semibold text-brand-900">Explorar</p>
-      <a href={withBase('/events')} class="hover:text-brand-900"
+    <nav aria-label="Explorar" class="flex flex-col gap-2 text-sm text-ink-700">
+      <p class="text-sm font-semibold text-ink-900">Explorar</p>
+      <a href={withBase('/events')} class="hover:text-ink-900"
         >Próximos retiros</a
       >
-      <a href={withBase('/team')} class="hover:text-brand-900"
+      <a href={withBase('/team')} class="hover:text-ink-900"
         >Nuestros facilitadores</a
       >
-      <a href={withBase('/about')} class="hover:text-brand-900">Sobre Intimar</a
-      >
+      <a href={withBase('/about')} class="hover:text-ink-900">Sobre Intimar</a>
     </nav>
 
-    <address class="flex flex-col gap-2 text-sm text-brand-700 not-italic">
-      <p class="text-sm font-semibold text-brand-900">Contáctanos</p>
-      <a href={withBase('/contact')} class="hover:text-brand-900">Escríbenos</a>
-      <a href={`mailto:${CONTACT_EMAIL}`} class="hover:text-brand-900"
+    <address class="flex flex-col gap-2 text-sm text-ink-700 not-italic">
+      <p class="text-sm font-semibold text-ink-900">Contáctanos</p>
+      <a href={withBase('/contact')} class="hover:text-ink-900">Escríbenos</a>
+      <a href={`mailto:${CONTACT_EMAIL}`} class="hover:text-ink-900"
         >{CONTACT_EMAIL}</a
       >
     </address>
   </div>
 
   <p
-    class="border-t border-brand-200/60 px-6 py-4 text-center text-xs text-brand-600"
+    class="border-t border-ink-200/60 px-6 py-4 text-center text-xs text-ink-600"
   >
     © {year} Intimar. Todos los derechos reservados.
   </p>

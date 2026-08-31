@@ -32,7 +32,7 @@ const filteredEvents = computed(() => {
 
     <p
       v-if="filteredEvents.length === 0"
-      class="rounded-xl border border-brand-200 bg-surface p-8 text-center text-brand-600"
+      class="rounded-xl border border-ink-200 bg-surface p-8 text-center text-ink-600"
     >
       Aún no hay retiros que coincidan con tu búsqueda.
     </p>

@@ -14,16 +14,16 @@ const { name, role, photo, specialties } = member.data;
 
 <a
   href={withBase(`/team/${member.id}`)}
-  class="group flex flex-col items-center rounded-2xl border border-brand-200 bg-surface p-6 text-center shadow-sm transition hover:-translate-y-1 hover:shadow-md"
+  class="group flex flex-col items-center rounded-2xl border border-ink-200 bg-surface p-6 text-center shadow-sm transition hover:-translate-y-1 hover:shadow-md"
 >
   <Image
     src={photo}
     alt={name}
     loading="lazy"
-    class="h-28 w-28 rounded-full object-cover ring-4 ring-brand-100 transition group-hover:ring-brand-200"
+    class="h-28 w-28 rounded-full object-cover ring-4 ring-ink-100 transition group-hover:ring-ink-200"
   />
-  <h3 class="mt-4 font-serif text-lg text-brand-900">{name}</h3>
-  <p class="text-sm text-brand-600">{role}</p>
+  <h3 class="mt-4 font-serif text-lg text-ink-900">{name}</h3>
+  <p class="text-sm text-ink-600">{role}</p>
   <div class="mt-3 flex flex-wrap justify-center gap-1.5">
     {specialties.slice(0, 3).map((specialty) => <Tag>{specialty}</Tag>)}
   </div>

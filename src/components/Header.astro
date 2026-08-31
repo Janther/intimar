@@ -4,18 +4,19 @@ import { withBase } from '../lib/site';
 const navLinks = [
   { href: withBase('/events'), label: 'Retiros' },
   { href: withBase('/team'), label: 'Facilitadores' },
+  { href: withBase('/blog'), label: 'Blog' },
   { href: withBase('/about'), label: 'Nosotros' },
   { href: withBase('/contact'), label: 'Contacto' },
 ];
 ---
 
 <header
-  class="sticky top-0 z-40 border-b border-brand-200/60 bg-brand-50/90 backdrop-blur"
+  class="sticky top-0 z-40 border-b border-ink-200/60 bg-ink-50/90 backdrop-blur"
 >
   <div class="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
     <a
       href={withBase('/')}
-      class="font-serif text-xl tracking-wide text-brand-900">Intimar</a
+      class="font-serif text-xl tracking-wide text-ink-900">Intimar</a
     >
 
     <nav class="hidden items-center gap-8 md:flex">
@@ -23,7 +24,7 @@ const navLinks = [
         navLinks.map((link) => (
           <a
             href={link.href}
-            class="text-sm text-brand-700 transition hover:text-brand-900"
+            class="text-sm text-ink-700 transition hover:text-ink-900"
           >
             {link.label}
           </a>
@@ -37,7 +38,7 @@ const navLinks = [
         type="button"
         aria-label="Cambiar tema"
         aria-pressed="false"
-        class="rounded-md p-2 text-brand-700 transition hover:text-brand-900"
+        class="rounded-md p-2 text-ink-700 transition hover:text-ink-900"
       >
         <span
           class="pi pi-moon text-lg"
@@ -50,7 +51,7 @@ const navLinks = [
       </button>
       <a
         href={withBase('/events')}
-        class="rounded-full bg-brand-700 px-5 py-2 text-sm font-medium text-brand-50 transition hover:bg-brand-800"
+        class="rounded-full bg-terracotta-500 px-5 py-2 text-sm font-medium text-white transition hover:bg-terracotta-700"
       >
         Ver Retiros
       </a>
@@ -58,19 +59,19 @@ const navLinks = [
 
     <details class="relative md:hidden">
       <summary
-        class="list-none rounded-md p-2 text-brand-800 [&::-webkit-details-marker]:hidden"
+        class="list-none rounded-md p-2 text-ink-800 [&::-webkit-details-marker]:hidden"
       >
         <span class="pi pi-bars text-xl" aria-hidden="true"></span>
         <span class="sr-only">Abrir menú</span>
       </summary>
       <nav
-        class="absolute right-0 mt-2 flex w-48 flex-col gap-1 rounded-lg border border-brand-200 bg-brand-50 p-3 shadow-lg"
+        class="absolute right-0 mt-2 flex w-48 flex-col gap-1 rounded-lg border border-ink-200 bg-ink-50 p-3 shadow-lg"
       >
         {
           navLinks.map((link) => (
             <a
               href={link.href}
-              class="rounded px-3 py-2 text-sm text-brand-700 hover:bg-brand-100"
+              class="rounded px-3 py-2 text-sm text-ink-700 hover:bg-ink-100"
             >
               {link.label}
             </a>
@@ -80,7 +81,7 @@ const navLinks = [
           id="theme-toggle-mobile"
           type="button"
           aria-pressed="false"
-          class="flex items-center gap-2 rounded px-3 py-2 text-left text-sm text-brand-700 hover:bg-brand-100"
+          class="flex items-center gap-2 rounded px-3 py-2 text-left text-sm text-ink-700 hover:bg-ink-100"
         >
           <span
             class="pi pi-moon text-sm"

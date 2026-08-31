@@ -11,26 +11,28 @@ import { withBase } from '../lib/site';
   <section
     class="mx-auto flex max-w-2xl flex-col items-center px-6 py-28 text-center"
   >
-    <p class="text-sm font-medium tracking-widest text-brand-500 uppercase">
+    <p
+      class="text-sm font-medium tracking-widest text-terracotta-text uppercase"
+    >
       404
     </p>
-    <h1 class="mt-2 font-serif text-3xl text-brand-900 sm:text-4xl">
+    <h1 class="mt-2 font-serif text-3xl text-ink-900 sm:text-4xl">
       Esta página no existe
     </h1>
-    <p class="mt-4 max-w-md text-brand-700">
+    <p class="mt-4 max-w-md text-ink-700">
       Puede que el enlace esté roto o que la página haya sido movida. Prueba con
       uno de estos caminos.
     </p>
     <div class="mt-9 flex flex-wrap justify-center gap-4">
       <a
         href={withBase('/events')}
-        class="rounded-full bg-brand-700 px-7 py-3.5 text-sm font-medium text-brand-50 transition hover:bg-brand-600"
+        class="rounded-full bg-terracotta-500 px-7 py-3.5 text-sm font-medium text-white transition hover:bg-terracotta-700"
       >
         Ver Próximos Retiros
       </a>
       <a
         href={withBase('/team')}
-        class="rounded-full border border-brand-200 px-7 py-3.5 text-sm font-medium text-brand-900 transition hover:bg-brand-100"
+        class="rounded-full border border-ink-200 px-7 py-3.5 text-sm font-medium text-ink-900 transition hover:bg-ink-100"
       >
         Conoce a tus Facilitadores
       </a>

@@ -1,5 +1,5 @@
-import { defineCollection } from 'astro:content';
-import { file } from 'astro/loaders';
+import { defineCollection, reference } from 'astro:content';
+import { file, glob } from 'astro/loaders';
 import { z } from 'astro/zod';
 
 // Data lives in flat JSON for now. To move to a database later, replace
@@ -61,4 +61,28 @@ const testimonials = defineCollection({
   }),
 });
 
-export const collections = { events, team, testimonials };
+const blog = defineCollection({
+  loader: glob({ pattern: '**/*.md', base: 'src/content/blog' }),
+  schema: ({ image }) =>
+    z.object({
+      title: z.string(),
+      summary: z.string(),
+      pubDate: z.coerce.date(),
+      // A path relative to this file — see src/content/blog/images/.
+      cover: image().optional(),
+      tags: z.array(z.string()).default([]),
+      // Usually one of our own facilitators (referenced by team id, so their
+      // name/photo/bio stay in sync automatically). A post from someone
+      // outside the team roster falls back to typing their details inline.
+      author: z.union([
+        reference('team'),
+        z.object({
+          name: z.string(),
+          bio: z.string().optional(),
+          photo: image().optional(),
+        }),
+      ]),
+    }),
+});
+
+export const collections = { events, team, testimonials, blog };

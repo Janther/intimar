@@ -1,9 +1,12 @@
 import { getCollection, getEntry, type CollectionEntry } from 'astro:content';
 import { getImage } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+import { withBase } from './site';
 
 type EventEntry = CollectionEntry<'events'>;
 export type TeamEntry = CollectionEntry<'team'>;
 type TestimonialEntry = CollectionEntry<'testimonials'>;
+export type BlogEntry = CollectionEntry<'blog'>;
 
 export async function getAllEvents(): Promise<EventEntry[]> {
   const events = await getCollection('events');
@@ -120,6 +123,43 @@ export interface EventSummary {
   imageWidth: number;
   imageHeight: number;
   tags: string[];
+}
+
+export async function getAllBlogPosts(): Promise<BlogEntry[]> {
+  const posts = await getCollection('blog');
+  return posts.sort(
+    (a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime(),
+  );
+}
+
+// The plain shape pages actually render for a post's byline — resolves the
+// author union (a `reference('team')` or an inline guest object) to one
+// consistent shape so BlogCard/the post page don't each re-implement the
+// "which kind of author is this" check.
+export interface BlogAuthor {
+  name: string;
+  bio?: string;
+  photo?: ImageMetadata;
+  href?: string;
+}
+
+export async function resolveBlogAuthor(post: BlogEntry): Promise<BlogAuthor> {
+  const author = post.data.author;
+  if ('collection' in author) {
+    const member = await getEntry(author);
+    if (!member) {
+      throw new Error(
+        `Blog post "${post.id}" references missing team member "${author.id}"`,
+      );
+    }
+    return {
+      name: member.data.name,
+      bio: member.data.bio,
+      photo: member.data.photo,
+      href: withBase(`/team/${member.id}`),
+    };
+  }
+  return { name: author.name, bio: author.bio, photo: author.photo };
 }
 
 export async function toEventSummary(event: EventEntry): Promise<EventSummary> {

@@ -12,7 +12,7 @@ const visible = ref(false);
   <Button
     label="Quiero Inscribirme"
     icon="pi pi-envelope"
-    class="!border-brand-700 !bg-brand-700 !text-brand-50 hover:!bg-brand-800"
+    class="!border-terracotta-500 !bg-terracotta-500 !text-white hover:!bg-terracotta-700"
     @click="visible = true"
   />
   <Dialog
@@ -21,7 +21,7 @@ const visible = ref(false);
     :header="`Únete a ${eventTitle}`"
     class="w-[90vw] max-w-md"
   >
-    <p class="mb-4 text-sm text-brand-700">
+    <p class="mb-4 text-sm text-ink-700">
       Cuéntanos un poco sobre ti y te responderemos con la disponibilidad y los
       próximos pasos.
     </p>

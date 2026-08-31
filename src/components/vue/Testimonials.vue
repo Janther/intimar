@@ -23,11 +23,11 @@ defineProps<{ testimonials: Testimonial[] }>();
     <template #item="{ data }">
       <figure class="mx-auto max-w-2xl px-4 py-10 text-center">
         <blockquote
-          class="font-confession text-lg leading-relaxed text-brand-900 sm:text-xl"
+          class="font-confession text-lg leading-relaxed text-ink-900 sm:text-xl"
         >
           “{{ data.quote }}”
         </blockquote>
-        <figcaption class="mt-4 text-sm text-brand-600">
+        <figcaption class="mt-4 text-sm text-ink-600">
           {{ data.name }} · {{ data.event }}
         </figcaption>
       </figure>

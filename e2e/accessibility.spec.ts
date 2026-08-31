@@ -9,6 +9,8 @@ const pages = [
   '/team/elena-marsh',
   '/about',
   '/contact',
+  '/blog',
+  '/blog/volver-a-la-respiracion',
 ];
 
 for (const path of pages) {

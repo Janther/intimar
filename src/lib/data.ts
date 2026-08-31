@@ -96,6 +96,17 @@ export function formatShortDate(date: Date): string {
   }).format(date);
 }
 
+// Blog post dates carry the year (unlike formatShortDate's event-deadline
+// use, which is always near-term) since a post's publish date stays
+// meaningful — and visible — long after the year it was written in.
+export function formatBlogDate(date: Date): string {
+  return new Intl.DateTimeFormat('es-CL', {
+    day: 'numeric',
+    month: 'long',
+    year: 'numeric',
+  }).format(date);
+}
+
 // Early bird pricing stops being valid — and stops being advertised — once
 // its deadline passes, so every early-bird display checks this first rather
 // than trusting the price fields alone.
@@ -130,6 +141,18 @@ export async function getAllBlogPosts(): Promise<BlogEntry[]> {
   return posts.sort(
     (a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime(),
   );
+}
+
+// "Previous" is the post published before this one (older), "next" is the
+// post published after (newer) — the same convention WordPress's
+// previous_post_link()/next_post_link() use, independent of getAllBlogPosts'
+// own newest-first sort order.
+export async function getAdjacentBlogPosts(
+  post: BlogEntry,
+): Promise<{ previous?: BlogEntry; next?: BlogEntry }> {
+  const posts = await getAllBlogPosts();
+  const index = posts.findIndex((p) => p.id === post.id);
+  return { previous: posts[index + 1], next: posts[index - 1] };
 }
 
 // The plain shape pages actually render for a post's byline — resolves the

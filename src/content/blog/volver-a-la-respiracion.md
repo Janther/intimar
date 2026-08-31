@@ -3,6 +3,9 @@ title: 'Volver a la respiración'
 summary: 'Por qué la respiración es la primera práctica que enseñamos en cada retiro, y no la última.'
 pubDate: 2026-02-10
 tags: ['Respiración', 'Práctica']
+# Placeholder — reused from src/data/images/events/sierra-silent-retreat.jpg.
+# Swap for a real cover photo whenever this example post gets replaced.
+cover: ./images/volver-a-la-respiracion.jpg
 author: elena-marsh
 ---
 

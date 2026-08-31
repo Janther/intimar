@@ -1,48 +1,49 @@
 ---
 import { Image } from 'astro:assets';
 import type { BlogEntry } from '../lib/data';
-import { resolveBlogAuthor, formatShortDate } from '../lib/data';
+import { formatBlogDate } from '../lib/data';
 import { withBase } from '../lib/site';
-import Tag from './vue/Tag.vue';
 
 interface Props {
   post: BlogEntry;
 }
 
 const { post } = Astro.props;
-const { title, summary, pubDate, tags } = post.data;
-const author = await resolveBlogAuthor(post);
+const { title, pubDate, cover } = post.data;
 ---
 
 <a
   href={withBase(`/blog/${post.id}`)}
-  class="group flex flex-col rounded-2xl border border-ink-200 bg-surface p-6 shadow-sm transition hover:-translate-y-1 hover:shadow-md"
+  class="group flex flex-col overflow-hidden rounded-2xl border border-ink-200 bg-surface shadow-sm transition hover:-translate-y-1 hover:shadow-md"
 >
-  <p class="text-xs text-ink-muted">{formatShortDate(pubDate)}</p>
-  <h3 class="mt-2 font-serif text-lg text-ink-900">{title}</h3>
-  <p class="mt-2 line-clamp-3 flex-1 text-sm text-ink-700">{summary}</p>
-
-  <div class="mt-4 flex items-center gap-2">
+  <div class="aspect-video overflow-hidden">
     {
-      author.photo && (
+      cover ? (
         <Image
-          src={author.photo}
-          alt={author.name}
+          src={cover}
+          alt={title}
           loading="lazy"
-          class="h-7 w-7 rounded-full object-cover"
+          width={480}
+          height={270}
+          class="h-full w-full object-cover transition duration-500 group-hover:scale-105"
+        />
+      ) : (
+        // No cover set — a plain wash in brand tones rather than a
+        // fabricated stock photo, so the grid stays visually consistent
+        // until a real image is added to the post's frontmatter.
+        <div
+          class="h-full w-full"
+          style="background: linear-gradient(135deg, var(--color-terracotta-200), var(--color-ink-200));"
         />
       )
     }
-    <span class="text-sm text-ink-muted">{author.name}</span>
   </div>
 
-  {
-    tags.length > 0 && (
-      <div class="mt-3 flex flex-wrap gap-1.5">
-        {tags.slice(0, 3).map((tag) => (
-          <Tag>{tag}</Tag>
-        ))}
-      </div>
-    )
-  }
+  <div class="flex flex-1 flex-col p-6">
+    <h3 class="font-serif text-lg text-ink-900">{title}</h3>
+    <p class="mt-2 flex flex-1 items-center gap-1.5 text-xs text-ink-muted">
+      <span class="pi pi-calendar" aria-hidden="true"></span>
+      {formatBlogDate(pubDate)}
+    </p>
+  </div>
 </a>

@@ -26,6 +26,7 @@ const filteredEvents = computed(() => {
       <InputText
         v-model="query"
         placeholder="Buscar retiros o ubicaciones"
+        aria-label="Buscar retiros o ubicaciones"
         class="w-full"
       />
     </span>

@@ -3,8 +3,10 @@ import { Image } from 'astro:assets';
 import { render } from 'astro:content';
 import Layout from '../../layouts/Layout.astro';
 import Tag from '../../components/vue/Tag.vue';
+import BlogCard from '../../components/BlogCard.astro';
 import {
   getAllBlogPosts,
+  getAdjacentBlogPosts,
   resolveBlogAuthor,
   formatShortDate,
 } from '../../lib/data';
@@ -22,6 +24,7 @@ const { post } = Astro.props;
 const { title, summary, pubDate, tags, cover } = post.data;
 const { Content } = await render(post);
 const author = await resolveBlogAuthor(post);
+const { previous, next } = await getAdjacentBlogPosts(post);
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site).toString();
 const articleSchema = {
@@ -82,7 +85,7 @@ const breadcrumbSchema = {
   articlePublishedTime={pubDate.toISOString()}
   articleAuthor={author.name}
 >
-  <article class="mx-auto max-w-3xl px-6 py-16">
+  <article class="mx-auto max-w-4xl px-6 py-16">
     <a
       href={withBase('/blog')}
       class="text-sm text-ink-muted hover:text-ink-900">← Blog</a
@@ -135,6 +138,8 @@ const breadcrumbSchema = {
         <Image
           src={cover}
           alt={title}
+          loading="eager"
+          fetchpriority="high"
           class="mt-8 w-full rounded-2xl object-cover"
         />
       )
@@ -143,5 +148,25 @@ const breadcrumbSchema = {
     <div class="prose mt-8 max-w-none blog-content">
       <Content />
     </div>
+
+    {
+      (previous || next) && (
+        <nav
+          class="mt-16 border-t border-ink-200 pt-8"
+          aria-labelledby="continue-reading-heading"
+        >
+          <h2
+            id="continue-reading-heading"
+            class="font-serif text-xl text-ink-900"
+          >
+            Continúa leyendo
+          </h2>
+          <div class="mt-6 grid grid-cols-1 gap-6 sm:grid-cols-2">
+            {previous && <BlogCard post={previous} />}
+            {next && <BlogCard post={next} />}
+          </div>
+        </nav>
+      )
+    }
   </article>
 </Layout>

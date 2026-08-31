@@ -15,8 +15,13 @@ const year = new Date().getFullYear();
       </p>
     </div>
 
-    <nav aria-label="Explorar" class="flex flex-col gap-2 text-sm text-ink-700">
-      <p class="text-sm font-semibold text-ink-900">Explorar</p>
+    <nav
+      aria-labelledby="footer-explore-heading"
+      class="flex flex-col gap-2 text-sm text-ink-700"
+    >
+      <p id="footer-explore-heading" class="text-sm font-semibold text-ink-900">
+        Explorar
+      </p>
       <a href={withBase('/events')} class="hover:text-ink-900"
         >Próximos retiros</a
       >

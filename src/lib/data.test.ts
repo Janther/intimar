@@ -3,6 +3,7 @@ import {
   formatDateRange,
   formatPrice,
   formatShortDate,
+  formatBlogDate,
   isEarlyBirdActive,
 } from './data';
 
@@ -35,6 +36,14 @@ describe('formatPrice', () => {
 describe('formatShortDate', () => {
   it('formats a date as day and month only', () => {
     expect(formatShortDate(new Date('2026-09-08'))).toBe('8 de septiembre');
+  });
+});
+
+describe('formatBlogDate', () => {
+  it('formats a date with day, month, and year', () => {
+    expect(formatBlogDate(new Date('2026-02-10'))).toBe(
+      '10 de febrero de 2026',
+    );
   });
 });
 

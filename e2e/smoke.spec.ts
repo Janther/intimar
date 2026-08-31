@@ -41,6 +41,47 @@ test('event detail page renders content, hosts, and a valid Event schema', async
   expect(data.image[0]).toMatch(/^https:\/\//);
 });
 
+test('blog listing renders real card images, not [object Object]', async ({
+  page,
+}) => {
+  await page.goto('/blog');
+  const images = page.locator('a[href^="/blog/"] img');
+  await expect(images.first()).toBeVisible();
+
+  const srcs = await images.evaluateAll((imgs) =>
+    imgs.map((img) => (img as HTMLImageElement).getAttribute('src')),
+  );
+  expect(srcs.length).toBeGreaterThan(0);
+  for (const src of srcs) {
+    expect(src).not.toContain('object');
+    expect(src).toMatch(/^\/_astro\/.+\.(webp|jpg|jpeg|png)/);
+  }
+});
+
+test('blog post renders content, author, adjacent post, and a valid BlogPosting schema', async ({
+  page,
+}) => {
+  await page.goto('/blog/volver-a-la-respiracion');
+  await expect(page.locator('h1')).toHaveText('Volver a la respiración');
+  await expect(page.getByRole('link', { name: 'Elena Marsh' })).toBeVisible();
+
+  // This is the newer of the two example posts, so only "previous" (the
+  // older one) should appear in the adjacent-post section — not "next".
+  await expect(
+    page.getByRole('link', { name: 'Una mirada desde afuera' }),
+  ).toBeVisible();
+
+  const jsonLd = await page
+    .locator('script[type="application/ld+json"]')
+    .first()
+    .textContent();
+  const data = JSON.parse(jsonLd ?? '{}');
+  expect(data['@type']).toBe('BlogPosting');
+  expect(data.headline).toBe('Volver a la respiración');
+  expect(data.author.name).toBe('Elena Marsh');
+  expect(data.publisher.name).toBe('Intimar');
+});
+
 test('team listing and detail pages render photos', async ({ page }) => {
   await page.goto('/team');
   await expect(page.locator('img').first()).toBeVisible();

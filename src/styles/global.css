@@ -136,35 +136,45 @@
     --color-terracotta-text: var(--color-terracotta-300);
   }
 
-  /* PrimeVue v4's styled theme (vue-app.ts) is registered when a Vue
+  /* --- PrimeVue pre-hydration shims -------------------------------------
+     PrimeVue v4's styled theme (vue-app.ts) is registered when a Vue
      island's JS runs `app.use(PrimeVue, ...)` — its component CSS is
      injected by that same JS, not present in the server-rendered HTML at
-     all. Every `client:*` PrimeVue text input (the events search box,
-     ContactForm's fields) briefly rendered with no border/background/
-     padding — a real flash, not a network-slowness artifact, reproducible
-     even with a fast connection. This is a plain-CSS approximation of
-     PrimeVue's own input chrome so there's a correctly-boxed input from
-     first paint; it MUST stay in the `base` layer (before `primevue` in
-     the @layer order above) so PrimeVue's real injected styles — focus
-     rings, dark-mode variants — still win once they load, rather than
-     this shim permanently overriding them. */
+     all. Every PrimeVue control that's part of a page's initial static
+     markup (not gated behind interaction — the events search box,
+     ContactForm's fields, ContactForm/InterestDialog's buttons) briefly
+     rendered with none of its chrome: no border/background/padding on
+     inputs, the search icon sitting above the input instead of nested
+     inside it, buttons with browser-default square corners. Confirmed via
+     CDP screencast capture and no-JS-vs-hydrated pixel diffs on /contact
+     and /events — a real flash, not a network-slowness artifact.
+
+     The three rule groups below are plain-CSS approximations of that
+     missing chrome, built from the same design tokens PrimeVue's Aura
+     theme uses for these components (@primeuix/themes/aura, confirmed by
+     reading its source: input and button padding/radius both alias
+     `form.field.*`, so the values below are shared, not coincidentally
+     equal). They MUST stay in the `base` layer (before `primevue` in the
+     @layer order above) so PrimeVue's real injected styles — focus rings,
+     dark-mode variants — still win once they load, rather than these
+     shims permanently overriding them. */
+  :root {
+    --pv-shim-padding-x: 0.75rem; /* form.field.padding.x */
+    --pv-shim-padding-y: 0.5rem; /* form.field.padding.y */
+    --pv-shim-radius: 6px; /* form.field.border.radius (border.radius.md) */
+    --pv-shim-icon-size: 1rem; /* icon.size */
+  }
+
+  /* InputText, Textarea — the events search box, ContactForm's fields. */
   .p-inputtext,
   .p-textarea {
     border: 1px solid var(--color-ink-200);
-    border-radius: 6px;
+    border-radius: var(--pv-shim-radius);
     background: var(--color-surface);
-    padding: 0.5rem 0.75rem;
+    padding: var(--pv-shim-padding-y) var(--pv-shim-padding-x);
   }
 
-  /* Same JS-injection gap as above, for IconField/InputIcon's structural
-     CSS (also from PrimeVue, also absent from SSR HTML): confirmed via a
-     throttled CDP screencast on /events that before hydration the search
-     icon sits inline above the input instead of nested inside it, then
-     snaps into place. Values mirror PrimeVue's own iconfield style
-     (@primeuix/styles/dist/iconfield) at its default size — icon.size:
-     1rem, form.field.padding.x: 0.75rem — read from a hydrated page's
-     computed styles since those design tokens aren't otherwise exposed as
-     plain CSS values before the theme JS runs. */
+  /* IconField, InputIcon — the events search icon. */
   .p-iconfield {
     position: relative;
     display: block;
@@ -173,44 +183,45 @@
   .p-inputicon {
     position: absolute;
     top: 50%;
-    margin-top: -0.5rem;
-    width: 1rem;
-    height: 1rem;
-    font-size: 1rem;
+    margin-top: calc(-1 * var(--pv-shim-icon-size) / 2);
+    width: var(--pv-shim-icon-size);
+    height: var(--pv-shim-icon-size);
+    font-size: var(--pv-shim-icon-size);
     line-height: 1;
     z-index: 1;
   }
 
   .p-iconfield .p-inputicon:first-child {
-    inset-inline-start: 0.75rem;
+    inset-inline-start: var(--pv-shim-padding-x);
   }
 
   .p-iconfield .p-inputicon:last-child {
-    inset-inline-end: 0.75rem;
+    inset-inline-end: var(--pv-shim-padding-x);
   }
 
   .p-iconfield .p-inputtext:not(:first-child) {
-    padding-inline-start: 2.5rem;
+    padding-inline-start: calc(
+      var(--pv-shim-padding-x) * 2 + var(--pv-shim-icon-size)
+    );
   }
 
   .p-iconfield .p-inputtext:not(:last-child) {
-    padding-inline-end: 2.5rem;
+    padding-inline-end: calc(
+      var(--pv-shim-padding-x) * 2 + var(--pv-shim-icon-size)
+    );
   }
 
-  /* Same gap as the two shims above, for Button (ContactForm's submit,
-     InterestDialog's trigger — both part of the page's initial static
-     markup, not gated behind interaction). Confirmed via a no-JS vs.
-     hydrated pixel diff: without this, the button keeps the browser's
-     default square corners/padding until PrimeVue's CSS loads. Values
-     read from a hydrated page's computed styles, same as the iconfield
-     shim above. */
+  /* Button — ContactForm's submit, InterestDialog's trigger. Aura's
+     button.gap is its own literal 0.5rem (not aliased to a form-field
+     token, just the same value in this theme), so it stays a plain
+     value rather than reusing --pv-shim-padding-y. */
   .p-button {
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 0.5rem;
-    padding: 0.5rem 0.75rem;
-    border-radius: 6px;
+    padding: var(--pv-shim-padding-y) var(--pv-shim-padding-x);
+    border-radius: var(--pv-shim-radius);
     font-size: 1rem;
     line-height: 1.5rem;
   }

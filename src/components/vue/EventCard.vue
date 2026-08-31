@@ -23,7 +23,7 @@ function formatPrice(price: number, currency: string) {
     :href="withBase(`/events/${event.id}`)"
     class="group flex flex-col overflow-hidden rounded-2xl border border-ink-200 bg-surface shadow-sm transition hover:-translate-y-1 hover:shadow-md"
   >
-    <div class="aspect-[4/3] overflow-hidden">
+    <div class="aspect-4/3 overflow-hidden">
       <img
         :src="event.image"
         :width="event.imageWidth"

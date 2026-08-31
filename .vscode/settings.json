@@ -1,0 +1,10 @@
+{
+  // Routes .css files through the Tailwind CSS IntelliSense extension's own
+  // "tailwindcss" language mode instead of VS Code's built-in CSS language
+  // service — the built-in one doesn't know Tailwind v4's at-rules
+  // (@theme, @utility, @plugin, @custom-variant, @source) and flags them as
+  // unknown; the Tailwind extension's mode does.
+  "files.associations": {
+    "*.css": "tailwindcss"
+  }
+}

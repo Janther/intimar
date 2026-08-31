@@ -55,7 +55,7 @@ function handleSubmit() {
     <Button
       type="submit"
       label="Enviar"
-      class="!border-terracotta-500 !bg-terracotta-500 !text-white hover:!bg-terracotta-700"
+      class="border-terracotta-500! bg-terracotta-500! text-white! hover:bg-terracotta-700!"
     />
     <Message v-if="submitted" severity="success" :closable="false">
       Tu aplicación de correo debería estar abierta con tu mensaje listo para

@@ -5,6 +5,16 @@ import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import { withBase } from '../lib/site';
 import ogDefaultSource from '../data/images/site/og-default.jpg';
+// primeicons ships its @font-face with font-display: block, so on any
+// connection slow enough to miss its ~3s block window (verified via a
+// throttled CDP screencast — every pi-* glyph on the page, e.g. the header's
+// dark/light toggle, the events search icon) renders as the browser's
+// fallback notdef glyph until the font arrives. Preloading it (resolved to
+// the real fingerprinted asset via Vite's `?url`, not a hardcoded path)
+// lets the browser fetch it in parallel with other head resources instead
+// of discovering it only after the CSS is parsed, keeping it inside the
+// block window on realistic networks.
+import primeiconsFontUrl from 'primeicons/fonts/primeicons.woff2?url';
 
 interface Props {
   title: string;
@@ -72,6 +82,13 @@ const absoluteImageURL = new URL(image, Astro.site);
         document.documentElement.classList.toggle('app-dark', isDark);
       })();
     </script>
+    <link
+      rel="preload"
+      href={primeiconsFontUrl}
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
     <link rel="icon" type="image/svg+xml" href={withBase('/favicon.svg')} />
     <link
       rel="alternate"

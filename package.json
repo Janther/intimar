@@ -15,6 +15,7 @@
     "format": "prettier --write .",
     "format:check": "prettier --check .",
     "typecheck": "astro check",
+    "lint": "eslint .",
     "test:unit": "vitest run --config vitest.unit.config.ts",
     "test:storybook": "vitest run",
     "test": "npm run test:unit && npm run test:storybook",
@@ -42,6 +43,7 @@
     "@astrojs/check": "^0.9.10",
     "@axe-core/playwright": "^4.13.0",
     "@chromatic-com/storybook": "latest",
+    "@eslint/js": "^10.0.1",
     "@playwright/test": "^1.62.1",
     "@storybook/addon-a11y": "^10.5.10",
     "@storybook/addon-docs": "^10.5.10",
@@ -51,12 +53,19 @@
     "@vitejs/plugin-vue": "^6.0.8",
     "@vitest/browser-playwright": "latest",
     "@vitest/coverage-v8": "latest",
+    "eslint": "^10.9.1",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-plugin-astro": "^3.1.0",
+    "eslint-plugin-vue": "^10.10.0",
+    "globals": "^17.11.0",
     "playwright": "latest",
     "prettier": "^3.9.6",
     "prettier-plugin-astro": "^0.14.1",
     "prettier-plugin-tailwindcss": "^0.8.1",
     "storybook": "^10.5.10",
     "typescript": "^6.0.3",
-    "vitest": "latest"
+    "typescript-eslint": "^8.69.0",
+    "vitest": "latest",
+    "vue-eslint-parser": "^10.4.1"
   }
 }

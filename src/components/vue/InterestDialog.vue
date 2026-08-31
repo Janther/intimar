@@ -4,7 +4,7 @@ import Dialog from 'primevue/dialog';
 import Button from 'primevue/button';
 import ContactForm from './ContactForm.vue';
 
-const props = defineProps<{ eventTitle: string }>();
+defineProps<{ eventTitle: string }>();
 const visible = ref(false);
 </script>
 

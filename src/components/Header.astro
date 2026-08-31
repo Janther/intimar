@@ -103,17 +103,17 @@ const navLinks = [
 
   <script is:inline>
     (function () {
-      var toggles = [
+      const toggles = [
         document.getElementById('theme-toggle'),
         document.getElementById('theme-toggle-mobile'),
       ].filter(Boolean);
 
       function sync() {
-        var isDark = document.documentElement.classList.contains('app-dark');
+        const isDark = document.documentElement.classList.contains('app-dark');
         toggles.forEach(function (toggle) {
-          var sun = toggle.querySelector('[data-theme-icon="light"]');
-          var moon = toggle.querySelector('[data-theme-icon="dark"]');
-          var label = toggle.querySelector('[data-theme-label]');
+          const sun = toggle.querySelector('[data-theme-icon="light"]');
+          const moon = toggle.querySelector('[data-theme-icon="dark"]');
+          const label = toggle.querySelector('[data-theme-label]');
           if (sun) sun.classList.toggle('hidden', isDark);
           if (moon) moon.classList.toggle('hidden', !isDark);
           if (label) label.textContent = isDark ? 'Modo claro' : 'Modo oscuro';
@@ -122,7 +122,7 @@ const navLinks = [
       }
 
       function toggleTheme() {
-        var isDark = document.documentElement.classList.toggle('app-dark');
+        const isDark = document.documentElement.classList.toggle('app-dark');
         localStorage.setItem('theme', isDark ? 'dark' : 'light');
         sync();
       }

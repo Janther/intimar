@@ -50,7 +50,7 @@ function handleSubmit() {
       <label for="message" class="text-sm font-medium text-ink-800"
         >Mensaje</label
       >
-      <Textarea id="message" v-model="message" rows="4" autoResize required />
+      <Textarea id="message" v-model="message" rows="4" auto-resize required />
     </div>
     <Button
       type="submit"

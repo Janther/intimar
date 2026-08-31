@@ -71,7 +71,10 @@ test('card surfaces switch away from a literal white background in dark mode', a
   await page.goto('/events');
   await page.click('#theme-toggle');
 
+  // The card has a `transition` utility on background-color, so it animates
+  // from white to the dark surface color rather than switching instantly —
+  // a one-shot evaluate() right after the click can catch it mid-transition.
+  // toHaveCSS polls until it settles instead of asserting on a single frame.
   const card = page.locator('a[href^="/events/"]').first();
-  const bg = await card.evaluate((el) => getComputedStyle(el).backgroundColor);
-  expect(bg).not.toBe('rgb(255, 255, 255)');
+  await expect(card).not.toHaveCSS('background-color', 'rgb(255, 255, 255)');
 });

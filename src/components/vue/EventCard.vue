@@ -41,14 +41,14 @@ function formatPrice(price: number, currency: string) {
       <h3 class="font-serif text-lg text-ink-900">{{ event.title }}</h3>
       <p class="line-clamp-2 text-sm text-ink-700">{{ event.summary }}</p>
       <div
-        class="mt-auto flex items-center justify-between pt-3 text-sm text-ink-600"
+        class="mt-auto flex items-center justify-between pt-3 text-sm text-ink-muted"
       >
         <span>{{ event.location }}</span>
         <span v-if="event.earlyBirdActive" class="flex items-baseline gap-1.5">
           <span class="font-medium text-ink-900">{{
             formatPrice(event.earlyBirdPrice, event.currency)
           }}</span>
-          <span class="text-xs text-ink-600 line-through">{{
+          <span class="text-xs text-ink-muted line-through">{{
             formatPrice(event.price, event.currency)
           }}</span>
         </span>
@@ -62,7 +62,7 @@ function formatPrice(price: number, currency: string) {
       >
         Early bird hasta el {{ event.earlyBirdDeadlineLabel }}
       </p>
-      <p class="text-xs text-ink-500">{{ event.startDateLabel }}</p>
+      <p class="text-xs text-ink-muted">{{ event.startDateLabel }}</p>
     </div>
   </a>
 </template>

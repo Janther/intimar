@@ -18,7 +18,7 @@ const author = await resolveBlogAuthor(post);
   href={withBase(`/blog/${post.id}`)}
   class="group flex flex-col rounded-2xl border border-ink-200 bg-surface p-6 shadow-sm transition hover:-translate-y-1 hover:shadow-md"
 >
-  <p class="text-xs text-ink-500">{formatShortDate(pubDate)}</p>
+  <p class="text-xs text-ink-muted">{formatShortDate(pubDate)}</p>
   <h3 class="mt-2 font-serif text-lg text-ink-900">{title}</h3>
   <p class="mt-2 line-clamp-3 flex-1 text-sm text-ink-700">{summary}</p>
 
@@ -33,7 +33,7 @@ const author = await resolveBlogAuthor(post);
         />
       )
     }
-    <span class="text-sm text-ink-600">{author.name}</span>
+    <span class="text-sm text-ink-muted">{author.name}</span>
   </div>
 
   {

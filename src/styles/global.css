@@ -89,6 +89,15 @@
      scale directly; only inline text/links need this. */
   --color-terracotta-text: var(--color-terracotta-600);
 
+  /* ink-400/500 sit at the ramp's midpoint by design — a 10-step ramp can't
+     have every rung hit 4.5:1 against BOTH a near-white and a near-black
+     surface, so the middle steps are for borders/dividers/muted fills, not
+     text. This is the safe choice for secondary/metadata text (dates,
+     captions, byline text): 10:1+ against a card in light mode, and still
+     8:1+ once ink-600 becomes the dark-mode ink-300 shade below — no
+     separate .app-dark override needed, the ramp flip already covers it. */
+  --color-ink-muted: var(--color-ink-600);
+
   /* Card/panel backgrounds that need to sit visibly above the page
      background — a plain `white` doesn't have a dark-mode equivalent,
      so it's a token like the rest of the ramp. */
@@ -189,7 +198,7 @@
   --tw-prose-hr: var(--color-ink-200);
   --tw-prose-quotes: var(--color-ink-800);
   --tw-prose-quote-borders: var(--color-ink-300);
-  --tw-prose-captions: var(--color-ink-500);
+  --tw-prose-captions: var(--color-ink-muted);
 
   & :is(h1, h2, h3, h4) {
     font-family: var(--font-serif);

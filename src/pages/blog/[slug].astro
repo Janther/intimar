@@ -83,11 +83,11 @@ const breadcrumbSchema = {
   articleAuthor={author.name}
 >
   <article class="mx-auto max-w-3xl px-6 py-16">
-    <a href={withBase('/blog')} class="text-sm text-ink-600 hover:text-ink-900"
+    <a href={withBase('/blog')} class="text-sm text-ink-muted hover:text-ink-900"
       >← Blog</a
     >
 
-    <p class="mt-6 text-sm text-ink-500">{formatShortDate(pubDate)}</p>
+    <p class="mt-6 text-sm text-ink-muted">{formatShortDate(pubDate)}</p>
     <h1 class="mt-2 font-serif text-3xl text-ink-900 sm:text-4xl">
       {title}
     </h1>
@@ -115,7 +115,7 @@ const breadcrumbSchema = {
             <p class="text-sm font-medium text-ink-800">{author.name}</p>
           )
         }
-        {author.bio && <p class="text-sm text-ink-500">{author.bio}</p>}
+        {author.bio && <p class="text-sm text-ink-muted">{author.bio}</p>}
       </div>
     </div>
 

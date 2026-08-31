@@ -28,7 +28,26 @@ export default defineConfig({
     // Must stay last — it compresses the fully-rendered build output,
     // including inline <script>/<style> content that Astro's own
     // compressHTML leaves untouched.
-    compress(),
+    //
+    // removeComments and collapseWhitespace must stay off: Vue's SSR output
+    // relies on both HTML comments (<!--[-->/<!--]--> fragment markers,
+    // <!--v-if--> placeholders for a false branch) AND exact whitespace as
+    // anchors for client-side hydration on every `client:*` island. The
+    // default minifier settings strip/collapse both as "insignificant",
+    // which silently breaks hydration matching — every page with a
+    // hydrated PrimeVue component (EventsExplorer, ContactForm,
+    // InterestDialog) logged "Hydration completed but contains mismatches"
+    // in production only, never in dev (unminified). Bisected one
+    // sub-processor at a time — CSS/Image/SVG/JSON/JavaScript minification
+    // are not implicated and stay at their defaults.
+    compress({
+      HTML: {
+        'html-minifier-terser': {
+          removeComments: false,
+          collapseWhitespace: false,
+        },
+      },
+    }),
   ],
 
   vite: {
@@ -42,6 +61,8 @@ export default defineConfig({
         'primevue/button',
         'primevue/dialog',
         'primevue/inputtext',
+        'primevue/iconfield',
+        'primevue/inputicon',
         'primevue/carousel',
         'primevue/textarea',
         'primevue/message',

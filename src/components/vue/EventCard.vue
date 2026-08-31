@@ -43,7 +43,10 @@ function formatPrice(price: number, currency: string) {
       <div
         class="mt-auto flex items-center justify-between pt-3 text-sm text-ink-muted"
       >
-        <span>{{ event.location }}</span>
+        <span class="flex items-center gap-1">
+          <span class="pi pi-map-marker" aria-hidden="true" />
+          {{ event.location }}
+        </span>
         <span v-if="event.earlyBirdActive" class="flex items-baseline gap-1.5">
           <span class="font-medium text-ink-900">{{
             formatPrice(event.earlyBirdPrice, event.currency)

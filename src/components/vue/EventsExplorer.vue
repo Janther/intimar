@@ -1,5 +1,7 @@
 <script setup lang="ts">
 import { computed, ref } from 'vue';
+import IconField from 'primevue/iconfield';
+import InputIcon from 'primevue/inputicon';
 import InputText from 'primevue/inputtext';
 import EventCard from './EventCard.vue';
 import type { EventSummary } from '../../lib/data';
@@ -22,14 +24,22 @@ const filteredEvents = computed(() => {
 
 <template>
   <div>
-    <span class="p-input-icon-left mb-8 block w-full sm:max-w-xs">
+    <IconField class="mb-8 block w-full sm:max-w-xs">
+      <InputIcon class="pi pi-search" aria-hidden="true" />
       <InputText
         v-model="query"
         placeholder="Buscar retiros o ubicaciones"
         aria-label="Buscar retiros o ubicaciones"
         class="w-full"
       />
-    </span>
+      <button
+        v-if="query"
+        type="button"
+        class="p-inputicon pi pi-times cursor-pointer border-0 bg-transparent p-0"
+        aria-label="Limpiar búsqueda"
+        @click="query = ''"
+      />
+    </IconField>
 
     <p
       v-if="filteredEvents.length === 0"

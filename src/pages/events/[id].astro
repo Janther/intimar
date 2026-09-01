@@ -2,6 +2,7 @@
 import { Image } from 'astro:assets';
 import Layout from '../../layouts/Layout.astro';
 import InterestDialog from '../../components/vue/InterestDialog.vue';
+import ShareButtons from '../../components/vue/ShareButtons.vue';
 import {
   getAllEvents,
   getEventHosts,
@@ -116,6 +117,10 @@ const breadcrumbSchema = {
       <span class="pi pi-map-marker" aria-hidden="true"></span>
       {location} · {formatDateRange(startDate, endDate)}
     </p>
+
+    <div class="mt-4">
+      <ShareButtons title={title} url={canonicalURL} client:load />
+    </div>
 
     <Image
       src={image}

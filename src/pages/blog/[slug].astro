@@ -4,6 +4,7 @@ import { render } from 'astro:content';
 import Layout from '../../layouts/Layout.astro';
 import Tag from '../../components/vue/Tag.vue';
 import BlogCard from '../../components/BlogCard.astro';
+import ShareButtons from '../../components/vue/ShareButtons.vue';
 import {
   getAllBlogPosts,
   getAdjacentBlogPosts,
@@ -121,6 +122,10 @@ const breadcrumbSchema = {
         }
         {author.bio && <p class="text-sm text-ink-muted">{author.bio}</p>}
       </div>
+    </div>
+
+    <div class="mt-4">
+      <ShareButtons title={title} url={canonicalURL} client:load />
     </div>
 
     {

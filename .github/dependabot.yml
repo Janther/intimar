@@ -1,0 +1,25 @@
+version: 2
+updates:
+  # package.json/package-lock.json at the repo root.
+  - package-ecosystem: 'npm'
+    directory: '/'
+    schedule:
+      interval: 'weekly'
+    open-pull-requests-limit: 10
+    groups:
+      # Bundles routine minor/patch bumps into one PR — this project's
+      # devDependencies alone (ESLint plugins, Storybook, Playwright, …)
+      # update often enough that one-PR-per-package would be mostly noise.
+      # Majors stay ungrouped since they're the ones actually worth
+      # reviewing individually (breaking changes, peer-dep shifts).
+      minor-and-patch:
+        update-types:
+          - 'minor'
+          - 'patch'
+
+  # Actions pinned in .github/workflows/*.yml (actions/checkout,
+  # actions/setup-node, the GitHub Pages deploy actions, …).
+  - package-ecosystem: 'github-actions'
+    directory: '/'
+    schedule:
+      interval: 'weekly'

@@ -16,7 +16,7 @@
     "format:check": "prettier --check .",
     "typecheck": "astro check",
     "lint": "eslint .",
-    "spellcheck": "cspell \"**/*\"",
+    "spellcheck": "cspell --dot \"**/*\"",
     "test:unit": "vitest run --config vitest.unit.config.ts",
     "test:storybook": "vitest run",
     "test": "npm run test:unit && npm run test:storybook",

@@ -7,6 +7,13 @@ updates:
       interval: 'weekly'
     open-pull-requests-limit: 10
     versioning-strategy: increase
+    ignore:
+      # typescript-eslint@8.69.0 caps its typescript peer dep at <6.1.0.
+      # Bumping typescript past that breaks peer resolution and fails the
+      # whole grouped PR. Remove once typescript-eslint supports newer
+      # typescript majors/minors.
+      - dependency-name: 'typescript'
+        versions: ['>=6.1.0']
     groups:
       # Bundles routine minor/patch bumps into one PR — this project's
       # devDependencies alone (ESLint plugins, Storybook, Playwright, …)

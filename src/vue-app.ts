@@ -128,5 +128,6 @@ export default (app: App) => {
       },
     },
     locale: localeEsCl,
+    license: import.meta.env.PUBLIC_PRIMEVUE_LICENSE_KEY,
   });
 };

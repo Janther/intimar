@@ -1,4 +1,4 @@
-export const CONTACT_EMAIL = 'hello@intimar.example';
+export const CONTACT_EMAIL = 'contacto@intimar.life';
 
 // Prefixes a root-relative internal path with the site's configured base
 // path (astro.config.mjs's `base`, exposed as import.meta.env.BASE_URL).

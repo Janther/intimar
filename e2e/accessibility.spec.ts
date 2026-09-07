@@ -6,7 +6,6 @@ const pages = [
   '/events',
   '/events/sierra-silent-retreat',
   '/team',
-  '/team/elena-marsh',
   '/about',
   '/contact',
   '/blog',

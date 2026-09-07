@@ -82,16 +82,19 @@ test('blog post renders content, author, adjacent post, and a valid BlogPosting 
   expect(data.publisher.name).toBe('Intimar');
 });
 
-test('team listing and detail pages render photos', async ({ page }) => {
+test('team listing renders photos and homepage cards link into facilitator sections', async ({
+  page,
+}) => {
   await page.goto('/team');
   await expect(page.locator('img').first()).toBeVisible();
 
+  await page.goto('/');
   await page
     .getByRole('link', { name: /Elena Marsh/ })
     .first()
     .click();
-  await expect(page).toHaveURL(/\/team\/elena-marsh/);
-  await expect(page.locator('h1')).toHaveText('Elena Marsh');
+  await expect(page).toHaveURL(/\/team#elena-marsh/);
+  await expect(page.locator('#elena-marsh h2')).toHaveText('Elena Marsh');
 });
 
 test('unknown routes render the custom 404 page', async ({ page }) => {

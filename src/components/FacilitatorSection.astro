@@ -1,0 +1,68 @@
+---
+import { Image } from 'astro:assets';
+import Tag from './vue/Tag.vue';
+import type { TeamEntry } from '../lib/data';
+
+interface Props {
+  member: TeamEntry;
+  index: number;
+}
+
+const { member, index } = Astro.props;
+const { name, role, bio, photo, specialties, social } = member.data;
+// 1-based ordinal, so "the 2nd, 4th, ..." facilitator (an even position)
+// has their picture on the right.
+const isEven = (index + 1) % 2 === 0;
+---
+
+<section id={member.id} class="scroll-mt-24">
+  <div
+    class:list={[
+      'flex flex-col items-center gap-6 text-center sm:items-start sm:text-left',
+      isEven ? 'sm:flex-row-reverse' : 'sm:flex-row',
+    ]}
+  >
+    <Image
+      src={photo}
+      alt={name}
+      class="h-32 w-32 shrink-0 rounded-full object-cover ring-4 ring-ink-100"
+    />
+    <div>
+      <h2 class="font-serif text-3xl text-ink-900">{name}</h2>
+      <p class="mt-1 text-ink-600">{role}</p>
+      <div class="mt-3 flex flex-wrap justify-center gap-1.5 sm:justify-start">
+        {specialties.map((specialty) => <Tag>{specialty}</Tag>)}
+      </div>
+      <div class="mt-3 flex justify-center gap-3 text-ink-600 sm:justify-start">
+        {
+          social.instagram && (
+            <a
+              href={social.instagram}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="transition hover:text-ink-900"
+              aria-label="Instagram"
+            >
+              <span class="pi pi-instagram text-xl" aria-hidden="true" />
+            </a>
+          )
+        }
+        {
+          social.website && (
+            <a
+              href={social.website}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="transition hover:text-ink-900"
+              aria-label="Sitio web"
+            >
+              <span class="pi pi-globe text-xl" aria-hidden="true" />
+            </a>
+          )
+        }
+      </div>
+    </div>
+  </div>
+
+  <p class="mt-8 max-w-2xl text-ink-700">{bio}</p>
+</section>

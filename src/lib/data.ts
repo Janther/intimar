@@ -47,13 +47,6 @@ export async function getAllTestimonials(): Promise<TestimonialEntry[]> {
   return getCollection('testimonials');
 }
 
-export async function getEventsHostedBy(
-  memberId: string,
-): Promise<EventEntry[]> {
-  const events = await getAllEvents();
-  return events.filter((event) => event.data.hostIds.includes(memberId));
-}
-
 export function formatDateRange(start: Date, end: Date): string {
   const sameYear = start.getFullYear() === end.getFullYear();
   const sameMonth = sameYear && start.getMonth() === end.getMonth();
@@ -179,7 +172,7 @@ export async function resolveBlogAuthor(post: BlogEntry): Promise<BlogAuthor> {
       name: member.data.name,
       bio: member.data.bio,
       photo: member.data.photo,
-      href: withBase(`/team/${member.id}`),
+      href: withBase(`/team#${member.id}`),
     };
   }
   return { name: author.name, bio: author.bio, photo: author.photo };

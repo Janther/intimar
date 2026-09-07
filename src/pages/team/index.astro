@@ -1,16 +1,37 @@
 ---
 import Layout from '../../layouts/Layout.astro';
-import TeamCard from '../../components/TeamCard.astro';
+import FacilitatorSection from '../../components/FacilitatorSection.astro';
 import { getAllTeamMembers } from '../../lib/data';
+import { withBase } from '../../lib/site';
 
 const team = await getAllTeamMembers();
+
+const personSchemas = team.map((member) => {
+  const { name, role, bio, photo, social } = member.data;
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'Person',
+    name,
+    jobTitle: role,
+    description: bio,
+    image: new URL(photo.src, Astro.site).toString(),
+    url: new URL(withBase(`/team#${member.id}`), Astro.site).toString(),
+    worksFor: {
+      '@type': 'Organization',
+      name: 'Intimar',
+      url: Astro.site?.toString(),
+    },
+    sameAs: [social.instagram, social.website].filter(Boolean),
+  };
+});
 ---
 
 <Layout
   title="Nuestros Facilitadores"
   description="Conoce a los profesores de tantra y facilitadores detrás de los retiros de Intimar."
+  structuredData={personSchemas}
 >
-  <section class="mx-auto max-w-6xl px-6 py-16">
+  <section class="mx-auto max-w-4xl px-6 py-16">
     <p
       class="text-sm font-medium tracking-widest text-terracotta-text uppercase"
     >
@@ -25,8 +46,15 @@ const team = await getAllTeamMembers();
       no hayamos practicado nosotros mismos.
     </p>
 
-    <div class="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-      {team.map((member) => <TeamCard member={member} />)}
+    <div class="mt-12 flex flex-col gap-12">
+      {
+        team.map((member, index) => (
+          <>
+            {index > 0 && <hr class="border-ink-200" />}
+            <FacilitatorSection member={member} index={index} />
+          </>
+        ))
+      }
     </div>
   </section>
 </Layout>

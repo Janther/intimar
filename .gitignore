@@ -23,6 +23,10 @@ pnpm-debug.log*
 # jetbrains setting folder
 .idea/
 
+# vim swap files
+*.swp
+*.swo
+
 *storybook.log
 storybook-static
 

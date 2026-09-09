@@ -18,6 +18,11 @@ const config: StorybookConfig = {
     // Vite config lives inside astro.config.mjs instead, so it's added here.
     viteConfig.plugins ??= [];
     viteConfig.plugins.push(vue(), tailwindcss());
+    // Astro exposes client env vars prefixed with PUBLIC_ (not Vite's own
+    // VITE_ default) by setting this same option in its own Vite config.
+    // Storybook runs plain Vite, so without it PUBLIC_PRIMEVUE_LICENSE_KEY
+    // (src/vue-app.ts) is stripped from import.meta.env here.
+    viteConfig.envPrefix = 'PUBLIC_';
     return viteConfig;
   },
 };

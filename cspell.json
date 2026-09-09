@@ -7,11 +7,18 @@
   // as the primary exclusion list instead of duplicating it here — only
   // paths NOT already gitignored need an explicit entry below.
   "useGitignore": true,
-  "ignorePaths": [".git", "package-lock.json", "coverage"],
+  "ignorePaths": [
+    ".git",
+    "package-lock.json",
+    "coverage",
+    // Vendored third-party skill docs — not our prose to spellcheck.
+    ".claude/skills"
+  ],
   "words": [
     "allura",
     "autodocs",
     "bradlc",
+    "claude",
     "conócelos",
     "contáctanos",
     "daniel",
@@ -22,9 +29,11 @@
     "facilitadora",
     "facilitadores",
     "farooqi",
+    "flexbox",
     "fraunces",
     "frontmatter",
     "github",
+    "gmail",
     "himalayo",
     "iconfield",
     "inputicon",
@@ -34,6 +43,7 @@
     "janther",
     "jetbrains",
     "kinesiólogo",
+    "klaus",
     "lindqvist",
     "marcus",
     "marisol",

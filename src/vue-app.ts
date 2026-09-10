@@ -28,10 +28,31 @@ const TantraPreset = definePreset(Aura, {
     // input's "Buscar retiros o ubicaciones" placeholder). Darkening it
     // one step gives real headroom instead of resting on a fractional
     // pass/fail margin.
+    //
+    // formField.background/borderColor: Aura's own defaults here are its
+    // generic slate/zinc surface scale (slate-300 border on white in light,
+    // zinc-600 border on zinc-950 in dark) — completely untouched by the
+    // brand's ink/surface tokens above, and measured at only 1.48:1 (light)
+    // / 2.57:1 (dark) against the input's own background, well under the
+    // 3:1 WCAG 1.4.11 non-text-contrast minimum for an input's boundary.
+    // `--color-ink-500` is the ramp's documented border-safe rung (see its
+    // definition in global.css) and clears 3:1 in both themes since it
+    // flips automatically with `.app-dark`; `--color-surface` matches every
+    // other card/panel on the site instead of Aura's unrelated zinc scale.
     colorScheme: {
       light: {
         formField: {
           placeholderColor: '{surface.600}',
+          background: 'var(--color-surface)',
+          borderColor: 'var(--color-ink-500)',
+          hoverBorderColor: 'var(--color-ink-600)',
+        },
+      },
+      dark: {
+        formField: {
+          background: 'var(--color-surface)',
+          borderColor: 'var(--color-ink-500)',
+          hoverBorderColor: 'var(--color-ink-400)',
         },
       },
     },
@@ -113,6 +134,15 @@ const localeEsCl = {
     unselectAll: 'Deseleccionar todo',
     slide: 'Diapositiva',
     slideNumber: '{slideNumber}',
+    // Carousel's prev/next nav buttons and page-indicator dots read these
+    // three keys directly (see primevue/carousel's ariaPageLabel/
+    // prevPageLabel/nextPageLabel) rather than the generic previous/next
+    // above — without them PrimeVue falls back to its English defaults
+    // ("Previous Page", "Next Page", "Page 1"), the one place on the site
+    // a screen-reader user hit un-translated strings (Testimonials.vue).
+    prevPageLabel: 'Página anterior',
+    nextPageLabel: 'Página siguiente',
+    pageLabel: 'Página {page}',
   },
 };
 

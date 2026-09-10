@@ -125,11 +125,13 @@ const breadcrumbSchema = {
     <Image
       src={image}
       alt={title}
+      width={1400}
+      height={788}
       class="mt-8 aspect-video w-full rounded-2xl object-cover"
     />
 
     <div class="mt-10 grid gap-10 sm:grid-cols-[2fr_1fr]">
-      <div class="prose max-w-none prose-p:text-ink-700">
+      <div class="prose prose-p:text-ink-700">
         <p class="text-ink-700">{description}</p>
 
         {
@@ -145,6 +147,8 @@ const breadcrumbSchema = {
                     <Image
                       src={host.data.photo}
                       alt={host.data.name}
+                      width={96}
+                      height={96}
                       class="h-12 w-12 rounded-full object-cover"
                     />
                     <div>

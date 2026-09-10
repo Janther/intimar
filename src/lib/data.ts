@@ -184,9 +184,17 @@ export async function toEventSummary(event: EventEntry): Promise<EventSummary> {
   // getImage() is the programmatic API <Image> itself is built on. Without
   // it, the card would fall back to the original unoptimized upload
   // (2-3x the bytes) with no width/height, risking layout shift.
+  //
+  // width/height are pinned to EventCard.vue's `aspect-4/3` thumbnail box
+  // (800x600 is exactly 4:3, ~2x the box's largest real rendered width so
+  // it stays sharp on retina) — without them getImage() defaults to the
+  // source's native size (1600px wide, up to ~2200px tall for portrait
+  // uploads), shipping a multi-hundred-KB image for a few-hundred-px card.
   const optimizedImage = await getImage({
     src: event.data.image,
     format: 'webp',
+    width: 800,
+    height: 600,
   });
   return {
     id: event.id,

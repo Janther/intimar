@@ -102,6 +102,15 @@
      background — a plain `white` doesn't have a dark-mode equivalent,
      so it's a token like the rest of the ramp. */
   --color-surface: white;
+
+  /* Form validation text (ContactForm's inline "Ingresa tu..." messages).
+     Nothing in the ink/terracotta/gold ramps reads as an error — terracotta
+     is the everyday accent/CTA color, so reusing it here would make a
+     validation message look like a call to action instead of a problem to
+     fix. red-800/red-400 (Tailwind's palette, already present in PrimeVue's
+     own Aura theme as its invalid-state color) both clear 4.5:1 against
+     every surface this renders on. */
+  --color-error: #991b1b;
 }
 
 @layer base {
@@ -134,6 +143,7 @@
     --color-surface: #211712;
     --color-accent-gold-text: var(--color-gold-300);
     --color-terracotta-text: var(--color-terracotta-300);
+    --color-error: #f87171;
   }
 
   /* --- PrimeVue pre-hydration shims -------------------------------------
@@ -165,10 +175,15 @@
     --pv-shim-icon-size: 1rem; /* icon.size */
   }
 
-  /* InputText, Textarea — the events search box, ContactForm's fields. */
+  /* InputText, Textarea — the events search box, ContactForm's fields.
+     Border uses ink-500, not ink-200: PrimeVue's real (post-hydration)
+     border color is themed to this same token in vue-app.ts's TantraPreset
+     for the 3:1 non-text-contrast reasoning documented there — matching it
+     here too keeps the pre-hydration shim from flashing a different
+     (lower-contrast) border before PrimeVue's CSS takes over. */
   .p-inputtext,
   .p-textarea {
-    border: 1px solid var(--color-ink-200);
+    border: 1px solid var(--color-ink-500);
     border-radius: var(--pv-shim-radius);
     background: var(--color-surface);
     padding: var(--pv-shim-padding-y) var(--pv-shim-padding-x);

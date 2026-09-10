@@ -60,9 +60,9 @@ const navLinks = [
       </a>
     </div>
 
-    <details class="relative md:hidden">
+    <details id="mobile-menu" class="relative md:hidden">
       <summary
-        class="list-none rounded-md p-2 text-ink-800 [&::-webkit-details-marker]:hidden"
+        class="flex h-11 w-11 list-none items-center justify-center rounded-md text-ink-800 [&::-webkit-details-marker]:hidden"
       >
         <span class="pi pi-bars text-xl" aria-hidden="true"></span>
         <span class="sr-only">Abrir menú</span>
@@ -108,14 +108,19 @@ const navLinks = [
         document.getElementById('theme-toggle-mobile'),
       ].filter(Boolean);
 
+      // Icon shows the theme a click switches TO — the same direction the
+      // text label already used ("Modo oscuro" while light, prompting a
+      // switch to dark). Previously the icon showed the *current* theme
+      // (moon while already dark) while the label described the
+      // *destination* ("Modo claro"), pointing opposite ways at a glance.
       function sync() {
         const isDark = document.documentElement.classList.contains('app-dark');
         toggles.forEach(function (toggle) {
           const sun = toggle.querySelector('[data-theme-icon="light"]');
           const moon = toggle.querySelector('[data-theme-icon="dark"]');
           const label = toggle.querySelector('[data-theme-label]');
-          if (sun) sun.classList.toggle('hidden', isDark);
-          if (moon) moon.classList.toggle('hidden', !isDark);
+          if (sun) sun.classList.toggle('hidden', !isDark);
+          if (moon) moon.classList.toggle('hidden', isDark);
           if (label) label.textContent = isDark ? 'Modo claro' : 'Modo oscuro';
           toggle.setAttribute('aria-pressed', String(isDark));
         });
@@ -131,6 +136,29 @@ const navLinks = [
         toggle.addEventListener('click', toggleTheme);
       });
       sync();
+    })();
+
+    // Mobile menu (the <details>/<summary> disclosure above): closing only
+    // on a second tap of the hamburger left it stuck open if a visitor
+    // pressed Escape or tapped elsewhere on the page — both are standard
+    // expectations for a floating menu like this one.
+    (function () {
+      const menu = document.getElementById('mobile-menu');
+      if (!(menu instanceof HTMLDetailsElement)) return;
+
+      document.addEventListener('click', function (event) {
+        if (menu.open && !menu.contains(event.target)) {
+          menu.open = false;
+        }
+      });
+
+      document.addEventListener('keydown', function (event) {
+        if (event.key === 'Escape' && menu.open) {
+          menu.open = false;
+          const summary = menu.querySelector('summary');
+          if (summary instanceof HTMLElement) summary.focus();
+        }
+      });
     })();
   </script>
 </header>

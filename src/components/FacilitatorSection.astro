@@ -1,4 +1,33 @@
 ---
+// "Wildgrowth" treatment — the raw end of the brand's composed/raw tension.
+// A hand-inked, wobbly rectangle (stroke only, no fill) sits tilted behind
+// the whole block (photo, name, tags, socials, bio) like a loosely sketched
+// boundary, not a card. Sized via explicit calc(100% + Npx) height/width
+// (not top/bottom/left/right auto-sizing) — an SVG's non-square viewBox has
+// an intrinsic aspect ratio that browsers can use to auto-size an
+// absolutely positioned element with inset-only sizing, ignoring the actual
+// top/bottom offsets; explicit calc() sizing avoids that.
+//
+// The frame's inner clearance (px-[10%] py-[6%] on the wrapper, not
+// per-child padding) is percentage-based because the path's wobble/corner
+// excursions are a roughly fixed fraction of the frame's WIDTH — a fixed-px
+// inset doesn't scale once a long bio stretches the frame much taller via
+// preserveAspectRatio="none", letting the ink line cross into the text
+// (confirmed with synthetic bios up to 8x normal length). py is smaller
+// than px because the path's top/bottom edges were drawn with a flatter,
+// smaller wobble amplitude than the left/right edges keep. One value per
+// axis on a single wrapper also guarantees top == bottom and left == right
+// clearance by construction.
+//
+// The portrait crop is Option A's asymmetric-blob border-radius mirrored
+// horizontally (TL/TR and BL/BR corners swapped on both the h- and
+// v-radius components), verified pixel-for-pixel against a true CSS
+// transform:scaleX(-1) mirror before use. Its hairline border
+// (border-ink-400/70) is deliberately on a separate absolutely positioned
+// layer with a DIFFERENT blob shape than the photo's own crop (Option A's
+// original, un-mirrored shape) — a single element's border can't trace a
+// different radius than its own clip shape, and the two mirrored-but-
+// offset shapes read as intentional dissonance rather than a random blob.
 import { Image } from 'astro:assets';
 import Tag from './vue/Tag.vue';
 import type { TeamEntry } from '../lib/data';
@@ -16,53 +45,83 @@ const isEven = (index + 1) % 2 === 0;
 ---
 
 <section id={member.id} class="scroll-mt-24">
-  <div
-    class:list={[
-      'flex flex-col items-center gap-6 text-center sm:items-start sm:text-left',
-      isEven ? 'sm:flex-row-reverse' : 'sm:flex-row',
-    ]}
-  >
-    <Image
-      src={photo}
-      alt={name}
-      class="h-32 w-32 shrink-0 rounded-full object-cover ring-4 ring-ink-100"
-    />
-    <div>
-      <h2 class="font-serif text-3xl text-ink-900">{name}</h2>
-      <p class="mt-1 text-ink-600">{role}</p>
-      <div class="mt-3 flex flex-wrap justify-center gap-1.5 sm:justify-start">
-        {specialties.map((specialty) => <Tag>{specialty}</Tag>)}
+  <div class="relative px-[10%] py-[6%]">
+    <svg
+      aria-hidden="true"
+      viewBox="0 0 100 100"
+      preserveAspectRatio="none"
+      class:list={[
+        'pointer-events-none absolute -inset-4 h-[calc(100%+2rem)] w-[calc(100%+2rem)] text-ink-300 sm:-inset-8 sm:h-[calc(100%+4rem)] sm:w-[calc(100%+4rem)]',
+        isEven ? 'rotate-2' : '-rotate-2',
+      ]}
+    >
+      <path
+        d="M8,4 C 30,2.5 55,4.5 78,2 C 92,2 98,10 96,20 C 100,35 94,50 98,62 C 101,78 95,88 92,96 C 75,97.5 55,95.5 35,98 C 18,98 4,96 3,84 C 0,70 5,58 1,44 C -1,28 4,16 8,4 Z"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="1.1"
+        vector-effect="non-scaling-stroke"></path>
+    </svg>
+
+    <div
+      class:list={[
+        'relative flex flex-col items-center gap-6 text-center sm:items-start sm:text-left',
+        isEven ? 'sm:flex-row-reverse' : 'sm:flex-row',
+      ]}
+    >
+      <div class="relative shrink-0">
+        <div
+          aria-hidden="true"
+          class="absolute -inset-2 rounded-[68%_32%_51%_49%/40%_62%_38%_60%] border border-ink-400/70"
+        >
+        </div>
+        <Image
+          src={photo}
+          alt={name}
+          class="relative h-32 w-32 rounded-[32%_68%_49%_51%/62%_40%_60%_38%] object-cover ring-4 ring-ink-100"
+        />
       </div>
-      <div class="mt-3 flex justify-center gap-3 text-ink-600 sm:justify-start">
-        {
-          social.instagram && (
-            <a
-              href={social.instagram}
-              target="_blank"
-              rel="noopener noreferrer"
-              class="transition hover:text-ink-900"
-              aria-label="Instagram"
-            >
-              <span class="pi pi-instagram text-xl" aria-hidden="true" />
-            </a>
-          )
-        }
-        {
-          social.website && (
-            <a
-              href={social.website}
-              target="_blank"
-              rel="noopener noreferrer"
-              class="transition hover:text-ink-900"
-              aria-label="Sitio web"
-            >
-              <span class="pi pi-globe text-xl" aria-hidden="true" />
-            </a>
-          )
-        }
+      <div>
+        <h2 class="font-serif text-3xl text-ink-900">{name}</h2>
+        <p class="mt-1 text-ink-600">{role}</p>
+        <div
+          class="mt-3 flex flex-wrap justify-center gap-1.5 sm:justify-start"
+        >
+          {specialties.map((specialty) => <Tag>{specialty}</Tag>)}
+        </div>
+        <div
+          class="mt-3 flex justify-center gap-3 text-ink-600 sm:justify-start"
+        >
+          {
+            social.instagram && (
+              <a
+                href={social.instagram}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="transition hover:text-ink-900"
+                aria-label="Instagram"
+              >
+                <span class="pi pi-instagram text-xl" aria-hidden="true" />
+              </a>
+            )
+          }
+          {
+            social.website && (
+              <a
+                href={social.website}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="transition hover:text-ink-900"
+                aria-label="Sitio web"
+              >
+                <span class="pi pi-globe text-xl" aria-hidden="true" />
+              </a>
+            )
+          }
+        </div>
       </div>
     </div>
-  </div>
 
-  <p class="mt-8 max-w-2xl text-ink-700">{bio}</p>
+    <p class="mt-8 max-w-2xl text-ink-700">{bio}</p>
+  </div>
 </section>

@@ -1,7 +1,8 @@
 ---
 import { Image } from 'astro:assets';
 import { CONTACT_EMAIL, withBase } from '../lib/site';
-import logoFull from '../data/images/site/logo-full.png';
+import logoFullLight from '../data/images/site/logo-full-light.png';
+import logoFullDark from '../data/images/site/logo-full.png';
 
 const year = new Date().getFullYear();
 ---
@@ -11,11 +12,18 @@ const year = new Date().getFullYear();
     <div>
       <p class="flex items-center gap-2 font-serif text-lg text-ink-900">
         <Image
-          src={logoFull}
+          src={logoFullLight}
           alt=""
           width={489}
           height={1150}
-          class="h-16 w-auto"
+          class="h-16 w-auto in-[.app-dark]:hidden"
+        />
+        <Image
+          src={logoFullDark}
+          alt=""
+          width={489}
+          height={1150}
+          class="hidden h-16 w-auto in-[.app-dark]:block"
         />
         Intimar
       </p>

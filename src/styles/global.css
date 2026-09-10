@@ -68,10 +68,11 @@
 
   /* Used only by the candlelit hero band — fixed in both themes, since the
      band itself stays dark regardless of site theme. Deliberately literal
-     values, not var()-linked to the ink ramp: they are what ink-900/ink-50
-     mean in light mode specifically, and must stay put even once ink-*
-     itself starts flipping for dark mode below. */
-  --color-hero-bg: #1a1310;
+     values, not var()-linked to the ink ramp, so they can't drift from it.
+     hero-bg is the exact backdrop color sampled from the brand mark's own
+     source art (logo.jpg) — the mark was painted for this specific maroon,
+     not a generic near-black. */
+  --color-hero-bg: #3c0a0d;
   --color-hero-fg: #f2e9e0;
 
   /* Decorative gold accent (hero rays, "juntos", section flourishes) and a
@@ -127,12 +128,21 @@
      without needing dark: variants everywhere. Custom-property overrides
      like this only survive the Tailwind / Lightning CSS build when placed
      inside a declared layer; a bare top-level rule is silently dropped
-     from the compiled output. */
+     from the compiled output.
+
+     The dark end of the ramp (50-300 — page/card/border surfaces) is tinted
+     to the same maroon family as --color-hero-bg instead of a neutral
+     near-black, so a dark-mode page and the candlelit hero read as one
+     backdrop rather than two different darks. Each step keeps its original
+     lightness (only hue/saturation moved to match logo.jpg), so the
+     contrast ratios already tuned against ink-400 upward hold unchanged —
+     verified: ink-900 text against the new ink-50 is still 15.7:1, and
+     terracotta-300/ink-700 links and body text both clear 7.5:1+. */
   .app-dark {
-    --color-ink-50: #1a1310;
-    --color-ink-100: #241a15;
-    --color-ink-200: #332922;
-    --color-ink-300: #4a3d33;
+    --color-ink-50: #1f0c0a;
+    --color-ink-100: #2b110e;
+    --color-ink-200: #401915;
+    --color-ink-300: #5e241f;
     --color-ink-400: #93826c;
     --color-ink-500: #a8926f;
     --color-ink-600: #c2ac8c;
@@ -140,7 +150,7 @@
     --color-ink-800: #e8dcc9;
     --color-ink-900: #f2e9e0;
 
-    --color-surface: #211712;
+    --color-surface: #260f0d;
     --color-accent-gold-text: var(--color-gold-300);
     --color-terracotta-text: var(--color-terracotta-300);
     --color-error: #f87171;

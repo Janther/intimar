@@ -89,7 +89,24 @@ const absoluteImageURL = new URL(image, Astro.site);
       type="font/woff2"
       crossorigin
     />
-    <link rel="icon" type="image/svg+xml" href={withBase('/favicon.svg')} />
+    <link rel="icon" href={withBase('/favicon.ico')} sizes="any" />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href={withBase('/favicon-32x32.png')}
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href={withBase('/favicon-16x16.png')}
+    />
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href={withBase('/apple-touch-icon.png')}
+    />
     <link
       rel="alternate"
       type="application/rss+xml"

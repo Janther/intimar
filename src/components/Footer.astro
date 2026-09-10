@@ -1,5 +1,7 @@
 ---
+import { Image } from 'astro:assets';
 import { CONTACT_EMAIL, withBase } from '../lib/site';
+import logoFull from '../data/images/site/logo-full.png';
 
 const year = new Date().getFullYear();
 ---
@@ -7,7 +9,16 @@ const year = new Date().getFullYear();
 <footer class="border-t border-ink-200/60 bg-ink-100/40">
   <div class="mx-auto grid max-w-6xl gap-8 px-6 py-12 md:grid-cols-3">
     <div>
-      <p class="font-serif text-lg text-ink-900">Intimar</p>
+      <p class="flex items-center gap-2 font-serif text-lg text-ink-900">
+        <Image
+          src={logoFull}
+          alt=""
+          width={489}
+          height={1150}
+          class="h-16 w-auto"
+        />
+        Intimar
+      </p>
       <p class="mt-2 max-w-xs text-sm text-ink-700">
         Retiros de tantra pequeños y presenciales, guiados por un equipo
         selecto, con raíces en la respiración, la presencia y el contacto

@@ -1,5 +1,7 @@
 ---
+import { Image } from 'astro:assets';
 import { withBase } from '../lib/site';
+import logoFull from '../data/images/site/logo-full.png';
 
 const navLinks = [
   { href: withBase('/events'), label: 'Retiros' },
@@ -16,8 +18,17 @@ const navLinks = [
   <div class="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
     <a
       href={withBase('/')}
-      class="font-serif text-xl tracking-wide text-ink-900">Intimar</a
+      class="flex items-center gap-2 font-serif text-xl tracking-wide text-ink-900"
     >
+      <Image
+        src={logoFull}
+        alt=""
+        width={489}
+        height={1150}
+        class="h-18 w-auto"
+      />
+      Intimar
+    </a>
 
     <nav
       aria-label="Navegación principal"

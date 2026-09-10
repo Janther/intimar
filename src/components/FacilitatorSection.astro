@@ -70,16 +70,16 @@ const isEven = (index + 1) % 2 === 0;
       ]}
     >
       <div class="relative shrink-0">
-        <div
-          aria-hidden="true"
-          class="absolute -inset-2 rounded-[68%_32%_51%_49%/40%_62%_38%_60%] border border-ink-400/70"
-        >
-        </div>
         <Image
           src={photo}
           alt={name}
           class="relative h-32 w-32 rounded-[32%_68%_49%_51%/62%_40%_60%_38%] object-cover ring-4 ring-ink-100"
         />
+        <div
+          aria-hidden="true"
+          class="pointer-events-none absolute -inset-1 rounded-[68%_32%_51%_49%/40%_62%_38%_60%] border-2 border-ink-400/70"
+        >
+        </div>
       </div>
       <div>
         <h2 class="font-serif text-3xl text-ink-900">{name}</h2>

@@ -49,10 +49,7 @@ const personSchemas = team.map((member) => {
     <div class="mt-12 flex flex-col gap-12 sm:gap-24">
       {
         team.map((member, index) => (
-          <>
-            {index > 0 && <hr class="border-ink-200" />}
-            <FacilitatorSection member={member} index={index} />
-          </>
+          <FacilitatorSection member={member} index={index} />
         ))
       }
     </div>

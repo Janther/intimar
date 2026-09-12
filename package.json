@@ -54,7 +54,7 @@
     "@storybook/vue3-vite": "^10.6.0",
     "@vitejs/plugin-vue": "^6.0.8",
     "@vitest/browser-playwright": "^4.1.11",
-    "@vitest/coverage-v8": "^4.1.11",
+    "@vitest/coverage-v8": "^5.0.0",
     "cspell": "^10.3.0",
     "eslint": "^10.10.0",
     "eslint-config-prettier": "^10.1.8",

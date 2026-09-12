@@ -32,9 +32,7 @@ const personSchemas = team.map((member) => {
   structuredData={personSchemas}
 >
   <section class="mx-auto max-w-4xl px-6 py-16">
-    <p
-      class="text-sm font-medium tracking-widest text-terracotta-text uppercase"
-    >
+    <p class="text-sm font-medium tracking-widest text-terracotta-text uppercase">
       Nuestros Facilitadores
     </p>
     <h1 class="mt-2 font-serif text-3xl text-ink-900 sm:text-4xl">
@@ -47,11 +45,9 @@ const personSchemas = team.map((member) => {
     </p>
 
     <div class="mt-12 flex flex-col gap-12 sm:gap-24">
-      {
-        team.map((member, index) => (
-          <FacilitatorSection member={member} index={index} />
-        ))
-      }
+      {team.map((member, index) => (
+        <FacilitatorSection member={member} index={index} />
+      ))}
     </div>
   </section>
 </Layout>

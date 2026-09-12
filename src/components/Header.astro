@@ -13,9 +13,7 @@ const navLinks = [
 ];
 ---
 
-<header
-  class="sticky top-0 z-40 border-b border-ink-200/60 bg-ink-50/90 backdrop-blur"
->
+<header class="sticky top-0 z-40 border-b border-ink-200/60 bg-ink-50/90 backdrop-blur">
   <div class="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
     <a
       href={withBase('/')}
@@ -42,16 +40,14 @@ const navLinks = [
       aria-label="Navegación principal"
       class="hidden items-center gap-8 md:flex"
     >
-      {
-        navLinks.map((link) => (
-          <a
-            href={link.href}
-            class="text-sm text-ink-700 transition hover:text-ink-900"
-          >
-            {link.label}
-          </a>
-        ))
-      }
+      {navLinks.map((link) => (
+        <a
+          href={link.href}
+          class="text-sm text-ink-700 transition hover:text-ink-900"
+        >
+          {link.label}
+        </a>
+      ))}
     </nav>
 
     <div class="hidden items-center gap-3 md:flex">
@@ -65,11 +61,13 @@ const navLinks = [
         <span
           class="pi pi-moon text-lg"
           data-theme-icon="dark"
-          aria-hidden="true"></span>
+          aria-hidden="true"
+        ></span>
         <span
           class="pi pi-sun hidden text-lg"
           data-theme-icon="light"
-          aria-hidden="true"></span>
+          aria-hidden="true"
+        ></span>
       </button>
       <a
         href={withBase('/events')}
@@ -80,9 +78,7 @@ const navLinks = [
     </div>
 
     <details id="mobile-menu" class="relative md:hidden">
-      <summary
-        class="flex h-11 w-11 list-none items-center justify-center rounded-md text-ink-800 [&::-webkit-details-marker]:hidden"
-      >
+      <summary class="flex h-11 w-11 list-none items-center justify-center rounded-md text-ink-800 [&::-webkit-details-marker]:hidden">
         <span class="pi pi-bars text-xl" aria-hidden="true"></span>
         <span class="sr-only">Abrir menú</span>
       </summary>
@@ -90,16 +86,14 @@ const navLinks = [
         aria-label="Menú"
         class="absolute right-0 mt-2 flex w-48 flex-col gap-1 rounded-lg border border-ink-200 bg-ink-50 p-3 shadow-lg"
       >
-        {
-          navLinks.map((link) => (
-            <a
-              href={link.href}
-              class="rounded px-3 py-2 text-sm text-ink-700 hover:bg-ink-100"
-            >
-              {link.label}
-            </a>
-          ))
-        }
+        {navLinks.map((link) => (
+          <a
+            href={link.href}
+            class="rounded px-3 py-2 text-sm text-ink-700 hover:bg-ink-100"
+          >
+            {link.label}
+          </a>
+        ))}
         <button
           id="theme-toggle-mobile"
           type="button"
@@ -109,11 +103,13 @@ const navLinks = [
           <span
             class="pi pi-moon text-sm"
             data-theme-icon="dark"
-            aria-hidden="true"></span>
+            aria-hidden="true"
+          ></span>
           <span
             class="pi pi-sun hidden text-sm"
             data-theme-icon="light"
-            aria-hidden="true"></span>
+            aria-hidden="true"
+          ></span>
           <span data-theme-label>Modo oscuro</span>
         </button>
       </nav>

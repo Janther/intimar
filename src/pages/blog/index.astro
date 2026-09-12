@@ -44,9 +44,7 @@ const breadcrumbSchema = {
   structuredData={[blogSchema, breadcrumbSchema]}
 >
   <section class="mx-auto max-w-6xl px-6 py-16">
-    <p
-      class="text-sm font-medium tracking-widest text-terracotta-text uppercase"
-    >
+    <p class="text-sm font-medium tracking-widest text-terracotta-text uppercase">
       Blog
     </p>
     <h1 class="mt-2 font-serif text-3xl text-ink-900 sm:text-4xl">
@@ -59,7 +57,9 @@ const breadcrumbSchema = {
     </p>
 
     <div class="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-      {posts.map((post) => <BlogCard post={post} />)}
+      {posts.map((post) => (
+        <BlogCard post={post} />
+      ))}
     </div>
   </section>
 </Layout>

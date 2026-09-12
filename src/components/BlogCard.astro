@@ -17,26 +17,24 @@ const { title, pubDate, cover } = post.data;
   class="group flex flex-col overflow-hidden rounded-2xl border border-ink-200 bg-surface shadow-sm transition hover:-translate-y-1 hover:shadow-md"
 >
   <div class="aspect-video overflow-hidden">
-    {
-      cover ? (
-        <Image
-          src={cover}
-          alt={title}
-          loading="lazy"
-          width={480}
-          height={270}
-          class="h-full w-full object-cover transition duration-500 group-hover:scale-105"
-        />
-      ) : (
-        // No cover set — a plain wash in brand tones rather than a
-        // fabricated stock photo, so the grid stays visually consistent
-        // until a real image is added to the post's frontmatter.
-        <div
-          class="h-full w-full"
-          style="background: linear-gradient(135deg, var(--color-terracotta-200), var(--color-ink-200));"
-        />
-      )
-    }
+    {cover ? (
+      <Image
+        src={cover}
+        alt={title}
+        loading="lazy"
+        width={480}
+        height={270}
+        class="h-full w-full object-cover transition duration-500 group-hover:scale-105"
+      />
+    ) : (
+      // No cover set — a plain wash in brand tones rather than a
+      // fabricated stock photo, so the grid stays visually consistent
+      // until a real image is added to the post's frontmatter.
+      <div
+        class="h-full w-full"
+        style="background: linear-gradient(135deg, var(--color-terracotta-200), var(--color-ink-200));"
+      />
+    )}
   </div>
 
   <div class="flex flex-1 flex-col p-6">

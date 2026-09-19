@@ -35,8 +35,19 @@ jobs:
         env:
           PUBLIC_PRIMEVUE_LICENSE_KEY: ${{ secrets.PUBLIC_PRIMEVUE_LICENSE_KEY }}
 
+      - name: Cache Playwright browsers
+        uses: actions/cache@v6
+        id: playwright-cache
+        with:
+          path: ~/.cache/ms-playwright
+          key: playwright-${{ runner.os }}-${{ hashFiles('node_modules/playwright-core/browsers.json') }}
+
       - name: Install Playwright browsers
-        run: npx playwright install --with-deps chromium
+        if: steps.playwright-cache.outputs.cache-hit != 'true'
+        run: npx playwright install chromium
+
+      - name: Install Playwright OS dependencies
+        run: npx playwright install-deps chromium
 
       - name: Unit tests
         run: npm run test:unit

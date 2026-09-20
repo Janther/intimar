@@ -8,6 +8,8 @@ on:
 jobs:
   test:
     runs-on: ubuntu-latest
+    env:
+      PUBLIC_PRIMEVUE_LICENSE_KEY: ${{ secrets.PUBLIC_PRIMEVUE_LICENSE_KEY }}
     steps:
       - uses: actions/checkout@v7
 
@@ -32,8 +34,6 @@ jobs:
 
       - name: Build
         run: npm run build
-        env:
-          PUBLIC_PRIMEVUE_LICENSE_KEY: ${{ secrets.PUBLIC_PRIMEVUE_LICENSE_KEY }}
 
       - name: Cache Playwright browsers
         uses: actions/cache@v6

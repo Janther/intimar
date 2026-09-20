@@ -1,5 +1,5 @@
 ---
-import { Image } from 'astro:assets';
+import { Image, getImage } from 'astro:assets';
 import Layout from '../../layouts/Layout.astro';
 import InterestDialog from '../../components/vue/InterestDialog.vue';
 import ShareButtons from '../../components/vue/ShareButtons.vue';
@@ -40,6 +40,17 @@ const hosts = await getEventHosts(event);
 const earlyBird = isEarlyBirdActive(earlyBirdDeadline);
 const savings = price - earlyBirdPrice;
 
+// Resize before emitting — `image.src` alone would ship the original,
+// unresized source file into the build output for both the OG image and
+// this schema's image.
+const ogImage = await getImage({
+  src: image,
+  width: 1200,
+  height: 630,
+  fit: 'cover',
+  format: 'jpg',
+});
+
 const canonicalURL = new URL(Astro.url.pathname, Astro.site).toString();
 const eventSchema = {
   '@context': 'https://schema.org',
@@ -54,7 +65,7 @@ const eventSchema = {
     '@type': 'Place',
     name: location,
   },
-  image: [new URL(image.src, Astro.site).toString()],
+  image: [new URL(ogImage.src, Astro.site).toString()],
   offers: {
     '@type': 'Offer',
     url: canonicalURL,
@@ -96,10 +107,10 @@ const breadcrumbSchema = {
 <Layout
   title={title}
   description={event.data.summary}
-  image={image.src}
+  image={ogImage.src}
   imageAlt={title}
-  imageWidth={image.width}
-  imageHeight={image.height}
+  imageWidth={ogImage.options.width}
+  imageHeight={ogImage.options.height}
   structuredData={[eventSchema, breadcrumbSchema]}
 >
   <article class="mx-auto max-w-4xl px-6 py-16">

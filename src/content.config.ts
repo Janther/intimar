@@ -30,15 +30,16 @@ const events = defineCollection({
     }),
 });
 
+// Bios run long and read better as prose than as escaped JSON strings, so
+// team members are one Markdown file each (frontmatter for the structured
+// fields, body for the bio) rather than flat JSON like the other collections.
 const team = defineCollection({
-  loader: file('src/data/team.json'),
+  loader: glob({ pattern: '*.md', base: 'src/data/team' }),
   schema: ({ image }) =>
     z.object({
-      id: z.string(),
       name: z.string(),
       role: z.string(),
-      bio: z.string(),
-      // A path relative to this JSON file — see src/data/images/team/.
+      // A path relative to this file — see src/data/images/team/.
       // Swap in the real photo under the same filename to replace it.
       photo: image(),
       specialties: z.array(z.string()).default([]),

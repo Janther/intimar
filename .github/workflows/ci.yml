@@ -35,6 +35,17 @@ jobs:
       - name: Build
         run: npm run build
 
+      - name: Lighthouse (performance + payload size budgets)
+        run: npm run lighthouse
+
+      - name: Upload Lighthouse report
+        if: failure()
+        uses: actions/upload-artifact@v7
+        with:
+          name: lighthouse-report
+          path: .lighthouseci/
+          retention-days: 7
+
       - name: Cache Playwright browsers
         uses: actions/cache@v6
         id: playwright-cache

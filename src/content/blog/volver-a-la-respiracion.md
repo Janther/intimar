@@ -6,7 +6,7 @@ tags: ['Respiración', 'Práctica']
 # Placeholder — reused from src/data/images/events/sierra-silent-retreat.jpg.
 # Swap for a real cover photo whenever this example post gets replaced.
 cover: ./images/volver-a-la-respiracion.jpg
-author: elena-marsh
+author: fernanda-pinochet
 ---
 
 Casi todas las personas que llegan a un primer retiro esperan que empecemos por otro lado — por el contacto, por el cuerpo del otro, por lo que imaginan que es "tantra". Empezamos por la respiración porque es lo primero que se cierra cuando algo nos incomoda, y lo último en lo que pensamos revisar.

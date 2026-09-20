@@ -170,7 +170,7 @@ export async function resolveBlogAuthor(post: BlogEntry): Promise<BlogAuthor> {
     }
     return {
       name: member.data.name,
-      bio: member.data.bio,
+      bio: member.body,
       photo: member.data.photo,
       href: withBase(`/team#${member.id}`),
     };

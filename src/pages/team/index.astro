@@ -1,4 +1,5 @@
 ---
+import { getImage } from 'astro:assets';
 import Layout from '../../layouts/Layout.astro';
 import FacilitatorSection from '../../components/FacilitatorSection.astro';
 import { getAllTeamMembers } from '../../lib/data';
@@ -6,24 +7,29 @@ import { withBase } from '../../lib/site';
 
 const team = await getAllTeamMembers();
 
-const personSchemas = team.map((member) => {
-  const { name, role, bio, photo, social } = member.data;
-  return {
-    '@context': 'https://schema.org',
-    '@type': 'Person',
-    name,
-    jobTitle: role,
-    description: bio,
-    image: new URL(photo.src, Astro.site).toString(),
-    url: new URL(withBase(`/team#${member.id}`), Astro.site).toString(),
-    worksFor: {
-      '@type': 'Organization',
-      name: 'Intimar',
-      url: Astro.site?.toString(),
-    },
-    sameAs: [social.instagram, social.website].filter(Boolean),
-  };
-});
+const personSchemas = await Promise.all(
+  team.map(async (member) => {
+    const { name, role, photo, social } = member.data;
+    // Resize before emitting — `photo.src` alone would ship the original,
+    // unresized source file (up to 16MB) into the build output.
+    const schemaPhoto = await getImage({ src: photo, width: 512, height: 512 });
+    return {
+      '@context': 'https://schema.org',
+      '@type': 'Person',
+      name,
+      jobTitle: role,
+      description: member.body,
+      image: new URL(schemaPhoto.src, Astro.site).toString(),
+      url: new URL(withBase(`/team#${member.id}`), Astro.site).toString(),
+      worksFor: {
+        '@type': 'Organization',
+        name: 'Intimar',
+        url: Astro.site?.toString(),
+      },
+      sameAs: [social.instagram, social.website].filter(Boolean),
+    };
+  }),
+);
 ---
 
 <Layout

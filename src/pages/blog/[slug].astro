@@ -1,5 +1,5 @@
 ---
-import { Image } from 'astro:assets';
+import { Image, getImage } from 'astro:assets';
 import { render } from 'astro:content';
 import Layout from '../../layouts/Layout.astro';
 import Tag from '../../components/vue/Tag.vue';
@@ -27,13 +27,26 @@ const { Content } = await render(post);
 const author = await resolveBlogAuthor(post);
 const { previous, next } = await getAdjacentBlogPosts(post);
 
+// Resize before emitting — `cover.src` alone would ship the original,
+// unresized source file into the build output for both the OG image and
+// this schema's image.
+const ogCover = cover
+  ? await getImage({
+      src: cover,
+      width: 1200,
+      height: 630,
+      fit: 'cover',
+      format: 'jpg',
+    })
+  : undefined;
+
 const canonicalURL = new URL(Astro.url.pathname, Astro.site).toString();
 const articleSchema = {
   '@context': 'https://schema.org',
   '@type': 'BlogPosting',
   headline: title,
   description: summary,
-  image: cover ? new URL(cover.src, Astro.site).toString() : undefined,
+  image: ogCover ? new URL(ogCover.src, Astro.site).toString() : undefined,
   datePublished: pubDate.toISOString(),
   // No separate "updated" tracking exists yet in the content schema, so
   // this is currently always the same instant as datePublished.
@@ -77,10 +90,10 @@ const breadcrumbSchema = {
 <Layout
   title={title}
   description={summary}
-  image={cover?.src}
+  image={ogCover?.src}
   imageAlt={title}
-  imageWidth={cover?.width}
-  imageHeight={cover?.height}
+  imageWidth={ogCover?.options.width}
+  imageHeight={ogCover?.options.height}
   structuredData={[articleSchema, breadcrumbSchema]}
   ogType="article"
   articlePublishedTime={pubDate.toISOString()}
@@ -141,7 +154,8 @@ const breadcrumbSchema = {
         loading="eager"
         fetchpriority="high"
         width={1400}
-        class="mt-8 w-full rounded-2xl object-cover"
+        height={788}
+        class="mt-8 aspect-video w-full rounded-2xl object-cover"
       />
     )}
 

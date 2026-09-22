@@ -3,7 +3,7 @@
     "id": "sierra-silent-retreat",
     "title": "Volver al Cuerpo",
     "summary": "Un retiro individual de cuatro días en la montaña para reconectar con tu propio cuerpo a través de la respiración, el movimiento y la quietud sin apuro.",
-    "description": "Ubicado entre bosques de pino a 1.800 metros de altura, este retiro te desconecta del ruido y te devuelve a un ritmo más lento. Los días transcurren entre prácticas guiadas de corporalidad, caminatas conscientes y tardes de quietud sin estructura — sin pareja, sin público, solo tú y tu respiración. Las noches cierran con baños de sonido guiados por Sana. Sin teléfonos, sin más agenda que la presencia.",
+    "description": "Ubicado entre bosques de pino a 1.800 metros de altura, este retiro te desconecta del ruido y te devuelve a un ritmo más lento. Los días transcurren entre prácticas guiadas de corporalidad, caminatas conscientes y tardes de quietud sin estructura — sin pareja, sin público, solo tú y tu respiración. Las noches cierran con baños de sonido guiados por Klaus. Sin teléfonos, sin más agenda que la presencia.",
     "location": "Sierra Nevada, California",
     "startDate": "2026-10-08",
     "endDate": "2026-10-12",
@@ -13,14 +13,14 @@
     "currency": "CLP",
     "image": "./images/events/sierra-silent-retreat.jpg",
     "tags": ["viaje en solitario", "corporalidad", "respiración"],
-    "hostIds": ["sana-farooqi", "elena-marsh"],
+    "hostIds": ["klaus-hott", "fernanda-pinochet"],
     "featured": true
   },
   {
     "id": "coastal-vinyasa-week",
     "title": "El Arte de la Presencia",
     "summary": "Un fin de semana para que parejas bajen el ritmo, se adentren en la respiración y se redescubran a través del contacto consciente y las prácticas de presencia.",
-    "description": "Una semana construida en torno a la práctica diaria en pareja — respiración, mirada compartida y contacto consciente — enmarcada por largos tramos de tiempo libre para nadar, recorrer los acantilados o simplemente descansar juntos. La cocina de Theo sostiene los días con tres comidas de estación, y el grupo se reúne cada noche para conversar abiertamente.",
+    "description": "Una semana construida en torno a la práctica diaria en pareja — respiración, mirada compartida y contacto consciente — enmarcada por largos tramos de tiempo libre para nadar, recorrer los acantilados o simplemente descansar juntos. La cocina de Antoine sostiene los días con tres comidas de estación, y el grupo se reúne cada noche para conversar abiertamente.",
     "location": "Ericeira, Portugal",
     "startDate": "2026-09-14",
     "endDate": "2026-09-21",
@@ -30,14 +30,14 @@
     "currency": "CLP",
     "image": "./images/events/coastal-vinyasa-week.jpg",
     "tags": ["práctica en pareja", "respiración", "mirada compartida"],
-    "hostIds": ["elena-marsh", "theo-lindqvist"],
+    "hostIds": ["fernanda-pinochet", "antoine-lacoste"],
     "featured": true
   },
   {
     "id": "somatic-reset-weekend",
     "title": "Fin de Semana de Reset Somático",
     "summary": "Una intensiva de dos días en contacto consciente, exposición al frío y regulación del sistema nervioso.",
-    "description": "Marcus guía sesiones en grupos pequeños para soltar tensión crónica a través del movimiento somático, prácticas de contacto consciente e inmersión en frío guiada por la respiración. Pensado para quienes buscan herramientas que puedan seguir usando mucho después de que termine el fin de semana.",
+    "description": "Antoine guía sesiones en grupos pequeños para soltar tensión crónica a través del movimiento somático, prácticas de contacto consciente e inmersión en frío guiada por la respiración. Pensado para quienes buscan herramientas que puedan seguir usando mucho después de que termine el fin de semana.",
     "location": "Catskills, Nueva York",
     "startDate": "2026-11-06",
     "endDate": "2026-11-08",
@@ -47,7 +47,7 @@
     "currency": "CLP",
     "image": "./images/events/somatic-reset-weekend.jpg",
     "tags": ["somática", "contacto consciente", "sistema nervioso"],
-    "hostIds": ["marcus-oduya"],
+    "hostIds": ["antoine-lacoste"],
     "featured": false
   },
   {
@@ -64,14 +64,14 @@
     "currency": "CLP",
     "image": "./images/events/desert-new-moon-gathering.jpg",
     "tags": ["sanación por sonido", "ritual", "ceremonia"],
-    "hostIds": ["sana-farooqi"],
+    "hostIds": ["klaus-hott"],
     "featured": false
   },
   {
     "id": "kitchen-and-craft-immersion",
     "title": "Inmersión de Cocina y Oficio",
     "summary": "Un retiro de cinco días centrado en la cocina de estación, el ritual sensorial y las mañanas lentas en el campo.",
-    "description": "Pasa tus días en la cocina al aire libre de Theo aprendiendo fermentación, panadería y recolección en el bosque, equilibrado con movimiento suave en las mañanas y largas tardes libres. Cada comida se trata como una práctica sensorial en sí misma. Termina con una cena comunitaria de cosecha para todo el grupo.",
+    "description": "Pasa tus días en la cocina al aire libre de Antoine aprendiendo fermentación, panadería y recolección en el bosque, equilibrado con movimiento suave en las mañanas y largas tardes libres. Cada comida se trata como una práctica sensorial en sí misma. Termina con una cena comunitaria de cosecha para todo el grupo.",
     "location": "Umbría, Italia",
     "startDate": "2027-05-03",
     "endDate": "2027-05-08",
@@ -81,14 +81,14 @@
     "currency": "CLP",
     "image": "./images/events/kitchen-and-craft-immersion.jpg",
     "tags": ["cocina", "ritual sensorial", "campo"],
-    "hostIds": ["theo-lindqvist", "elena-marsh"],
+    "hostIds": ["antoine-lacoste", "fernanda-pinochet"],
     "featured": false
   },
   {
     "id": "sacred-union",
     "title": "Unión Sagrada",
     "summary": "Un fin de semana ceremonial para parejas listas para profundizar su intimidad — combinando ritual, respiración y prácticas de contacto guiado en un grupo pequeño y privado.",
-    "description": "Realizado durante el fin de semana de San Valentín en las terrazas de arroz sobre Ubud, Unión Sagrada está pensado para parejas listas para bajar el ritmo juntas. Los días transcurren entre respiración en pareja, contacto guiado y una ceremonia de cierre conducida por Elena y Sana — en un grupo deliberadamente pequeño y privado para que nada se sienta actuado.",
+    "description": "Realizado durante el fin de semana de San Valentín en las terrazas de arroz sobre Ubud, Unión Sagrada está pensado para parejas listas para bajar el ritmo juntas. Los días transcurren entre respiración en pareja, contacto guiado y una ceremonia de cierre conducida por Fernanda y Klaus — en un grupo deliberadamente pequeño y privado para que nada se sienta actuado.",
     "location": "Ubud, Bali",
     "startDate": "2027-02-12",
     "endDate": "2027-02-15",
@@ -98,7 +98,7 @@
     "currency": "CLP",
     "image": "./images/events/sacred-union.jpg",
     "tags": ["parejas", "ceremonia", "trabajo energético"],
-    "hostIds": ["elena-marsh", "sana-farooqi"],
+    "hostIds": ["fernanda-pinochet", "klaus-hott"],
     "featured": true
   }
 ]

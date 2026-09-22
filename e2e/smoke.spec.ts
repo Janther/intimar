@@ -28,7 +28,7 @@ test('event detail page renders content, hosts, and a valid Event schema', async
 }) => {
   await page.goto('/events/sierra-silent-retreat');
   await expect(page.locator('h1')).toHaveText('Volver al Cuerpo');
-  await expect(page.getByRole('link', { name: 'Sana Farooqi' })).toBeVisible();
+  await expect(page.getByRole('link', { name: 'Klaus Hott' })).toBeVisible();
 
   const jsonLd = await page
     .locator('script[type="application/ld+json"]')
@@ -63,7 +63,9 @@ test('blog post renders content, author, adjacent post, and a valid BlogPosting 
 }) => {
   await page.goto('/blog/volver-a-la-respiracion');
   await expect(page.locator('h1')).toHaveText('Volver a la respiración');
-  await expect(page.getByRole('link', { name: 'Elena Marsh' })).toBeVisible();
+  await expect(
+    page.getByRole('link', { name: 'Fernanda Pinochet' }),
+  ).toBeVisible();
 
   // This is the newer of the two example posts, so only "previous" (the
   // older one) should appear in the adjacent-post section — not "next".
@@ -78,7 +80,7 @@ test('blog post renders content, author, adjacent post, and a valid BlogPosting 
   const data = JSON.parse(jsonLd ?? '{}');
   expect(data['@type']).toBe('BlogPosting');
   expect(data.headline).toBe('Volver a la respiración');
-  expect(data.author.name).toBe('Elena Marsh');
+  expect(data.author.name).toBe('Fernanda Pinochet');
   expect(data.publisher.name).toBe('Intimar');
 });
 
@@ -90,11 +92,13 @@ test('team listing renders photos and homepage cards link into facilitator secti
 
   await page.goto('/');
   await page
-    .getByRole('link', { name: /Elena Marsh/ })
+    .getByRole('link', { name: /Antoine Lacoste/ })
     .first()
     .click();
-  await expect(page).toHaveURL(/\/team#elena-marsh/);
-  await expect(page.locator('#elena-marsh h2')).toHaveText('Elena Marsh');
+  await expect(page).toHaveURL(/\/team#antoine-lacoste/);
+  await expect(page.locator('#antoine-lacoste h2')).toHaveText(
+    'Antoine Lacoste',
+  );
 });
 
 test('unknown routes render the custom 404 page', async ({ page }) => {

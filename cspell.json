@@ -1,6 +1,9 @@
 {
   "version": "0.2",
-  "language": "en,es",
+  // British spelling is the house style for prose and comments; en (US) stays
+  // enabled because library APIs and existing identifiers use it
+  // (`specialties`, PrimeVue's `Dialog`).
+  "language": "en-GB,en,es",
   "import": ["@cspell/dict-es-es/cspell-ext.json"],
   "dictionaries": ["es-es"],
   // Reuses .gitignore (dist/, node_modules/, .astro/, storybook-static, …)
@@ -21,10 +24,12 @@
     "autorun",
     "biodanza",
     "bradlc",
+    "catmull",
+    "ciis",
     "claude",
-    "conócelos",
-    "contáctanos",
     "contentful",
+    "contáctanos",
+    "conócelos",
     "daniel",
     "deseleccionar",
     "elena",
@@ -41,6 +46,7 @@
     "gmail",
     "himalayo",
     "hott",
+    "hridaya",
     "iconfield",
     "inputicon",
     "inputtext",
@@ -68,9 +74,12 @@
     "primevue",
     "priya",
     "reconectar",
+    "reconexión",
     "respiracion",
     "retunes",
     "sexología",
+    "sexológico",
+    "sexólogo",
     "srcs",
     "stylesheet",
     "subcontratado",

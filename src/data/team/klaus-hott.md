@@ -3,7 +3,7 @@ name: Klaus Hott
 role: Sexólogo Somático
 summary: >-
   Sexólogo somático y facilitador de retiros y talleres que unen experiencia y educación. Su camino lo llevó a profundizar en el tantra tradicional a través de inmersiones intensivas en el centro de yoga y meditación Håå, en Suecia, y en Hridaya Yoga, y a certificarse como trabajador corporal sexológico en el ISS (Australia). Hoy acompaña a quienes buscan más libertad en su sexualidad y en su vida.
-photo: ../images/team/klaus-hott.jpg
+photo: ../images/team/klaus-hott.jpeg
 specialties:
   - Sexología Somática
   - Tantra Tradicional

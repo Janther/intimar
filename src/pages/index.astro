@@ -93,9 +93,9 @@ const organizationSchema = {
       </a>
     </div>
     <div class="flex flex-wrap justify-center gap-6">
-      {team.map((member) => (
+      {team.map((member, index) => (
         <div class="w-full max-w-sm sm:w-[calc(50%-0.75rem)] lg:w-[calc(33.333%-1rem)]">
-          <TeamCard member={member} />
+          <TeamCard member={member} index={index} />
         </div>
       ))}
     </div>

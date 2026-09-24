@@ -1,13 +1,13 @@
 ---
 name: Antoine Lacoste
-role: Facilitador Somático y de Contacto
+role: Terapeuta y Facilitador
 photo: ../images/team/antoine-lacoste.jpg
 specialties:
-  - Contacto Consciente
-  - Sistema Nervioso
-  - Exposición al Frío
+  - Sexualidad Consciente
+  - Psicología Integral
+  - Enfoque Sensible al Trauma
 social:
-  instagram: https://instagram.com/
+  instagram: https://www.instagram.com/antoinelacoste.k/
 ---
 
 En la disciplinada práctica de yoga encontré un camino experiencial para cultivar la presencia y una relación interna con lo sagrado. Fue un refrescante contraste con mi educación cristiana, donde Dios era un padre lejano al cual rezaba ocasionalmente. Con los años me di cuenta de que ambos caminos se encontraban en su visión patriarcal del cuerpo y la sexualidad – son obstáculos hacia el reino de Dios.

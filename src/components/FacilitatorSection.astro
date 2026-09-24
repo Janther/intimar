@@ -120,8 +120,72 @@ const isEven = (index + 1) % 2 === 0;
       </div>
     </div>
 
-    <div class="mt-8 max-w-2xl text-ink-700 [&>p+p]:mt-4">
-      <Bio />
+    <div class="mt-8 max-w-2xl" data-bio>
+      <div
+        id={`${member.id}-bio`}
+        class="max-h-40 overflow-hidden text-ink-700 mask-b-from-40% [&>p+p]:mt-4"
+        data-bio-content
+      >
+        <Bio />
+      </div>
+      <button
+        type="button"
+        class="mt-2 text-sm font-medium text-ink-600 underline decoration-ink-300 underline-offset-2 transition hover:text-terracotta-600"
+        aria-controls={`${member.id}-bio`}
+        aria-expanded="false"
+        data-bio-toggle
+      >
+        Ver más
+      </button>
     </div>
   </div>
 </section>
+
+<noscript>
+  <style>
+    [data-bio-content] {
+      max-height: none !important;
+      mask-image: none !important;
+    }
+    [data-bio-toggle] {
+      display: none !important;
+    }
+  </style>
+</noscript>
+
+<script>
+  // Bios render collapsed server-side (not collapsed by this script after
+  // load) so the page doesn't paint the full text and then jump shorter.
+  // A bio that turns out to fit — or barely overflows, where hiding one
+  // line behind a button is more friction than it saves — is expanded and
+  // its toggle removed instead.
+  const COLLAPSED_CLASSES = ['max-h-40', 'overflow-hidden', 'mask-b-from-40%'];
+  const MIN_HIDDEN_PX = 48;
+
+  document.querySelectorAll<HTMLElement>('[data-bio]').forEach((bio) => {
+    const content = bio.querySelector<HTMLElement>('[data-bio-content]');
+    const toggle = bio.querySelector<HTMLButtonElement>('[data-bio-toggle]');
+    if (!content || !toggle) return;
+
+    if (content.scrollHeight - content.clientHeight < MIN_HIDDEN_PX) {
+      content.classList.remove(...COLLAPSED_CLASSES);
+      toggle.remove();
+      return;
+    }
+
+    toggle.addEventListener('click', () => {
+      const expanding = toggle.getAttribute('aria-expanded') !== 'true';
+      COLLAPSED_CLASSES.forEach((cls) =>
+        content.classList.toggle(cls, !expanding),
+      );
+      toggle.setAttribute('aria-expanded', String(expanding));
+      toggle.textContent = expanding ? 'Ver menos' : 'Ver más';
+
+      // Collapsing a long bio while scrolled near its end would leave the
+      // visitor staring at the next facilitator — bring this one back.
+      if (!expanding && bio.getBoundingClientRect().top < 0) {
+        bio.closest('section')?.scrollIntoView({ block: 'start' });
+      }
+    });
+  });
+</script>

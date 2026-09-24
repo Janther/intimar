@@ -1,14 +1,13 @@
 ---
 name: Fernanda Pinochet
-role: Fundadora y Profesora de Tantra
+role: Facilitadora de Tantra
 photo: ../images/team/fernanda-pinochet.jpeg
 specialties:
   - Tantra
-  - Respiración
-  - Diseño de Retiros
+  - Sexualidad Consciente
+  - Trabajo Somático
 social:
-  instagram: https://instagram.com/
-  website: https://example.com/
+  instagram: https://www.instagram.com/fernanda.pinochet.reymond/
 ---
 
 Crecí aceptando y viviendo la vida como se supone que tenía que ser, siguiendo lo que era normal, pero siempre sintiendo una curiosidad insaciable por más.

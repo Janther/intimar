@@ -1,13 +1,13 @@
 ---
 name: Klaus Hott
-role: Facilitadora de Energía y Sonido
+role: Sexólogo Somático
 photo: ../images/team/klaus-hott.jpg
 specialties:
-  - Trabajo Energético
-  - Sanación por Sonido
-  - Ceremonia
+  - Sexología Somática
+  - Tantra Tradicional
+  - Educación Sexual
 social:
-  website: https://example.com/
+  instagram: https://www.instagram.com/mister_hott/
 ---
 
 Antes de comenzar mi camino, mi vida era bastante gris, del trabajo a la casa y de la casa al trabajo, mis amigos eran mis colegas. Sumando mi vida en el extranjero me tuvo sin una red de soporte. Y sin encontrar interés en mi vida, buscaba desesperadamente que alguien que me validara. Esta falta de sentido en mi vida me hacia sentir atrapado.

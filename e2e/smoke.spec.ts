@@ -101,6 +101,26 @@ test('team listing renders photos and homepage cards link into facilitator secti
   );
 });
 
+test('facilitator bios start collapsed and expand on "Ver más"', async ({
+  page,
+}) => {
+  await page.goto('/team');
+  const section = page.locator('#klaus-hott');
+  const bio = section.locator('[data-bio-content]');
+  const toggle = section.getByRole('button', { name: 'Ver más' });
+
+  await expect(toggle).toHaveAttribute('aria-expanded', 'false');
+  const collapsedHeight = (await bio.boundingBox())!.height;
+
+  await toggle.click();
+  const expanded = section.getByRole('button', { name: 'Ver menos' });
+  await expect(expanded).toHaveAttribute('aria-expanded', 'true');
+  expect((await bio.boundingBox())!.height).toBeGreaterThan(collapsedHeight);
+
+  await expanded.click();
+  await expect(toggle).toHaveAttribute('aria-expanded', 'false');
+});
+
 test('unknown routes render the custom 404 page', async ({ page }) => {
   const response = await page.goto('/this-page-does-not-exist');
   expect(response?.status()).toBe(404);

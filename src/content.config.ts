@@ -39,6 +39,10 @@ const team = defineCollection({
     z.object({
       name: z.string(),
       role: z.string(),
+      // Short third-person blurb (~70 words) for the homepage team cards —
+      // same text as the facilitator's "¿Quiénes somos?" Instagram card.
+      // The body stays the long first-person story shown on /team.
+      summary: z.string().optional(),
       // A path relative to this file — see src/data/images/team/.
       // Swap in the real photo under the same filename to replace it.
       photo: image(),

@@ -1,40 +1,110 @@
 ---
+// Mirrors the facilitators' "¿Quiénes somos?" Instagram cards: deep maroon
+// ground, copper ribbons with thin gold edges sweeping in from the corners,
+// a round portrait with a copper ring, and the short third-person summary.
+//
+// The background is inline SVG rather than a raster export so it stays
+// sharp at any card size and costs ~1.5KB instead of a photo-sized image.
+// The feTurbulence grain is the leathery texture of the original artwork —
+// the raw side of the brand's composed/raw tension, kept faint enough that
+// it never fights the text. Ribbons hug the edges and corners so the
+// centered text column always sits on the flat maroon.
 import { Image } from 'astro:assets';
 import type { TeamEntry } from '../lib/data';
 import { withBase } from '../lib/site';
-import Tag from './vue/Tag.vue';
 
 interface Props {
   member: TeamEntry;
 }
 
 const { member } = Astro.props;
-const { name, role, photo, specialties } = member.data;
+const { name, role, summary, photo } = member.data;
+// SVG ids are document-global and this card renders several times per page.
+const uid = `team-card-${member.id}`;
 ---
 
 <a
   href={withBase(`/team#${member.id}`)}
-  class="group flex flex-col items-center rounded-2xl border border-ink-200 bg-surface p-6 text-center shadow-sm transition hover:-translate-y-1 hover:shadow-md"
+  class="group relative isolate flex h-full flex-col items-center overflow-hidden rounded-2xl bg-hero-bg px-7 pt-9 pb-6 text-center text-hero-fg shadow-sm transition hover:-translate-y-1 hover:shadow-lg"
 >
-  <div class="relative shrink-0">
+  <svg
+    aria-hidden="true"
+    viewBox="0 0 300 400"
+    preserveAspectRatio="xMidYMid slice"
+    class="pointer-events-none absolute inset-0 -z-10 h-full w-full"
+  >
+    <defs>
+      <linearGradient id={`${uid}-copper`} x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0" stop-color="#8a3320" />
+        <stop offset="0.55" stop-color="#b05a35" />
+        <stop offset="1" stop-color="#5a1a12" />
+      </linearGradient>
+      <filter id={`${uid}-grain`} x="0" y="0" width="100%" height="100%">
+        <feTurbulence
+          type="fractalNoise"
+          baseFrequency="0.85"
+          numOctaves="2"
+          seed="7"
+          stitchTiles="stitch"
+        />
+        <feColorMatrix type="saturate" values="0" />
+      </filter>
+    </defs>
+
+    <!-- Top ribbon: sweeps from the top-left corner across and down the right edge. -->
+    <path
+      d="M-10,30 C 60,-25 175,0 240,55 C 285,95 305,150 312,215 L312,120 C 285,65 225,15 150,0 C 90,-10 30,0 -10,12 Z"
+      fill={`url(#${uid}-copper)`}
+      opacity="0.7"
+    />
+    <!-- Right ribbon: runs down the lower right side. -->
+    <path
+      d="M312,195 C 282,245 274,310 290,360 C 296,380 304,395 312,405 Z"
+      fill={`url(#${uid}-copper)`}
+      opacity="0.6"
+    />
+    <!-- Bottom-left swoosh. -->
+    <path
+      d="M-10,245 C 20,290 34,345 24,410 L-10,410 Z"
+      fill={`url(#${uid}-copper)`}
+      opacity="0.55"
+    />
+
+    <g
+      fill="none"
+      stroke="var(--color-gold-200)"
+      stroke-width="0.7"
+      stroke-linecap="round"
+      opacity="0.6"
+    >
+      <path d="M-10,48 C 70,-8 195,22 258,100 C 288,140 302,190 312,232" />
+      <path d="M308,185 C 274,248 272,330 300,410" />
+      <path d="M-6,262 C 14,300 26,352 16,410" />
+    </g>
+
+    <rect
+      width="300"
+      height="400"
+      filter={`url(#${uid}-grain)`}
+      opacity="0.14"
+      style="mix-blend-mode: soft-light"
+    />
+  </svg>
+
+  <div class="rounded-full bg-linear-to-br from-gold-200 via-terracotta-400 to-terracotta-700 p-0.75 shadow-lg shadow-black/30">
     <Image
       src={photo}
       alt={name}
       loading="lazy"
-      width={224}
-      height={224}
-      class="h-28 w-28 rounded-[32%_68%_49%_51%/62%_40%_60%_38%] object-cover ring-4 ring-ink-100 transition group-hover:ring-ink-200"
+      width={320}
+      height={320}
+      class="h-40 w-40 rounded-full object-cover ring-2 ring-hero-bg transition duration-500 group-hover:scale-[1.02]"
     />
-    <div
-      aria-hidden="true"
-      class="pointer-events-none absolute -inset-1 rounded-[68%_32%_51%_49%/40%_62%_38%_60%] border-2 border-ink-400/70"
-    ></div>
   </div>
-  <h3 class="mt-4 font-serif text-lg text-ink-900">{name}</h3>
-  <p class="text-sm text-ink-600">{role}</p>
-  <div class="mt-3 flex flex-wrap justify-center gap-1.5">
-    {specialties.slice(0, 3).map((specialty) => (
-      <Tag>{specialty}</Tag>
-    ))}
-  </div>
+
+  <h3 class="mt-5 font-sans text-2xl tracking-wide">{name}</h3>
+  <p class="mt-3 text-sm leading-relaxed text-hero-fg/85">{summary ?? role}</p>
+  <span class="mt-auto self-end pt-6 text-sm text-gold-200 underline decoration-transparent underline-offset-4 transition group-hover:decoration-gold-200">
+    y esta es mi historia…
+  </span>
 </a>

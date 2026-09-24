@@ -18,7 +18,7 @@ const personSchemas = await Promise.all(
       '@type': 'Person',
       name,
       jobTitle: role,
-      description: member.body,
+      description: member.data.summary ?? member.body,
       image: new URL(schemaPhoto.src, Astro.site).toString(),
       url: new URL(withBase(`/team#${member.id}`), Astro.site).toString(),
       worksFor: {

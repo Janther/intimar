@@ -1,6 +1,8 @@
 ---
 name: Fernanda Pinochet
 role: Facilitadora de Tantra
+summary: >-
+  Facilitadora de tantra, sexualidad consciente y trabajo somático. Su curiosidad por explorar otras formas de relacionarse, vivir la sexualidad y conectar con lo sagrado la llevó a viajar por el mundo profundizando en estas prácticas. Hoy crea espacios para cuestionar lo establecido, experimentar sin culpa ni vergüenza y descubrir formas más libres y profundas de relacionarnos con nosotros mismos y con otros.
 photo: ../images/team/fernanda-pinochet.jpeg
 specialties:
   - Tantra

@@ -1,6 +1,8 @@
 ---
 name: Antoine Lacoste
 role: Terapeuta y Facilitador
+summary: >-
+  Terapeuta y facilitador de talleres y retiros que promueven la reconexión con el lenguaje simbólico del alma. Sus años de experiencia en el mundo de la sexualidad consciente y su formación en psicología integral (CIIS, California) brindan un enfoque sensible al trauma y al sistema nervioso a la hora de explorar y re-significar los vínculos y la intimidad.
 photo: ../images/team/antoine-lacoste.jpg
 specialties:
   - Sexualidad Consciente

@@ -9,19 +9,21 @@
 @layer base, theme, primevue, components, utilities;
 
 @theme {
-  --font-sans: 'Belleza', ui-sans-serif, system-ui, sans-serif;
-  --font-serif: 'Fraunces', Georgia, serif;
+  /* --ff-* come from Astro's Fonts API (astro.config.mjs), each already
+     ending in its metric-matched fallback stack. */
+  --font-sans: var(--ff-belleza);
+  --font-serif: var(--ff-fraunces);
 
   /* A rawer, documented-testimony voice for quoted/confessional content
      (testimonials) — plain, composed Fraunces reads as poised no matter
      what it's saying; a typewriter face carries the sense of an account
      being given, not a brand line being written. */
-  --font-confession: 'Special Elite', 'Courier New', monospace;
+  --font-confession: var(--ff-special-elite);
 
   /* Scoped accent for a single emphasized word/phrase (e.g. the hero's
      "juntos") — a connecting script is a display/accent face, not a body
      font, so it stays off --font-sans and gets applied deliberately. */
-  --font-allura: 'Allura', cursive;
+  --font-allura: var(--ff-allura);
 
   /* Structural neutral ramp — page/card backgrounds, body text, borders.
      Shared with the sexology project's brand system (src/styles/global.css

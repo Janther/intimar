@@ -1,5 +1,5 @@
 ---
-import { getImage } from 'astro:assets';
+import { Font, getImage } from 'astro:assets';
 import '../styles/global.css';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
@@ -147,12 +147,15 @@ const absoluteImageURL = new URL(image, Astro.site);
     <meta name="twitter:image" content={absoluteImageURL} />
     <meta name="twitter:image:alt" content={imageAlt} />
 
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Allura&family=Belleza&family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,300..700,100,1;1,9..144,300..700,100,1&family=Special+Elite&display=swap"
-    />
+    {/* Families are configured in astro.config.mjs. Only the body face and
+        upright headings are preloaded — a preload downloads its file on
+        every page whether used or not, so Fraunces italic and the accent
+        faces (testimonials, the hero's script word) load on demand, which
+        keeps pages inside Lighthouse's font-size budget. */}
+    <Font cssVariable="--ff-belleza" preload />
+    <Font cssVariable="--ff-fraunces" preload={[{ style: 'normal' }]} />
+    <Font cssVariable="--ff-special-elite" />
+    <Font cssVariable="--ff-allura" />
 
     {structuredDataEntries.map((data) => (
       <script

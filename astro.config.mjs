@@ -1,5 +1,5 @@
 // @ts-check
-import { defineConfig } from 'astro/config';
+import { defineConfig, fontProviders } from 'astro/config';
 
 import vue from '@astrojs/vue';
 
@@ -22,6 +22,51 @@ const isGhPagesStaging = process.env.DEPLOY_TARGET === 'gh-pages';
 export default defineConfig({
   site: isGhPagesStaging ? 'https://janther.github.io' : 'https://intimar.life',
   base: isGhPagesStaging ? '/intimar' : '/',
+
+  // Self-hosted through Astro's Fonts API instead of a Google Fonts
+  // <link>: files are downloaded at build time and served from our own
+  // origin, the body/heading faces are preloaded, and each family gets a
+  // metric-matched fallback (size-adjust etc. from its generic last
+  // fallback). With display=swap from Google, the late font swap reflowed
+  // text and pushed the event page's hero image down — enough layout shift
+  // (CLS 0.17) to fail Lighthouse on slower CI machines.
+  // Variables are --ff-* (not --font-*) so they don't collide with
+  // Tailwind's own --font-* theme namespace in global.css.
+  fonts: [
+    {
+      provider: fontProviders.google(),
+      name: 'Belleza',
+      cssVariable: '--ff-belleza',
+      fallbacks: ['ui-sans-serif', 'system-ui', 'sans-serif'],
+    },
+    {
+      provider: fontProviders.google(),
+      name: 'Fraunces',
+      cssVariable: '--ff-fraunces',
+      weights: ['300 700'],
+      styles: ['normal', 'italic'],
+      fallbacks: ['Georgia', 'serif'],
+      // The brand's Fraunces is the soft, "wonky" cut — same axis values
+      // the old Google Fonts URL pinned (SOFT 100, WONK 1).
+      options: {
+        experimental: {
+          variableAxis: { opsz: [['9', '144']], SOFT: ['100'], WONK: ['1'] },
+        },
+      },
+    },
+    {
+      provider: fontProviders.google(),
+      name: 'Special Elite',
+      cssVariable: '--ff-special-elite',
+      fallbacks: ['Courier New', 'monospace'],
+    },
+    {
+      provider: fontProviders.google(),
+      name: 'Allura',
+      cssVariable: '--ff-allura',
+      fallbacks: ['cursive'],
+    },
+  ],
 
   integrations: [
     vue({

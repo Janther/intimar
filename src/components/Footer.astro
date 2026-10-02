@@ -1,6 +1,6 @@
 ---
 import { Image } from 'astro:assets';
-import { CONTACT_EMAIL, withBase } from '../lib/site';
+import { CONTACT_EMAIL, CONTACT_PAGE_ENABLED, withBase } from '../lib/site';
 import logoFullLight from '../data/images/site/logo-full-light.png';
 import logoFullDark from '../data/images/site/logo-full.png';
 
@@ -54,9 +54,11 @@ const year = new Date().getFullYear();
 
     <address class="flex flex-col gap-2 text-sm text-ink-700 not-italic">
       <p class="text-sm font-semibold text-ink-900">Contáctanos</p>
-      <a href={withBase('/contact')} class="hover:text-ink-900">
-        Escríbenos
-      </a>
+      {CONTACT_PAGE_ENABLED && (
+        <a href={withBase('/contact')} class="hover:text-ink-900">
+          Escríbenos
+        </a>
+      )}
       <a href={`mailto:${CONTACT_EMAIL}`} class="hover:text-ink-900">
         {CONTACT_EMAIL}
       </a>

@@ -42,6 +42,7 @@ const breadcrumbSchema = {
   title="Blog"
   description="Reflexiones sobre tantra, respiración y contacto consciente desde el equipo de Intimar."
   structuredData={[blogSchema, breadcrumbSchema]}
+  noindex={posts.length === 0}
 >
   <section class="mx-auto max-w-6xl px-6 py-16">
     <p class="text-sm font-medium tracking-widest text-terracotta-text uppercase">
@@ -56,10 +57,19 @@ const breadcrumbSchema = {
       afuera.
     </p>
 
-    <div class="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-      {posts.map((post) => (
-        <BlogCard post={post} />
-      ))}
-    </div>
+    {/* Static builds always emit this page, so with every post unpublished
+        it stays reachable by URL (though unlinked, noindexed and left out of
+        the sitemap) — say so instead of showing an empty grid. */}
+    {posts.length > 0 ? (
+      <div class="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        {posts.map((post) => (
+          <BlogCard post={post} />
+        ))}
+      </div>
+    ) : (
+      <p class="mt-10 text-ink-700">
+        Pronto compartiremos nuevas reflexiones por aquí.
+      </p>
+    )}
   </section>
 </Layout>

@@ -14,7 +14,8 @@
     "image": "./images/events/sierra-silent-retreat.jpg",
     "tags": ["viaje en solitario", "corporalidad", "respiración"],
     "hostIds": ["klaus-hott", "fernanda-pinochet"],
-    "featured": true
+    "featured": true,
+    "published": false
   },
   {
     "id": "coastal-vinyasa-week",
@@ -31,7 +32,8 @@
     "image": "./images/events/coastal-vinyasa-week.jpg",
     "tags": ["práctica en pareja", "respiración", "mirada compartida"],
     "hostIds": ["fernanda-pinochet", "antoine-lacoste"],
-    "featured": true
+    "featured": true,
+    "published": false
   },
   {
     "id": "somatic-reset-weekend",
@@ -48,7 +50,8 @@
     "image": "./images/events/somatic-reset-weekend.jpg",
     "tags": ["somática", "contacto consciente", "sistema nervioso"],
     "hostIds": ["antoine-lacoste"],
-    "featured": false
+    "featured": false,
+    "published": false
   },
   {
     "id": "desert-new-moon-gathering",
@@ -65,7 +68,8 @@
     "image": "./images/events/desert-new-moon-gathering.jpg",
     "tags": ["sanación por sonido", "ritual", "ceremonia"],
     "hostIds": ["klaus-hott"],
-    "featured": false
+    "featured": false,
+    "published": false
   },
   {
     "id": "kitchen-and-craft-immersion",
@@ -82,7 +86,8 @@
     "image": "./images/events/kitchen-and-craft-immersion.jpg",
     "tags": ["cocina", "ritual sensorial", "campo"],
     "hostIds": ["antoine-lacoste", "fernanda-pinochet"],
-    "featured": false
+    "featured": false,
+    "published": false
   },
   {
     "id": "sacred-union",
@@ -99,6 +104,25 @@
     "image": "./images/events/sacred-union.jpg",
     "tags": ["parejas", "ceremonia", "trabajo energético"],
     "hostIds": ["fernanda-pinochet", "klaus-hott"],
-    "featured": true
+    "featured": true,
+    "published": false
+  },
+  {
+    "id": "un-portal-al-erotismo-consciente",
+    "title": "Un Portal al Erotismo Consciente",
+    "summary": "Una jornada de taller en Pirque para habitar tu cuerpo desde la curiosidad y la presencia — movimiento, respiración, voz, consentimiento y tacto consciente. Puedes venir solo o en pareja.",
+    "description": "Bienvenido al templo que es tu cuerpo. ¿Qué pasa cuando dejas de seguir automáticamente lo “establecido” y empiezas a descubrir qué te hace sentir más libre, más vivo y más tú? Este es un espacio que otorga herramientas y permiso para que cada uno explore su propia verdad con su erotismo: un terreno de juego para reconocer tus ejes y estar presente con las emociones que brotan cuando desafiamos las historias que ya no nos sirven.\n\nDurante el día bailaremos y haremos circular la energía vital a través del movimiento, la respiración y la voz; practicaremos herramientas de consentimiento, límites y conexión auténtica; haremos ejercicios para aprender a escucharnos y regular el sistema nervioso; jugaremos a explorar diferentes tactos y formas de conectar con otros, y nos adentraremos en la auto-exploración del cuerpo como templo sagrado.\n\nPuedes venir solo o en pareja; las parejas podrán elegir cuándo participar juntos o individualmente. No es un lugar para buscar sexo, sino para aprender a habitar el cuerpo, el deseo y el encuentro desde el consentimiento, los límites claros y la escucha profunda.\n\nSábado 17 de octubre, de 10:00 a 21:00 hrs, en Bosque Místico, Pirque. Este es un espacio íntimo — nos reservamos el derecho de componer un grupo que favorezca la armonía del encuentro.",
+    "location": "Bosque Místico, Pirque",
+    "startDate": "2026-10-17",
+    "endDate": "2026-10-17",
+    "earlyBirdPrice": 80000,
+    "earlyBirdDeadline": "2026-09-30",
+    "price": 80000,
+    "currency": "CLP",
+    "image": "./images/events/intimar-manos.jpg",
+    "tags": ["erotismo consciente", "consentimiento", "solo o en pareja"],
+    "hostIds": ["antoine-lacoste", "fernanda-pinochet", "klaus-hott"],
+    "featured": true,
+    "published": true
   }
 ]

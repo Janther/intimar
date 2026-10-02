@@ -1,15 +1,22 @@
 ---
 import { Image } from 'astro:assets';
-import { withBase } from '../lib/site';
+import { CONTACT_PAGE_ENABLED, withBase } from '../lib/site';
+import { getAllBlogPosts } from '../lib/data';
 import logoFullLight from '../data/images/site/logo-full-light.png';
 import logoFullDark from '../data/images/site/logo-full.png';
+
+// An empty blog isn't worth a nav slot — the link returns on its own once
+// any post is published again.
+const hasBlogPosts = (await getAllBlogPosts()).length > 0;
 
 const navLinks = [
   { href: withBase('/events'), label: 'Retiros' },
   { href: withBase('/team'), label: 'Facilitadores' },
-  { href: withBase('/blog'), label: 'Blog' },
+  ...(hasBlogPosts ? [{ href: withBase('/blog'), label: 'Blog' }] : []),
   { href: withBase('/about'), label: 'Nosotros' },
-  { href: withBase('/contact'), label: 'Contacto' },
+  ...(CONTACT_PAGE_ENABLED
+    ? [{ href: withBase('/contact'), label: 'Contacto' }]
+    : []),
 ];
 ---
 

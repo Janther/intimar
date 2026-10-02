@@ -1,7 +1,6 @@
 ---
 import { Image, getImage } from 'astro:assets';
 import Layout from '../../layouts/Layout.astro';
-import InterestDialog from '../../components/vue/InterestDialog.vue';
 import ShareButtons from '../../components/vue/ShareButtons.vue';
 import {
   getAllEvents,
@@ -11,7 +10,7 @@ import {
   formatShortDate,
   isEarlyBirdActive,
 } from '../../lib/data';
-import { withBase } from '../../lib/site';
+import { WHATSAPP_URL, withBase } from '../../lib/site';
 import Tag from '../../components/vue/Tag.vue';
 
 export async function getStaticPaths() {
@@ -147,7 +146,10 @@ const breadcrumbSchema = {
 
     <div class="mt-10 grid gap-10 sm:grid-cols-[2fr_1fr]">
       <div class="prose prose-p:text-ink-700">
-        <p class="text-ink-700">{description}</p>
+        {/* Blank lines in the JSON description separate paragraphs. */}
+        {description.split(/\n\s*\n/).map((paragraph) => (
+          <p class="text-ink-700">{paragraph}</p>
+        ))}
 
         {hosts.length > 0 && (
           <div class="mt-8">
@@ -214,7 +216,17 @@ const breadcrumbSchema = {
           </div>
         </dl>
         <div class="mt-6">
-          <InterestDialog eventTitle={title} client:load />
+          {/* Sign-ups go through WhatsApp until there's a messaging system;
+              InterestDialog (the contact-form version) can swap back in then. */}
+          <a
+            href={WHATSAPP_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="p-button inline-flex! w-fit bg-terracotta-500 text-white transition hover:bg-terracotta-700"
+          >
+            <span class="pi pi-whatsapp" aria-hidden="true" />
+            Quiero Inscribirme
+          </a>
         </div>
       </aside>
     </div>

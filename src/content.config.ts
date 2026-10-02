@@ -27,6 +27,9 @@ const events = defineCollection({
       tags: z.array(z.string()).default([]),
       hostIds: z.array(z.string()).default([]),
       featured: z.boolean().default(false),
+      // Set to false to take an event off the site (listing, homepage and
+      // its own page) without deleting its data; flip back to republish.
+      published: z.boolean().default(true),
     }),
 });
 
@@ -76,6 +79,9 @@ const blog = defineCollection({
       // A path relative to this file — see src/content/blog/images/.
       cover: image().optional(),
       tags: z.array(z.string()).default([]),
+      // Set to false to take a post off the site without deleting it; when
+      // no post is published, the Blog nav link disappears too.
+      published: z.boolean().default(true),
       // Usually one of our own facilitators (referenced by team id, so their
       // name/photo/bio stay in sync automatically). A post from someone
       // outside the team roster falls back to typing their details inline.

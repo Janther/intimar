@@ -9,6 +9,9 @@ import sitemap from '@astrojs/sitemap';
 
 import compress from '@playform/compress';
 
+import { hasPublishedBlogPosts } from './src/lib/blog-files.mjs';
+import { CONTACT_PAGE_ENABLED } from './src/lib/site.ts';
+
 // The GitHub Pages staging deploy (see .github/workflows/deploy.yml) builds
 // with DEPLOY_TARGET=gh-pages so it gets a site/base matching where GitHub
 // actually serves a repo not named <user>.github.io — janther.github.io/intimar.
@@ -24,7 +27,17 @@ export default defineConfig({
     vue({
       appEntrypoint: '/src/vue-app.ts',
     }),
-    sitemap(),
+    // /blog (with no published posts) and /contact (while disabled) are
+    // still built, but as unlinked, noindexed placeholders — keep them out
+    // of the sitemap too.
+    sitemap({
+      filter: (page) => {
+        const path = new URL(page).pathname;
+        if (path.endsWith('/blog/')) return hasPublishedBlogPosts();
+        if (path.endsWith('/contact/')) return CONTACT_PAGE_ENABLED;
+        return true;
+      },
+    }),
     // Must stay last — it compresses the fully-rendered build output,
     // including inline <script>/<style> content that Astro's own
     // compressHTML leaves untouched.

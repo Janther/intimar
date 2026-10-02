@@ -1,15 +1,18 @@
 import { test, expect } from '@playwright/test';
 import AxeBuilder from '@axe-core/playwright';
+import { hasPublishedBlogPosts } from '../src/lib/blog-files.mjs';
 
 const pages = [
   '/',
   '/events',
-  '/events/sierra-silent-retreat',
+  '/events/un-portal-al-erotismo-consciente',
   '/team',
   '/about',
   '/contact',
-  '/blog',
-  '/blog/volver-a-la-respiracion',
+  // Blog pages only exist (meaningfully) while a post is published.
+  ...(hasPublishedBlogPosts()
+    ? ['/blog', '/blog/volver-a-la-respiracion']
+    : []),
 ];
 
 for (const path of pages) {

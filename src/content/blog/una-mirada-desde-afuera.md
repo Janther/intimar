@@ -3,6 +3,7 @@ title: 'Una mirada desde afuera'
 summary: 'Reflexiones de una terapeuta de pareja que participó como invitada en uno de nuestros retiros — ejemplo de publicación con autora externa al equipo.'
 pubDate: 2026-01-22
 tags: ['Invitados']
+published: false
 # Placeholder — reused from src/data/images/events/coastal-vinyasa-week.jpg.
 # Swap for a real cover photo whenever this example post gets replaced.
 cover: ./images/una-mirada-desde-afuera.jpg

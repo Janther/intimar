@@ -1,5 +1,18 @@
 export const CONTACT_EMAIL = 'contacto@intimar.life';
 
+// Off until messages from /contact have somewhere to go: hides the header
+// "Contacto" and footer "Escríbenos" links, and keeps the still-built page
+// noindexed and out of the sitemap. Flip to true to bring it all back.
+export const CONTACT_PAGE_ENABLED = false;
+
+// Where "Quiero Inscribirme" sends people while there's no messaging
+// system: Intimar's WhatsApp Business short link. Used instead of a
+// wa.me/<number>?text= link so the phone number never appears in the
+// site's HTML; the trade-off is that short links ignore ?text= and always
+// open the one greeting configured in WhatsApp Business (Settings →
+// Business tools → Short link), so it can't name the event.
+export const WHATSAPP_URL = 'https://wa.me/message/ADKIDDUXI3F5H1';
+
 // Prefixes a root-relative internal path with the site's configured base
 // path (astro.config.mjs's `base`, exposed as import.meta.env.BASE_URL).
 // Astro rewrites its own generated URLs automatically (asset imports,

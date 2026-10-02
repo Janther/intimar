@@ -20,6 +20,12 @@ describe('formatDateRange', () => {
     ).toBe('6 de noviembre – 13 de diciembre de 2026');
   });
 
+  it('shows a single date for one-day events', () => {
+    expect(
+      formatDateRange(new Date('2026-10-17'), new Date('2026-10-17')),
+    ).toBe('17 de octubre de 2026');
+  });
+
   it('includes both years when the range crosses a year boundary', () => {
     expect(
       formatDateRange(new Date('2026-12-10'), new Date('2027-02-15')),

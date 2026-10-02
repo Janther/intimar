@@ -8,8 +8,11 @@ export type TeamEntry = CollectionEntry<'team'>;
 type TestimonialEntry = CollectionEntry<'testimonials'>;
 export type BlogEntry = CollectionEntry<'blog'>;
 
+// Every page reads events through here, so filtering unpublished ones out
+// at this single point hides them everywhere — including their detail
+// page, which getStaticPaths then never builds.
 export async function getAllEvents(): Promise<EventEntry[]> {
-  const events = await getCollection('events');
+  const events = await getCollection('events', (event) => event.data.published);
   return events.sort(
     (a, b) => a.data.startDate.getTime() - b.data.startDate.getTime(),
   );
@@ -47,26 +50,40 @@ export async function getAllTestimonials(): Promise<TestimonialEntry[]> {
   return getCollection('testimonials');
 }
 
+// Content dates are bare "YYYY-MM-DD" strings, which JavaScript parses as
+// UTC midnight. Formatting them in the machine's local zone shifted every
+// date a day early on any build west of UTC (e.g. Chile, UTC−3) — so all
+// date formatting reads them back in UTC, where they were created.
+const UTC = { timeZone: 'UTC' } as const;
+
 export function formatDateRange(start: Date, end: Date): string {
-  const sameYear = start.getFullYear() === end.getFullYear();
-  const sameMonth = sameYear && start.getMonth() === end.getMonth();
+  const sameYear = start.getUTCFullYear() === end.getUTCFullYear();
+  const sameMonth = sameYear && start.getUTCMonth() === end.getUTCMonth();
+
+  // One-day events (workshops) would otherwise read "17–17 de octubre".
+  if (sameMonth && start.getUTCDate() === end.getUTCDate()) {
+    return formatBlogDate(start);
+  }
 
   // Intl.DateTimeFormat refuses to format day+year without month (it falls
   // back to a disambiguated string), so the same-month case is built by
   // hand instead of asking it for just the end day and year.
   if (sameMonth) {
-    const month = new Intl.DateTimeFormat('es-CL', { month: 'long' }).format(
-      start,
-    );
-    return `${start.getDate()}–${end.getDate()} de ${month} de ${end.getFullYear()}`;
+    const month = new Intl.DateTimeFormat('es-CL', {
+      ...UTC,
+      month: 'long',
+    }).format(start);
+    return `${start.getUTCDate()}–${end.getUTCDate()} de ${month} de ${end.getUTCFullYear()}`;
   }
 
   const startFmt = new Intl.DateTimeFormat('es-CL', {
+    ...UTC,
     month: 'long',
     day: 'numeric',
     ...(sameYear ? {} : { year: 'numeric' }),
   }).format(start);
   const endFmt = new Intl.DateTimeFormat('es-CL', {
+    ...UTC,
     month: 'long',
     day: 'numeric',
     year: 'numeric',
@@ -84,6 +101,7 @@ export function formatPrice(price: number, currency: string): string {
 
 export function formatShortDate(date: Date): string {
   return new Intl.DateTimeFormat('es-CL', {
+    ...UTC,
     month: 'long',
     day: 'numeric',
   }).format(date);
@@ -94,6 +112,7 @@ export function formatShortDate(date: Date): string {
 // meaningful — and visible — long after the year it was written in.
 export function formatBlogDate(date: Date): string {
   return new Intl.DateTimeFormat('es-CL', {
+    ...UTC,
     day: 'numeric',
     month: 'long',
     year: 'numeric',
@@ -129,8 +148,11 @@ export interface EventSummary {
   tags: string[];
 }
 
+// Like getAllEvents(), the single read path for posts — unpublished ones
+// are filtered here, so their pages, the RSS feed and adjacent-post links
+// all drop them at once.
 export async function getAllBlogPosts(): Promise<BlogEntry[]> {
-  const posts = await getCollection('blog');
+  const posts = await getCollection('blog', (post) => post.data.published);
   return posts.sort(
     (a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime(),
   );

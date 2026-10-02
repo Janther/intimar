@@ -1,11 +1,13 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import ContactForm from '../components/vue/ContactForm.vue';
+import { CONTACT_PAGE_ENABLED } from '../lib/site';
 ---
 
 <Layout
   title="Contacto"
   description="Escríbele a los facilitadores de Intimar."
+  noindex={!CONTACT_PAGE_ENABLED}
 >
   <section class="mx-auto max-w-xl px-6 py-16">
     <p class="text-sm font-medium tracking-widest text-terracotta-text uppercase">

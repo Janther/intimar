@@ -1,4 +1,8 @@
 import { test, expect } from '@playwright/test';
+import { hasPublishedBlogPosts } from '../src/lib/blog-files.mjs';
+import { CONTACT_PAGE_ENABLED } from '../src/lib/site';
+
+const blogPublished = hasPublishedBlogPosts();
 
 test('homepage renders the hero and featured events', async ({ page }) => {
   await page.goto('/');
@@ -26,8 +30,15 @@ test('events listing renders real card images, not [object Object]', async ({
 test('event detail page renders content, hosts, and a valid Event schema', async ({
   page,
 }) => {
-  await page.goto('/events/sierra-silent-retreat');
-  await expect(page.locator('h1')).toHaveText('Volver al Cuerpo');
+  await page.goto('/events/un-portal-al-erotismo-consciente');
+
+  // Sign-up goes to the WhatsApp Business short link (no phone number).
+  await expect(
+    page.getByRole('link', { name: 'Quiero Inscribirme' }),
+  ).toHaveAttribute('href', /^https:\/\/wa\.me\/message\//);
+  await expect(page.locator('h1')).toHaveText(
+    'Un Portal al Erotismo Consciente',
+  );
   await expect(page.getByRole('link', { name: 'Klaus Hott' })).toBeVisible();
 
   const jsonLd = await page
@@ -36,14 +47,39 @@ test('event detail page renders content, hosts, and a valid Event schema', async
     .textContent();
   const data = JSON.parse(jsonLd ?? '{}');
   expect(data['@type']).toBe('Event');
-  expect(data.name).toBe('Volver al Cuerpo');
+  expect(data.name).toBe('Un Portal al Erotismo Consciente');
   expect(typeof data.offers.price).toBe('number');
   expect(data.image[0]).toMatch(/^https:\/\//);
+});
+
+test('header shows the Blog link only while a post is published', async ({
+  page,
+}) => {
+  await page.goto('/');
+  const nav = page.getByRole('navigation', { name: 'Navegación principal' });
+  await expect(nav.getByRole('link', { name: 'Blog' })).toHaveCount(
+    blogPublished ? 1 : 0,
+  );
+});
+
+test('header and footer link to the contact page only while it is enabled', async ({
+  page,
+}) => {
+  await page.goto('/');
+  const expected = CONTACT_PAGE_ENABLED ? 1 : 0;
+  const nav = page.getByRole('navigation', { name: 'Navegación principal' });
+  await expect(nav.getByRole('link', { name: 'Contacto' })).toHaveCount(
+    expected,
+  );
+  await expect(page.getByRole('link', { name: 'Escríbenos' })).toHaveCount(
+    expected,
+  );
 });
 
 test('blog listing renders real card images, not [object Object]', async ({
   page,
 }) => {
+  test.skip(!blogPublished, 'No blog posts are published');
   await page.goto('/blog');
   const images = page.locator('a[href^="/blog/"] img');
   await expect(images.first()).toBeVisible();
@@ -61,6 +97,7 @@ test('blog listing renders real card images, not [object Object]', async ({
 test('blog post renders content, author, adjacent post, and a valid BlogPosting schema', async ({
   page,
 }) => {
+  test.skip(!blogPublished, 'No blog posts are published');
   await page.goto('/blog/volver-a-la-respiracion');
   await expect(page.locator('h1')).toHaveText('Volver a la respiración');
   await expect(

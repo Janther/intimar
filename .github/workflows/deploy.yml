@@ -1,4 +1,4 @@
-name: Deploy to GitHub Pages (staging)
+name: Deploy to GitHub Pages (intimar.life)
 
 on:
   push:
@@ -29,14 +29,15 @@ jobs:
 
       - run: npm ci
 
-      # DEPLOY_TARGET=gh-pages switches astro.config.mjs's site/base to
-      # janther.github.io/intimar for this build only — the intimar.life
-      # production config is untouched for local/other builds.
-      - name: Build (GitHub Pages staging config)
+      # Production build (site https://intimar.life, base /): the repo's
+      # GitHub Pages custom domain is intimar.life, so Pages serves this at
+      # the domain root. Setting DEPLOY_TARGET=gh-pages here instead would
+      # build for the janther.github.io/intimar subpath (noindexed staging),
+      # which breaks every asset path once a custom domain is set.
+      - name: Build (intimar.life production config)
         run: npm run build
         env:
           PUBLIC_PRIMEVUE_LICENSE_KEY: ${{ secrets.PUBLIC_PRIMEVUE_LICENSE_KEY }}
-          DEPLOY_TARGET: gh-pages
 
       - uses: actions/configure-pages@v6
 

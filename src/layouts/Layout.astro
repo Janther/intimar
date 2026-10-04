@@ -5,7 +5,12 @@ import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import { withBase } from '../lib/site';
 import { getAllBlogPosts } from '../lib/data';
-import ogDefaultSource from '../data/images/site/og-default.jpg';
+// Default share card for pages without their own image (events and blog
+// posts pass theirs): the brand mark centred on --color-hero-bg at the
+// 1200x630 Open Graph size. Composed from logo-full.png rather than using
+// the logo directly, because the logo is tall and transparent — social
+// previews would crop it and fill the transparency black or white.
+import ogDefaultSource from '../data/images/site/og-logo.png';
 // primeicons ships its @font-face with font-display: block, so on any
 // connection slow enough to miss its ~3s block window (verified via a
 // throttled CDP screencast — every pi-* glyph on the page, e.g. the header's
@@ -46,7 +51,7 @@ const {
   title,
   description = 'Intimar — retiros de tantra pequeños y presenciales, guiados por nuestro propio equipo.',
   image = defaultOgImage.src,
-  imageAlt = 'Intimar — retiros de tantra pequeños y presenciales',
+  imageAlt = 'Logo de Intimar',
   imageWidth = 1200,
   imageHeight = 630,
   structuredData,

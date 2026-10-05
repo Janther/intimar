@@ -72,5 +72,10 @@
     "typescript-eslint": "^8.71.0",
     "vitest": "^4.1.11",
     "vue-eslint-parser": "^10.4.1"
+  },
+  "overrides": {
+    "@storybook/addon-vitest": {
+      "vitest": "$vitest"
+    }
   }
 }

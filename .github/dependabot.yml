@@ -15,6 +15,14 @@ updates:
       - dependency-name: 'typescript'
         versions: ['>=6.1.0']
     groups:
+      # Vitest packages pin each other's exact version, so they must update
+      # together (see also "overrides" in package.json). Must stay above
+      # minor-and-patch: Dependabot uses the first matching group.
+      vitest:
+        patterns:
+          - 'vitest'
+          - '@vitest/*'
+
       # Bundles routine minor/patch bumps into one PR — this project's
       # devDependencies alone (ESLint plugins, Storybook, Playwright, …)
       # update often enough that one-PR-per-package would be mostly noise.

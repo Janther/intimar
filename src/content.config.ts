@@ -2,12 +2,11 @@ import { defineCollection, reference } from 'astro:content';
 import { file, glob } from 'astro/loaders';
 import { z } from 'astro/zod';
 
-// Data lives in flat JSON for now. To move to a database later, replace
-// `file('src/data/events.json')` with a custom loader that implements the
-// Astro Loader API and fetches from that database — the schema below and
-// every getCollection()/getEntry() call in the pages stay unchanged.
+// One JSON file per event (src/data/events/<id>.json) rather than one big
+// array, so the /admin panel can add or edit an event as a single-file
+// change in its pull request.
 const events = defineCollection({
-  loader: file('src/data/events.json'),
+  loader: glob({ pattern: '*.json', base: 'src/data/events' }),
   schema: ({ image }) =>
     z.object({
       id: z.string(),
@@ -17,11 +16,12 @@ const events = defineCollection({
       location: z.string(),
       startDate: z.coerce.date(),
       endDate: z.coerce.date(),
-      earlyBirdPrice: z.number(),
-      earlyBirdDeadline: z.coerce.date(),
+      // Both optional: an event without them simply has no early bird.
+      earlyBirdPrice: z.number().optional(),
+      earlyBirdDeadline: z.coerce.date().optional(),
       price: z.number(),
       currency: z.string().default('CLP'),
-      // A path relative to this JSON file — see src/data/images/events/.
+      // A path relative to this event's JSON file — see src/data/images/events/.
       // Swap in the real photo under the same filename to replace it.
       image: image(),
       tags: z.array(z.string()).default([]),

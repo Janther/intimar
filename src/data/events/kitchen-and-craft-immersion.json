@@ -1,0 +1,18 @@
+{
+  "id": "kitchen-and-craft-immersion",
+  "title": "Inmersión de Cocina y Oficio",
+  "summary": "Un retiro de cinco días centrado en la cocina de estación, el ritual sensorial y las mañanas lentas en el campo.",
+  "description": "Pasa tus días en la cocina al aire libre de Antoine aprendiendo fermentación, panadería y recolección en el bosque, equilibrado con movimiento suave en las mañanas y largas tardes libres. Cada comida se trata como una práctica sensorial en sí misma. Termina con una cena comunitaria de cosecha para todo el grupo.",
+  "location": "Umbría, Italia",
+  "startDate": "2027-05-03",
+  "endDate": "2027-05-08",
+  "earlyBirdPrice": 1760000,
+  "earlyBirdDeadline": "2027-04-01",
+  "price": 2040000,
+  "currency": "CLP",
+  "image": "../images/events/kitchen-and-craft-immersion.jpg",
+  "tags": ["cocina", "ritual sensorial", "campo"],
+  "hostIds": ["antoine-lacoste", "fernanda-pinochet"],
+  "featured": false,
+  "published": false
+}

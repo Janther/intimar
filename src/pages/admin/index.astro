@@ -1,0 +1,25 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import AdminApp from '../../components/vue/admin/AdminApp.vue';
+import { getAllTeamMembers } from '../../lib/data';
+
+// Static page: login, forms and pull requests all happen in the browser
+// against GitHub's API (see src/lib/admin/). Team members are baked in at
+// build time for the "Facilitadores" checkboxes — they rarely change.
+const hosts = (await getAllTeamMembers()).map((m) => ({
+  id: m.id,
+  name: m.data.name,
+}));
+---
+
+<Layout title="Panel" description="Panel de edición de Intimar." noindex>
+  <section class="mx-auto max-w-6xl px-6 py-16">
+    <p class="text-sm font-medium tracking-widest text-terracotta-text uppercase">
+      Panel
+    </p>
+    <h1 class="mt-2 mb-8 font-serif text-3xl text-ink-900">
+      Edición de contenido
+    </h1>
+    <AdminApp hosts={hosts} client:only="vue" />
+  </section>
+</Layout>

@@ -1,0 +1,18 @@
+{
+  "id": "desert-new-moon-gathering",
+  "title": "Encuentro de Luna Nueva en el Desierto",
+  "summary": "Un encuentro de tres noches bajo el cielo abierto del desierto, construido en torno a la sanación por sonido, el trabajo energético y el ritual comunitario.",
+  "description": "Coordinado con la luna nueva, este pequeño encuentro se mueve entre baños de sonido, trabajo energético y largos silencios bajo un cielo inusualmente oscuro. Solo carpas y comidas compartidas — sin teléfonos, sin más horario que el amanecer y el atardecer.",
+  "location": "Joshua Tree, California",
+  "startDate": "2026-12-10",
+  "endDate": "2026-12-13",
+  "earlyBirdPrice": 780000,
+  "earlyBirdDeadline": "2026-11-10",
+  "price": 930000,
+  "currency": "CLP",
+  "image": "../images/events/desert-new-moon-gathering.jpg",
+  "tags": ["sanación por sonido", "ritual", "ceremonia"],
+  "hostIds": ["klaus-hott"],
+  "featured": false,
+  "published": false
+}

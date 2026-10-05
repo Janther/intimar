@@ -1,0 +1,18 @@
+{
+  "id": "sacred-union",
+  "title": "Unión Sagrada",
+  "summary": "Un fin de semana ceremonial para parejas listas para profundizar su intimidad — combinando ritual, respiración y prácticas de contacto guiado en un grupo pequeño y privado.",
+  "description": "Realizado durante el fin de semana de San Valentín en las terrazas de arroz sobre Ubud, Unión Sagrada está pensado para parejas listas para bajar el ritmo juntas. Los días transcurren entre respiración en pareja, contacto guiado y una ceremonia de cierre conducida por Fernanda y Klaus — en un grupo deliberadamente pequeño y privado para que nada se sienta actuado.",
+  "location": "Ubud, Bali",
+  "startDate": "2027-02-12",
+  "endDate": "2027-02-15",
+  "earlyBirdPrice": 1090000,
+  "earlyBirdDeadline": "2027-01-12",
+  "price": 1280000,
+  "currency": "CLP",
+  "image": "../images/events/sacred-union.jpg",
+  "tags": ["parejas", "ceremonia", "trabajo energético"],
+  "hostIds": ["fernanda-pinochet", "klaus-hott"],
+  "featured": true,
+  "published": false
+}

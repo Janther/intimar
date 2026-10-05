@@ -1,0 +1,7 @@
+name = "intimar-github-auth"
+main = "index.js"
+compatibility_date = "2026-10-01"
+
+[vars]
+ALLOWED_ORIGINS = "https://intimar.life,http://localhost:4321"
+GITHUB_ORG = "intimar-life"

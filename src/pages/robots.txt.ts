@@ -10,7 +10,7 @@ const isGhPagesStaging = process.env.DEPLOY_TARGET === 'gh-pages';
 export const GET: APIRoute = () => {
   const body = isGhPagesStaging
     ? 'User-agent: *\nDisallow: /\n'
-    : 'User-agent: *\nAllow: /\n\nSitemap: https://intimar.life/sitemap-index.xml\n';
+    : 'User-agent: *\nAllow: /\nDisallow: /admin/\n\nSitemap: https://intimar.life/sitemap-index.xml\n';
 
   return new Response(body, {
     headers: { 'Content-Type': 'text/plain' },

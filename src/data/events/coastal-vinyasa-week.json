@@ -1,0 +1,18 @@
+{
+  "id": "coastal-vinyasa-week",
+  "title": "El Arte de la Presencia",
+  "summary": "Un fin de semana para que parejas bajen el ritmo, se adentren en la respiración y se redescubran a través del contacto consciente y las prácticas de presencia.",
+  "description": "Una semana construida en torno a la práctica diaria en pareja — respiración, mirada compartida y contacto consciente — enmarcada por largos tramos de tiempo libre para nadar, recorrer los acantilados o simplemente descansar juntos. La cocina de Antoine sostiene los días con tres comidas de estación, y el grupo se reúne cada noche para conversar abiertamente.",
+  "location": "Ericeira, Portugal",
+  "startDate": "2026-09-14",
+  "endDate": "2026-09-21",
+  "earlyBirdPrice": 1510000,
+  "earlyBirdDeadline": "2026-09-01",
+  "price": 1790000,
+  "currency": "CLP",
+  "image": "../images/events/coastal-vinyasa-week.jpg",
+  "tags": ["práctica en pareja", "respiración", "mirada compartida"],
+  "hostIds": ["fernanda-pinochet", "antoine-lacoste"],
+  "featured": true,
+  "published": false
+}

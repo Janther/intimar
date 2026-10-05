@@ -82,6 +82,7 @@ export default defineConfig({
         const path = new URL(page).pathname;
         if (path.endsWith('/blog/')) return hasPublishedBlogPosts();
         if (path.endsWith('/contact/')) return CONTACT_PAGE_ENABLED;
+        if (path.endsWith('/admin/')) return false;
         return true;
       },
     }),

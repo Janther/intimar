@@ -177,6 +177,19 @@ test('faq answers open and the page carries FAQPage structured data', async ({
   expect(data.mainEntity.length).toBeGreaterThan(0);
 });
 
+test('admin panel is noindexed and offers the GitHub login', async ({
+  page,
+}) => {
+  await page.goto('/admin');
+  await expect(page.locator('meta[name="robots"]')).toHaveAttribute(
+    'content',
+    'noindex',
+  );
+  await expect(
+    page.getByRole('button', { name: 'Entrar con GitHub' }),
+  ).toBeVisible();
+});
+
 test('unknown routes render the custom 404 page', async ({ page }) => {
   const response = await page.goto('/this-page-does-not-exist');
   expect(response?.status()).toBe(404);

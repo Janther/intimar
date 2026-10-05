@@ -1,0 +1,18 @@
+{
+  "id": "somatic-reset-weekend",
+  "title": "Fin de Semana de Reset Somático",
+  "summary": "Una intensiva de dos días en contacto consciente, exposición al frío y regulación del sistema nervioso.",
+  "description": "Antoine guía sesiones en grupos pequeños para soltar tensión crónica a través del movimiento somático, prácticas de contacto consciente e inmersión en frío guiada por la respiración. Pensado para quienes buscan herramientas que puedan seguir usando mucho después de que termine el fin de semana.",
+  "location": "Catskills, Nueva York",
+  "startDate": "2026-11-06",
+  "endDate": "2026-11-08",
+  "earlyBirdPrice": 490000,
+  "earlyBirdDeadline": "2026-10-06",
+  "price": 590000,
+  "currency": "CLP",
+  "image": "../images/events/somatic-reset-weekend.jpg",
+  "tags": ["somática", "contacto consciente", "sistema nervioso"],
+  "hostIds": ["antoine-lacoste"],
+  "featured": false,
+  "published": false
+}

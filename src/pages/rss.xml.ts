@@ -22,7 +22,7 @@ export async function GET(context: APIContext) {
   return rss({
     title: 'Intimar — Blog',
     description:
-      'Reflexiones sobre tantra, respiración y contacto consciente desde el equipo de Intimar.',
+      'Reflexiones sobre neotantra, respiración y contacto consciente desde el equipo de Intimar.',
     site: context.site!,
     items,
   });

@@ -8,6 +8,7 @@ const pages = [
   '/events/un-portal-al-erotismo-consciente',
   '/team',
   '/about',
+  '/faq',
   '/contact',
   // Blog pages only exist (meaningfully) while a post is published.
   ...(hasPublishedBlogPosts()

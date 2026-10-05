@@ -1,0 +1,69 @@
+---
+import { getCollection, render } from 'astro:content';
+import Layout from '../layouts/Layout.astro';
+
+const entries = (await getCollection('faq')).sort(
+  (a, b) => a.data.order - b.data.order,
+);
+const questions = await Promise.all(
+  entries.map(async (entry) => ({
+    entry,
+    Answer: (await render(entry)).Content,
+  })),
+);
+
+// Google's FAQ rich result reads plain text, so the Markdown links and bold
+// are reduced to their words.
+function toPlainText(markdown: string): string {
+  return markdown
+    .replace(/\[([^\]]+)\]\([^)]+\)/g, '$1')
+    .replace(/\*\*([^*]+)\*\*/g, '$1')
+    .replace(/\s+/g, ' ')
+    .trim();
+}
+
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: entries.map((entry) => ({
+    '@type': 'Question',
+    name: entry.data.question,
+    acceptedAnswer: {
+      '@type': 'Answer',
+      text: toPlainText(entry.body ?? ''),
+    },
+  })),
+};
+---
+
+<Layout
+  title="Preguntas frecuentes"
+  description="Respuestas a las dudas más comunes sobre los encuentros de neotantra y erotismo consciente de Intimar."
+  structuredData={faqSchema}
+>
+  <section class="mx-auto max-w-3xl px-6 py-16">
+    <p class="text-sm font-medium tracking-widest text-terracotta-text uppercase">
+      Preguntas frecuentes
+    </p>
+    <h1 class="mt-2 font-serif text-3xl text-ink-900 sm:text-4xl">
+      Las preguntas que más nos hacen
+    </h1>
+
+    <div class="mt-10 divide-y divide-ink-200 border-y border-ink-200">
+      {questions.map(({ entry, Answer }) => (
+        <details class="group py-5" id={entry.id}>
+          <summary class="flex cursor-pointer list-none items-start justify-between gap-6 font-serif text-lg text-ink-900 [&::-webkit-details-marker]:hidden">
+            {entry.data.question}
+            <span
+              aria-hidden="true"
+              class="pi pi-plus mt-1.5 shrink-0 text-sm text-terracotta-text transition group-open:rotate-45"
+            />
+          </summary>
+          <div class="mt-3 text-ink-700 [&_a]:text-ink-900 [&_a]:underline [&_a]:underline-offset-2 [&>p+p]:mt-3">
+            <Answer />
+          </div>
+        </details>
+      ))}
+    </div>
+  </section>
+</Layout>

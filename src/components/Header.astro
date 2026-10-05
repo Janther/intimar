@@ -14,6 +14,7 @@ const navLinks = [
   { href: withBase('/team'), label: 'Facilitadores' },
   ...(hasBlogPosts ? [{ href: withBase('/blog'), label: 'Blog' }] : []),
   { href: withBase('/about'), label: 'Nosotros' },
+  { href: withBase('/faq'), label: 'Preguntas frecuentes' },
   ...(CONTACT_PAGE_ENABLED
     ? [{ href: withBase('/contact'), label: 'Contacto' }]
     : []),

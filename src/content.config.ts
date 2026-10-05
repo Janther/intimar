@@ -96,4 +96,14 @@ const blog = defineCollection({
     }),
 });
 
-export const collections = { events, team, testimonials, blog };
+// One Markdown file per question (src/content/faq/), so answers can carry
+// links and paragraphs; `order` sets their position on /faq.
+const faq = defineCollection({
+  loader: glob({ pattern: '*.md', base: 'src/content/faq' }),
+  schema: z.object({
+    question: z.string(),
+    order: z.number(),
+  }),
+});
+
+export const collections = { events, team, testimonials, blog, faq };

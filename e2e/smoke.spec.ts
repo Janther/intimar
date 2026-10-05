@@ -158,6 +158,25 @@ test('facilitator bios start collapsed and expand on "Ver más"', async ({
   await expect(toggle).toHaveAttribute('aria-expanded', 'false');
 });
 
+test('faq answers open and the page carries FAQPage structured data', async ({
+  page,
+}) => {
+  await page.goto('/faq');
+  const question = page.getByText('¿Es para parejas o para personas solas?');
+  const answer = page.getByText('Para ambas.');
+  await expect(answer).toBeHidden();
+  await question.click();
+  await expect(answer).toBeVisible();
+
+  const jsonLd = await page
+    .locator('script[type="application/ld+json"]')
+    .first()
+    .textContent();
+  const data = JSON.parse(jsonLd ?? '{}');
+  expect(data['@type']).toBe('FAQPage');
+  expect(data.mainEntity.length).toBeGreaterThan(0);
+});
+
 test('unknown routes render the custom 404 page', async ({ page }) => {
   const response = await page.goto('/this-page-does-not-exist');
   expect(response?.status()).toBe(404);

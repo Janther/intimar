@@ -32,7 +32,7 @@ jobs:
       # Production build (site https://intimar.life, base /): the repo's
       # GitHub Pages custom domain is intimar.life, so Pages serves this at
       # the domain root. Setting DEPLOY_TARGET=gh-pages here instead would
-      # build for the janther.github.io/intimar subpath (noindexed staging),
+      # build for the intimar-life.github.io/intimar subpath (noindexed staging),
       # which breaks every asset path once a custom domain is set.
       - name: Build (intimar.life production config)
         run: npm run build

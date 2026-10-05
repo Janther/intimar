@@ -14,13 +14,15 @@ import { CONTACT_PAGE_ENABLED } from './src/lib/site.ts';
 
 // The GitHub Pages staging deploy (see .github/workflows/deploy.yml) builds
 // with DEPLOY_TARGET=gh-pages so it gets a site/base matching where GitHub
-// actually serves a repo not named <user>.github.io — janther.github.io/intimar.
+// actually serves a repo not named <user>.github.io — intimar-life.github.io/intimar.
 // Local dev and the real intimar.life production build are untouched.
 const isGhPagesStaging = process.env.DEPLOY_TARGET === 'gh-pages';
 
 // https://astro.build/config
 export default defineConfig({
-  site: isGhPagesStaging ? 'https://janther.github.io' : 'https://intimar.life',
+  site: isGhPagesStaging
+    ? 'https://intimar-life.github.io'
+    : 'https://intimar.life',
   base: isGhPagesStaging ? '/intimar' : '/',
 
   // Self-hosted through Astro's Fonts API instead of a Google Fonts

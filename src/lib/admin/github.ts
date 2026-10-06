@@ -8,7 +8,7 @@ const API = 'https://api.github.com';
 const TOKEN_KEY = 'intimar-admin-token';
 const STATE_KEY = 'intimar-admin-state';
 
-export function adminUrl(): string {
+function adminUrl(): string {
   return new URL(`${import.meta.env.BASE_URL}admin/`, window.location.origin)
     .href;
 }

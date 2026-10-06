@@ -1,6 +1,6 @@
 // Generates src/data/images/events/default.jpg — the image events fall back
 // to when they don't have their own photo. Run with:
-//   node scripts/generate-default-event-image.mjs
+//   npm run generate:event-image
 //
 // Brand maroon ground, a pattern of PrimeIcons (the site's icon font, used
 // here through its raw SVGs) each slightly tilted with a soft shadow, and
@@ -28,6 +28,10 @@ const SPACING_X = 175;
 const SPACING_Y = 150;
 const LOGO_HEIGHT = 600; // stays inside the 16:9 and 1200x630 crops
 const OUT = 'src/data/images/events/default.jpg';
+// The logo is the light source: each icon's shadow falls away from the
+// centre, longer the farther the icon is from it.
+const SHADOW_MIN = 2;
+const SHADOW_MAX = 12;
 
 const iconDir = new URL('../node_modules/primeicons/raw-svg/', import.meta.url);
 
@@ -49,7 +53,9 @@ function rand() {
   return seed / 2147483647;
 }
 
-const uses = [];
+const shadows = [];
+const icons = [];
+const maxDistance = Math.hypot(W / 2, H / 2);
 let n = 0;
 for (
   let row = -1, y = -SPACING_Y / 2;
@@ -63,10 +69,21 @@ for (
     const tilt = (rand() * 28 - 14).toFixed(1); // -14°..+14°
     const cx = x + (rand() * 24 - 12);
     const cy = y + (rand() * 24 - 12);
-    uses.push(
-      `<g color="${color}" transform="translate(${cx.toFixed(1)} ${cy.toFixed(1)}) rotate(${tilt})">` +
-        `<use href="#i-${name}" x="${-ICON_SIZE / 2}" y="${-ICON_SIZE / 2}" width="${ICON_SIZE}" height="${ICON_SIZE}"/></g>`,
-    );
+    const use = `<use href="#i-${name}" x="${-ICON_SIZE / 2}" y="${-ICON_SIZE / 2}" width="${ICON_SIZE}" height="${ICON_SIZE}"/>`;
+    const at = (px, py) =>
+      `translate(${px.toFixed(1)} ${py.toFixed(1)}) rotate(${tilt})`;
+
+    // Shadow: a dark copy pushed outward along the centre→icon direction.
+    const dx = cx - W / 2;
+    const dy = cy - H / 2;
+    const distance = Math.hypot(dx, dy) || 1;
+    const length =
+      SHADOW_MIN +
+      (SHADOW_MAX - SHADOW_MIN) * Math.min(1, distance / maxDistance);
+    const sx = cx + (dx / distance) * length;
+    const sy = cy + (dy / distance) * length;
+    shadows.push(`<g color="#000" transform="${at(sx, sy)}">${use}</g>`);
+    icons.push(`<g color="${color}" transform="${at(cx, cy)}">${use}</g>`);
     n += 3; // step through the icons so neighbours differ
   }
 }
@@ -74,8 +91,8 @@ for (
 const background = `<svg xmlns="http://www.w3.org/2000/svg" width="${W}" height="${H}">
   <defs>
     ${ICONS.map(symbol).join('\n    ')}
-    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
-      <feDropShadow dx="3" dy="5" stdDeviation="4" flood-color="#000" flood-opacity="0.55"/>
+    <filter id="blur" x="-10%" y="-10%" width="120%" height="120%">
+      <feGaussianBlur stdDeviation="3"/>
     </filter>
     <radialGradient id="halo" cx="50%" cy="50%" r="50%">
       <stop offset="0" stop-color="${BG}" stop-opacity="1"/>
@@ -84,8 +101,11 @@ const background = `<svg xmlns="http://www.w3.org/2000/svg" width="${W}" height=
     </radialGradient>
   </defs>
   <rect width="${W}" height="${H}" fill="${BG}"/>
-  <g opacity="0.42" filter="url(#shadow)">
-    ${uses.join('\n    ')}
+  <g opacity="0.42">
+    <g opacity="0.75" filter="url(#blur)">
+      ${shadows.join('\n      ')}
+    </g>
+    ${icons.join('\n    ')}
   </g>
   <ellipse cx="${W / 2}" cy="${H / 2}" rx="430" ry="440" fill="url(#halo)"/>
 </svg>`;

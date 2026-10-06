@@ -9,7 +9,11 @@ export default defineConfig({
     trace: 'on-first-retry',
   },
   webServer: {
-    command: 'npm run build && npm run preview',
+    // --ignore-lock keeps `astro preview` in the foreground. Astro 7
+    // auto-backgrounds it when it detects an AI agent (AI_AGENT, CLAUDECODE…),
+    // and a backgrounded server makes the command exit, which Playwright
+    // reports as "Process from config.webServer exited early".
+    command: 'npm run build && npm run preview -- --ignore-lock',
     url: 'http://localhost:4321',
     reuseExistingServer: !process.env.CI,
     timeout: 120_000,

@@ -3,6 +3,7 @@ import { Image, getImage } from 'astro:assets';
 import Layout from '../../layouts/Layout.astro';
 import ShareButtons from '../../components/vue/ShareButtons.vue';
 import {
+  eventImage,
   getAllEvents,
   getEventHosts,
   formatDateRange,
@@ -32,10 +33,10 @@ const {
   earlyBirdDeadline,
   price,
   currency,
-  image,
   tags,
 } = event.data;
 const hosts = await getEventHosts(event);
+const image = eventImage(event);
 // Shown only when the event has both early-bird fields and the deadline
 // hasn't passed.
 const earlyBird =

@@ -84,18 +84,19 @@ onBeforeUnmount(() => {
   if (newImageUrl.value) URL.revokeObjectURL(newImageUrl.value);
 });
 
+// Without its own photo an event shows the site's default image, so the
+// preview does too.
 const currentImageUrl = computed(() => {
   if (newImageUrl.value) return newImageUrl.value;
-  if (!event.image) return '';
-  const path = event.image.replace(/^\.\.\//, 'src/data/');
+  const path = event.image
+    ? event.image.replace(/^\.\.\//, 'src/data/')
+    : `${EVENT_IMAGES_DIR}/default.jpg`;
   return `https://raw.githubusercontent.com/${ADMIN_CONFIG.owner}/${ADMIN_CONFIG.repo}/${ADMIN_CONFIG.baseBranch}/${path}`;
 });
 const preview = computed(() => toPreviewSummary(event, currentImageUrl.value));
 
 function collectErrors(): EventErrors {
-  const found = validateEvent(event, {
-    hasImage: Boolean(currentImageUrl.value),
-  });
+  const found = validateEvent(event);
   if (isNew && props.existingIds.includes(event.id)) {
     found.title = 'Ya existe un evento con este título. Usa otro.';
   }
@@ -295,11 +296,15 @@ const input =
       </label>
 
       <label class="text-sm font-medium text-ink-800">
-        Foto {{ isNew ? '' : '(opcional: solo si quieres cambiarla)' }}
+        Foto (opcional)
         <input :class="input" type="file" accept="image/*" @change="onImage" />
-        <span v-if="errors.image" class="mt-1 block text-xs text-error">{{
-          errors.image
-        }}</span>
+        <span class="mt-1 block text-xs text-ink-600">
+          {{
+            event.image || imageFile
+              ? 'Sube otra solo si quieres cambiarla.'
+              : 'Si no subes una, el evento usa la imagen de Intimar por defecto.'
+          }}
+        </span>
       </label>
 
       <div

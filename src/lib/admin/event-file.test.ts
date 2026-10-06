@@ -61,32 +61,26 @@ describe('validateEvent', () => {
   };
 
   it('accepts a complete event', () => {
-    expect(validateEvent(valid, { hasImage: true })).toEqual({});
+    expect(validateEvent(valid)).toEqual({});
   });
 
-  it('flags missing fields and the photo in Spanish', () => {
-    const errors = validateEvent(emptyEvent(), { hasImage: false });
+  it('flags missing fields in Spanish, but not a missing photo', () => {
+    const errors = validateEvent(emptyEvent());
     expect(errors.title).toBe('Ponle un título al evento.');
-    expect(errors.image).toBe('Sube una foto para el evento.');
+    expect(errors.image).toBeUndefined();
   });
 
   it('rejects an end date before the start', () => {
-    const errors = validateEvent(
-      { ...valid, endDate: '2026-11-01' },
-      { hasImage: true },
-    );
+    const errors = validateEvent({ ...valid, endDate: '2026-11-01' });
     expect(errors.endDate).toBeDefined();
   });
 
   it('requires a cheaper early bird with a deadline before the event', () => {
-    const errors = validateEvent(
-      {
-        ...valid,
-        earlyBirdPrice: 90000,
-        earlyBirdDeadline: '2026-12-01',
-      },
-      { hasImage: true },
-    );
+    const errors = validateEvent({
+      ...valid,
+      earlyBirdPrice: 90000,
+      earlyBirdDeadline: '2026-12-01',
+    });
     expect(errors.earlyBirdPrice).toBeDefined();
     expect(errors.earlyBirdDeadline).toBeDefined();
   });

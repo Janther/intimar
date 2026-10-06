@@ -2,6 +2,7 @@ import { getCollection, getEntry, type CollectionEntry } from 'astro:content';
 import { getImage } from 'astro:assets';
 import type { ImageMetadata } from 'astro';
 import { withBase } from './site';
+import defaultEventImage from '../data/images/events/default.jpg';
 import {
   formatDateRange,
   formatShortDate,
@@ -107,6 +108,11 @@ export async function resolveBlogAuthor(post: BlogEntry): Promise<BlogAuthor> {
   return { name: author.name, bio: author.bio, photo: author.photo };
 }
 
+// The event's own photo, or the brand fallback for events without one.
+export function eventImage(event: EventEntry): ImageMetadata {
+  return event.data.image ?? defaultEventImage;
+}
+
 export async function toEventSummary(event: EventEntry): Promise<EventSummary> {
   // EventCard.vue can't use Astro's <Image> component (it's Vue, not
   // Astro), so this calls the same underlying optimization by hand —
@@ -120,7 +126,7 @@ export async function toEventSummary(event: EventEntry): Promise<EventSummary> {
   // source's native size (1600px wide, up to ~2200px tall for portrait
   // uploads), shipping a multi-hundred-KB image for a few-hundred-px card.
   const optimizedImage = await getImage({
-    src: event.data.image,
+    src: eventImage(event),
     format: 'webp',
     width: 800,
     height: 600,

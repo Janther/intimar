@@ -21,7 +21,8 @@ export interface EventFile {
   earlyBirdDeadline?: string;
   price: number;
   currency: string;
-  image: string;
+  // Omitted when the event uses the default image (events/default.jpg).
+  image?: string;
   tags: string[];
   hostIds: string[];
   featured: boolean;
@@ -59,7 +60,6 @@ export function emptyEvent(): EventFile {
     endDate: '',
     price: 0,
     currency: 'CLP',
-    image: '',
     tags: [],
     hostIds: [],
     featured: false,
@@ -104,10 +104,7 @@ export function serializeEvent(event: EventFile): string {
 
 export type EventErrors = Partial<Record<keyof EventFile, string>>;
 
-export function validateEvent(
-  event: EventFile,
-  { hasImage }: { hasImage: boolean },
-): EventErrors {
+export function validateEvent(event: EventFile): EventErrors {
   const errors: EventErrors = {};
   const required: [keyof EventFile, string][] = [
     ['title', 'Ponle un título al evento.'],
@@ -139,7 +136,6 @@ export function validateEvent(
   }
   if (event.hostIds.length === 0)
     errors.hostIds = 'Elige al menos un facilitador.';
-  if (!hasImage) errors.image = 'Sube una foto para el evento.';
   return errors;
 }
 

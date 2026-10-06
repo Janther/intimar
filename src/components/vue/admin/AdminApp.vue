@@ -13,7 +13,10 @@ import {
 } from '../../../lib/admin/github';
 import { formatDateRange } from '../../../lib/format';
 
-defineProps<{ hosts: { id: string; name: string }[] }>();
+defineProps<{
+  hosts: { id: string; name: string }[];
+  defaultImageUrl: string;
+}>();
 
 type View =
   | { name: 'list' }
@@ -152,6 +155,7 @@ const statusClass: Record<Change['status'], string> = {
         :client="client!"
         :login="user.login"
         :hosts="hosts"
+        :default-image-url="defaultImageUrl"
         :existing-ids="existingIds"
         :initial="view.event"
         @done="(url) => (view = { name: 'sent', url })"

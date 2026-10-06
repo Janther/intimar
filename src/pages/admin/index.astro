@@ -1,7 +1,9 @@
 ---
+import { getImage } from 'astro:assets';
 import Layout from '../../layouts/Layout.astro';
 import AdminApp from '../../components/vue/admin/AdminApp.vue';
 import { getAllTeamMembers } from '../../lib/data';
+import defaultEventImage from '../../data/images/events/default.jpg';
 
 // Static page: login, forms and pull requests all happen in the browser
 // against GitHub's API (see src/lib/admin/). Team members are baked in at
@@ -10,6 +12,16 @@ const hosts = (await getAllTeamMembers()).map((m) => ({
   id: m.id,
   name: m.data.name,
 }));
+
+// The image events fall back to without a photo, at the card's size — the
+// editor previews it until a photo is uploaded. Served by the site itself,
+// so it shows even before default.jpg exists on GitHub.
+const defaultImage = await getImage({
+  src: defaultEventImage,
+  format: 'webp',
+  width: 800,
+  height: 600,
+});
 ---
 
 <Layout title="Panel" description="Panel de edición de Intimar." noindex>
@@ -20,6 +32,10 @@ const hosts = (await getAllTeamMembers()).map((m) => ({
     <h1 class="mt-2 mb-8 font-serif text-3xl text-ink-900">
       Edición de contenido
     </h1>
-    <AdminApp hosts={hosts} client:only="vue" />
+    <AdminApp
+      hosts={hosts}
+      defaultImageUrl={defaultImage.src}
+      client:only="vue"
+    />
   </section>
 </Layout>

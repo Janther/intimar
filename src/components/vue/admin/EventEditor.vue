@@ -27,6 +27,7 @@ const props = defineProps<{
   client: GitHubClient;
   login: string;
   hosts: { id: string; name: string }[];
+  defaultImageUrl: string;
   existingIds: string[];
   initial: RepoEvent | null;
 }>();
@@ -88,9 +89,8 @@ onBeforeUnmount(() => {
 // preview does too.
 const currentImageUrl = computed(() => {
   if (newImageUrl.value) return newImageUrl.value;
-  const path = event.image
-    ? event.image.replace(/^\.\.\//, 'src/data/')
-    : `${EVENT_IMAGES_DIR}/default.jpg`;
+  if (!event.image) return props.defaultImageUrl;
+  const path = event.image.replace(/^\.\.\//, 'src/data/');
   return `https://raw.githubusercontent.com/${ADMIN_CONFIG.owner}/${ADMIN_CONFIG.repo}/${ADMIN_CONFIG.baseBranch}/${path}`;
 });
 const preview = computed(() => toPreviewSummary(event, currentImageUrl.value));

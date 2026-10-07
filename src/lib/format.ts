@@ -93,6 +93,7 @@ export interface EventSummary {
   earlyBirdActive: boolean;
   earlyBirdDeadlineLabel: string;
   price: number;
+  couplePrice?: number;
   currency: string;
   image: string;
   imageWidth: number;

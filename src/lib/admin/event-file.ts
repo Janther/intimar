@@ -20,6 +20,7 @@ export interface EventFile {
   earlyBirdPrice?: number;
   earlyBirdDeadline?: string;
   price: number;
+  couplePrice?: number;
   currency: string;
   // Omitted when the event uses the default image (events/default.jpg).
   image?: string;
@@ -41,6 +42,7 @@ const KEY_ORDER: (keyof EventFile)[] = [
   'earlyBirdPrice',
   'earlyBirdDeadline',
   'price',
+  'couplePrice',
   'currency',
   'image',
   'tags',
@@ -122,6 +124,9 @@ export function validateEvent(event: EventFile): EventErrors {
     errors.endDate = 'La fecha de término no puede ser antes del inicio.';
   }
   if (!(event.price > 0)) errors.price = 'Indica un precio mayor que 0.';
+  if (event.couplePrice !== undefined && !(event.couplePrice > 0)) {
+    errors.couplePrice = 'El precio por pareja debe ser mayor que 0.';
+  }
   if (event.earlyBirdPrice !== undefined) {
     if (!(event.earlyBirdPrice > 0 && event.earlyBirdPrice < event.price)) {
       errors.earlyBirdPrice =
@@ -160,6 +165,7 @@ export function toPreviewSummary(
       event.earlyBirdPrice !== undefined && isEarlyBirdActive(deadline),
     earlyBirdDeadlineLabel: deadline ? formatShortDate(deadline) : '',
     price: event.price,
+    couplePrice: event.couplePrice,
     currency: event.currency,
     image: imageUrl,
     imageWidth: 800,

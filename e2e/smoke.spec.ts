@@ -48,7 +48,15 @@ test('event detail page renders content, hosts, and a valid Event schema', async
   const data = JSON.parse(jsonLd ?? '{}');
   expect(data['@type']).toBe('Event');
   expect(data.name).toBe('Un Portal al Erotismo Consciente');
-  expect(typeof data.offers.price).toBe('number');
+  // One offer per person, plus one per couple when the event has it.
+  const offers = [data.offers].flat();
+  expect(offers.map((o: { name: string }) => o.name)).toEqual([
+    'Por persona',
+    'Por pareja',
+  ]);
+  expect(
+    offers.every((o: { price: unknown }) => typeof o.price === 'number'),
+  ).toBe(true);
   expect(data.image[0]).toMatch(/^https:\/\//);
 });
 

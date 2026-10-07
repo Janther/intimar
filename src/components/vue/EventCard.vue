@@ -65,6 +65,9 @@ function formatPrice(price: number, currency: string) {
       >
         Early bird hasta el {{ event.earlyBirdDeadlineLabel }}
       </p>
+      <p v-if="event.couplePrice" class="text-xs text-ink-muted">
+        {{ formatPrice(event.couplePrice, event.currency) }} por pareja
+      </p>
       <p class="text-xs text-ink-muted">{{ event.startDateLabel }}</p>
     </div>
   </a>

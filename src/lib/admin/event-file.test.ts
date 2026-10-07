@@ -37,6 +37,16 @@ describe('serializeEvent', () => {
   });
 });
 
+describe('serializeEvent couple price', () => {
+  it('writes couplePrice right after price, and omits it when unset', () => {
+    const base = { ...emptyEvent(), id: 'x', price: 80000 };
+    expect(serializeEvent({ ...base, couplePrice: 150000 })).toContain(
+      '"price": 80000,\n  "couplePrice": 150000,\n  "currency"',
+    );
+    expect(serializeEvent(base)).not.toContain('couplePrice');
+  });
+});
+
 describe('slugify', () => {
   it('strips accents and punctuation', () => {
     expect(slugify('Un Portal al Erotismo Consciente')).toBe(
@@ -68,6 +78,13 @@ describe('validateEvent', () => {
     const errors = validateEvent(emptyEvent());
     expect(errors.title).toBe('Ponle un título al evento.');
     expect(errors.image).toBeUndefined();
+  });
+
+  it('accepts no couple price, rejects a non-positive one', () => {
+    expect(validateEvent({ ...valid, couplePrice: undefined })).toEqual({});
+    expect(validateEvent({ ...valid, couplePrice: 0 }).couplePrice).toBe(
+      'El precio por pareja debe ser mayor que 0.',
+    );
   });
 
   it('rejects an end date before the start', () => {

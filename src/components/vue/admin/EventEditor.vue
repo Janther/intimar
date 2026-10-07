@@ -46,6 +46,15 @@ const tagsText = ref(event.tags.join(', '));
 const imageFile = ref<File | null>(null);
 const newImageUrl = ref('');
 const errors = ref<EventErrors>({});
+// Optional: an empty field removes the key from the JSON instead of
+// saving 0 or "" (which the site's schema would reject).
+const couplePrice = computed({
+  get: () => event.couplePrice ?? '',
+  set: (value: number | string) => {
+    if (value === '' || value === null) delete event.couplePrice;
+    else event.couplePrice = Number(value);
+  },
+});
 const saving = ref(false);
 const failure = ref('');
 // Errors only appear after the first "Enviar" — from then on they update
@@ -232,6 +241,23 @@ const input =
         />
         <span v-if="errors.price" class="mt-1 block text-xs text-error">{{
           errors.price
+        }}</span>
+      </label>
+
+      <label class="text-sm font-medium text-ink-800">
+        Precio por pareja (CLP, opcional)
+        <input
+          v-model="couplePrice"
+          :class="input"
+          type="number"
+          min="0"
+          step="1000"
+        />
+        <span class="mt-1 block text-xs text-ink-600">
+          Déjalo vacío si el evento no tiene precio especial para parejas.
+        </span>
+        <span v-if="errors.couplePrice" class="mt-1 block text-xs text-error">{{
+          errors.couplePrice
         }}</span>
       </label>
 

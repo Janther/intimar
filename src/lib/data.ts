@@ -145,6 +145,7 @@ export async function toEventSummary(event: EventEntry): Promise<EventSummary> {
       ? formatShortDate(event.data.earlyBirdDeadline)
       : '',
     price: event.data.price,
+    couplePrice: event.data.couplePrice,
     currency: event.data.currency,
     image: optimizedImage.src,
     imageWidth: optimizedImage.attributes.width,

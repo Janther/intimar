@@ -32,6 +32,7 @@ const {
   earlyBirdPrice,
   earlyBirdDeadline,
   price,
+  couplePrice,
   currency,
   tags,
 } = event.data;
@@ -76,13 +77,18 @@ const eventSchema = {
     name: location,
   },
   image: [new URL(ogImage.src, Astro.site).toString()],
-  offers: {
+  offers: [
+    { name: 'Por persona', price },
+    ...(couplePrice !== undefined
+      ? [{ name: 'Por pareja', price: couplePrice }]
+      : []),
+  ].map((offer) => ({
     '@type': 'Offer',
     url: canonicalURL,
-    price,
     priceCurrency: currency,
     availability: 'https://schema.org/InStock',
-  },
+    ...offer,
+  })),
   organizer: {
     '@type': 'Organization',
     name: 'Intimar',
@@ -215,6 +221,15 @@ const breadcrumbSchema = {
             </p>
             <p class="text-sm text-ink-600">por persona</p>
           </>
+        )}
+        {couplePrice !== undefined && (
+          <p class="mt-2 text-sm text-ink-700">
+            o{' '}
+            <span class="font-medium text-ink-900">
+              {formatPrice(couplePrice, currency)}
+            </span>{' '}
+            por pareja
+          </p>
         )}
         <dl class="mt-4 space-y-2 text-sm text-ink-700">
           <div class="flex justify-between">
